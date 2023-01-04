@@ -8,9 +8,9 @@ afterEvaluate {
             release(MavenPublication) {
                 from components.release
                 groupId = 'com.github.18647499996'//插件id，格式：com.github.18647499996
-                artifactId = 'Component'//插件名称
+                artifactId = 'component'//插件名称
                 version = '1.0'//版本号
-                //引用使用格式：implementation 'com.github.18647499996:Component:1.0'
+                //引用使用格式：implementation 'com.github.18647499996:component:1.0'
             }
         }
     }
