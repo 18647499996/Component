@@ -14,6 +14,7 @@ import android.graphics.RectF;
 import android.graphics.Region;
 import android.os.Build;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 import com.liudonghan.view.R;
@@ -85,7 +86,7 @@ public class ViewHelper {
      * 初始化view属性
      *
      * @param context 上下文
-     * @param attrs 属性
+     * @param attrs   属性
      */
     public void initAttrs(Context context, AttributeSet attrs) {
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.Liu_Attrs);
@@ -128,6 +129,8 @@ public class ViewHelper {
     }
 
     public void onSizeChanged(View view, int w, int h) {
+        Log.d("'onSizeChanged：", "宽：" + w + "    --------   高：" + h);
+        Log.d("view内边距：", "左：" + view.getPaddingLeft() + "\n上：" + view.getPaddingTop() + "\n右：" + view.getPaddingRight() + "\n下：" + view.getPaddingBottom());
         mLayer.set(0, 0, w, h);
         refreshRegion(view);
     }
@@ -156,11 +159,11 @@ public class ViewHelper {
                 mClipPath.addCircle(center.x, y + r, r, Path.Direction.CW);
             }
         } else {
-            mClipPath.addRoundRect(areas, radii, Path.Direction.CW);
+            mClipPath.addRoundRect(new RectF(0, 0, w, h), radii, Path.Direction.CW);
         }
-        Region clip = new Region((int) areas.left, (int) areas.top,
-                (int) areas.right, (int) areas.bottom);
-        mAreaRegion.setPath(mClipPath, clip);
+//        Region clip = new Region((int) areas.left, (int) areas.top,
+//                (int) areas.right, (int) areas.bottom);
+//        mAreaRegion.setPath(mClipPath, clip);
     }
 
     public void onClipDraw(Canvas canvas) {
