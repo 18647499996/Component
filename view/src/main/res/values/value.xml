@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="liu_is_circle" format="boolean" />
+    <attr name="liu_round_corner" format="dimension|integer" />
+    <attr name="liu_round_corner_top_left" format="dimension|integer" />
+    <attr name="liu_round_corner_top_right" format="dimension|integer" />
+    <attr name="liu_round_corner_bottom_left" format="dimension|integer" />
+    <attr name="liu_round_corner_bottom_right" format="dimension|integer" />
+    <attr name="liu_stroke_color" format="color|reference" />
+    <attr name="liu_stroke_width" format="dimension|integer" />
+    <attr name="liu_clip_background" format="boolean" />
+
+    <declare-styleable name="Liu_Attrs">
+        <attr name="liu_is_circle" />
+        <attr name="liu_round_corner" />
+        <attr name="liu_round_corner_top_left" />
+        <attr name="liu_round_corner_top_right" />
+        <attr name="liu_round_corner_bottom_left" />
+        <attr name="liu_round_corner_bottom_right" />
+        <attr name="liu_stroke_color" />
+        <attr name="liu_stroke_width" />
+        <attr name="liu_clip_background" />
+    </declare-styleable>
+
+    <declare-styleable name="LiuTextView">
+        <attr name="liu_is_circle" />
+        <attr name="liu_round_corner" />
+        <attr name="liu_round_corner_top_left" />
+        <attr name="liu_round_corner_top_right" />
+        <attr name="liu_round_corner_bottom_left" />
+        <attr name="liu_round_corner_bottom_right" />
+        <attr name="liu_stroke_color" />
+        <attr name="liu_stroke_width" />
+        <attr name="liu_clip_background" />
+    </declare-styleable>
+
+    <declare-styleable name="LiuImageView">
+        <attr name="liu_is_circle" />
+        <attr name="liu_round_corner" />
+        <attr name="liu_round_corner_top_left" />
+        <attr name="liu_round_corner_top_right" />
+        <attr name="liu_round_corner_bottom_left" />
+        <attr name="liu_round_corner_bottom_right" />
+        <attr name="liu_stroke_color" />
+        <attr name="liu_stroke_width" />
+        <attr name="liu_clip_background" />
+    </declare-styleable>
+
+    <declare-styleable name="LiuLinearLayout">
+        <attr name="liu_is_circle" />
+        <attr name="liu_round_corner" />
+        <attr name="liu_round_corner_top_left" />
+        <attr name="liu_round_corner_top_right" />
+        <attr name="liu_round_corner_bottom_left" />
+        <attr name="liu_round_corner_bottom_right" />
+        <attr name="liu_stroke_color" />
+        <attr name="liu_stroke_width" />
+        <attr name="liu_clip_background" />
+    </declare-styleable>
+
+    <declare-styleable name="LiuRelativeLayout">
+        <attr name="liu_is_circle" />
+        <attr name="liu_round_corner" />
+        <attr name="liu_round_corner_top_left" />
+        <attr name="liu_round_corner_top_right" />
+        <attr name="liu_round_corner_bottom_left" />
+        <attr name="liu_round_corner_bottom_right" />
+        <attr name="liu_stroke_color" />
+        <attr name="liu_stroke_width" />
+        <attr name="liu_clip_background" />
+    </declare-styleable>
+
+    <declare-styleable name="LiuButton">
+        <attr name="liu_is_circle" />
+        <attr name="liu_round_corner" />
+        <attr name="liu_round_corner_top_left" />
+        <attr name="liu_round_corner_top_right" />
+        <attr name="liu_round_corner_bottom_left" />
+        <attr name="liu_round_corner_bottom_right" />
+        <attr name="liu_stroke_color" />
+        <attr name="liu_stroke_width" />
+        <attr name="liu_clip_background" />
+    </declare-styleable>
+</resources>
