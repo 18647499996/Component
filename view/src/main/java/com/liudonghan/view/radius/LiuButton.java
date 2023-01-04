@@ -1,14 +1,16 @@
-package com.liudonghan.view;
+package com.liudonghan.view.radius;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
+import android.widget.Button;
 
 import java.util.Arrays;
+
+import com.liudonghan.view.helper.ViewAttr;
+import com.liudonghan.view.helper.ViewHelper;
 
 /**
  * Description：
@@ -17,15 +19,15 @@ import java.util.Arrays;
  * Time:1/4/23
  */
 @SuppressLint("AppCompatCustomView")
-public class LiuLinearLayout extends LinearLayout implements ViewAttr {
+public class LiuButton extends Button implements ViewAttr {
 
     private ViewHelper viewHelper;
 
-    public LiuLinearLayout(Context context) {
+    public LiuButton(Context context) {
         super(context, null);
     }
 
-    public LiuLinearLayout(Context context, AttributeSet attrs) {
+    public LiuButton(Context context, AttributeSet attrs) {
         super(context, attrs, 0);
         viewHelper = new ViewHelper();
         viewHelper.initAttrs(context, attrs);

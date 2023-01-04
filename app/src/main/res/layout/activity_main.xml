@@ -6,7 +6,7 @@
     android:gravity="center"
     android:orientation="vertical">
 
-    <com.liudonghan.view.LiuTextView
+    <com.liudonghan.view.radius.LiuTextView
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:layout_centerInParent="true"
@@ -17,7 +17,7 @@
         app:liu_stroke_color="@color/colorAccent"
         app:liu_stroke_width="1dp" />
 
-    <com.liudonghan.view.LiuLinearLayout
+    <com.liudonghan.view.radius.LiuLinearLayout
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:layout_marginTop="5dp"
@@ -32,9 +32,9 @@
             android:layout_height="wrap_content"
             android:text="啊啊啊啊啊" />
 
-    </com.liudonghan.view.LiuLinearLayout>
+    </com.liudonghan.view.radius.LiuLinearLayout>
 
-    <com.liudonghan.view.LiuButton
+    <com.liudonghan.view.radius.LiuButton
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:layout_marginTop="5dp"
@@ -46,7 +46,7 @@
         app:liu_stroke_width="1dp" />
 
 
-    <com.liudonghan.view.LiuImageView
+    <com.liudonghan.view.radius.LiuImageView
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginTop="5dp"

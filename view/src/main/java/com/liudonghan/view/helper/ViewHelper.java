@@ -1,4 +1,4 @@
-package com.liudonghan.view;
+package com.liudonghan.view.helper;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
@@ -15,6 +15,8 @@ import android.graphics.Region;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
+
+import com.liudonghan.view.R;
 
 /**
  * Description：

@@ -1,4 +1,4 @@
-package com.liudonghan.view;
+package com.liudonghan.view.radius;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -6,9 +6,11 @@ import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import java.util.Arrays;
+
+import com.liudonghan.view.helper.ViewAttr;
+import com.liudonghan.view.helper.ViewHelper;
 
 /**
  * Description：
@@ -17,15 +19,15 @@ import java.util.Arrays;
  * Time:1/4/23
  */
 @SuppressLint("AppCompatCustomView")
-public class LiuTextView extends TextView implements ViewAttr {
+public class LiuImageView extends ImageView implements ViewAttr {
 
     private ViewHelper viewHelper;
 
-    public LiuTextView(Context context) {
+    public LiuImageView(Context context) {
         super(context, null);
     }
 
-    public LiuTextView(Context context, AttributeSet attrs) {
+    public LiuImageView(Context context, AttributeSet attrs) {
         super(context, attrs, 0);
         viewHelper = new ViewHelper();
         viewHelper.initAttrs(context, attrs);
