@@ -81,4 +81,9 @@
         <attr name="liu_stroke_width" />
         <attr name="liu_clip_background" />
     </declare-styleable>
+
+    <declare-styleable name="LiuCountDown">
+        <attr name="liu_millis_as_future" format="integer"/>
+        <attr name="liu_count_down_interval" format="integer"/>
+    </declare-styleable>
 </resources>
