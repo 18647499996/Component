@@ -14,7 +14,6 @@ import android.graphics.RectF;
 import android.graphics.Region;
 import android.os.Build;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 
 import com.liudonghan.view.R;
@@ -128,13 +127,24 @@ public class ViewHelper {
         mPaint.setAntiAlias(true);
     }
 
+
+    /**
+     * view试图发生变化
+     *
+     * @param view view引用
+     * @param w    宽
+     * @param h    高
+     */
     public void onSizeChanged(View view, int w, int h) {
-        Log.d("'onSizeChanged：", "宽：" + w + "    --------   高：" + h);
-        Log.d("view内边距：", "左：" + view.getPaddingLeft() + "\n上：" + view.getPaddingTop() + "\n右：" + view.getPaddingRight() + "\n下：" + view.getPaddingBottom());
         mLayer.set(0, 0, w, h);
         refreshRegion(view);
     }
 
+    /**
+     * 重置区域
+     *
+     * @param view view引用
+     */
     public void refreshRegion(View view) {
         int w = (int) mLayer.width();
         int h = (int) mLayer.height();
@@ -161,11 +171,16 @@ public class ViewHelper {
         } else {
             mClipPath.addRoundRect(new RectF(0, 0, w, h), radii, Path.Direction.CW);
         }
-//        Region clip = new Region((int) areas.left, (int) areas.top,
-//                (int) areas.right, (int) areas.bottom);
-//        mAreaRegion.setPath(mClipPath, clip);
+        Region clip = new Region((int) areas.left, (int) areas.top,
+                (int) areas.right, (int) areas.bottom);
+        mAreaRegion.setPath(mClipPath, clip);
     }
 
+    /**
+     * 裁剪绘制
+     *
+     * @param canvas 画布
+     */
     public void onClipDraw(Canvas canvas) {
         if (mStrokeWidth > 0) {
             // 支持半透明描边，将与描边区域重叠的内容裁剪掉
