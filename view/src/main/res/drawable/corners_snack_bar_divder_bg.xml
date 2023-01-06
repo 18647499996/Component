@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+    <solid android:color="#ff323232"/>
+    <corners
+        android:topRightRadius="2dp"
+        android:topLeftRadius="2dp"
+        />
+</shape><!-- From: file:/Users/wmora/dev/snackbar/lib/src/main/res/drawable/sb__divider_bg.xml -->
