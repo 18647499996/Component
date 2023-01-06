@@ -39,6 +39,7 @@ import com.liudonghan.view.snackbar.display.DisplayCompat;
 import com.liudonghan.view.snackbar.listener.ActionClickListener;
 import com.liudonghan.view.snackbar.listener.ActionSwipeListener;
 import com.liudonghan.view.snackbar.listener.EventListener;
+import com.liudonghan.view.snackbar.listener.SwipeDismissTouchListener;
 
 
 /**
@@ -696,6 +697,42 @@ public class SnackBar extends SnackBarLayout {
 
         View inner = layout.findViewById(R.id.view_snack_bar_layout);
         inner.setClickable(true);
+
+        if (mCanSwipeToDismiss && res.getBoolean(R.bool.sb__is_swipeable)) {
+            inner.setOnTouchListener(new SwipeDismissTouchListener(this, null,
+                    new SwipeDismissTouchListener.DismissCallbacks() {
+                        @Override
+                        public boolean canDismiss(Object token) {
+                            return true;
+                        }
+
+                        @Override
+                        public void onDismiss(View view, Object token) {
+                            if (view != null) {
+                                if (mActionSwipeListener != null) {
+                                    mActionSwipeListener.onSwipeToDismiss();
+                                }
+                                dismiss(false);
+                            }
+                        }
+
+                        @Override
+                        public void pauseTimer(boolean shouldPause) {
+                            if (isIndefiniteDuration()) {
+                                return;
+                            }
+                            if (shouldPause) {
+                                removeCallbacks(mDismissRunnable);
+
+                                mSnackbarFinish = System.currentTimeMillis();
+                            } else {
+                                mTimeRemaining -= (mSnackbarFinish - mSnackbarStart);
+
+                                startTimer(mTimeRemaining);
+                            }
+                        }
+                    }));
+        }
 
         return params;
     }

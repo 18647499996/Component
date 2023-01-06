@@ -99,4 +99,7 @@
         <item name="android:backgroundDimEnabled">true</item>
         <item name="android:backgroundDimAmount">0.5</item>
     </style>
+
+    <bool name="sb__is_swipeable">false</bool>
+
 </resources>

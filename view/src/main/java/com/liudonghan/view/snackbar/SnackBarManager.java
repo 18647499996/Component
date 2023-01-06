@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 
-import com.google.android.material.snackbar.Snackbar;
 
 import java.lang.ref.WeakReference;
 
