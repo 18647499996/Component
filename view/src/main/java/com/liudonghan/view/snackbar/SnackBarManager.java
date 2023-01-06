@@ -1,6 +1,7 @@
 package com.liudonghan.view.snackbar;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
@@ -8,6 +9,8 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 
+
+import com.liudonghan.view.R;
 
 import java.lang.ref.WeakReference;
 
@@ -19,13 +22,28 @@ import java.lang.ref.WeakReference;
  */
 public class SnackBarManager {
 
+    private static volatile SnackBarManager instance = null;
+
+    private SnackBarManager() {
+    }
+
+    public static SnackBarManager getInstance() {
+        //single chcekout
+        if (null == instance) {
+            synchronized (SnackBarManager.class) {
+                // double checkout
+                if (null == instance) {
+                    instance = new SnackBarManager();
+                }
+            }
+        }
+        return instance;
+    }
+
     private static final String TAG = SnackBarManager.class.getSimpleName();
     private static final Handler MAIN_THREAD = new Handler(Looper.getMainLooper());
 
     private static WeakReference<SnackBar> snackbarReference;
-
-    private SnackBarManager() {
-    }
 
     /**
      * Displays a {@link com.nispok.snackbar.Snackbar} in the current {@link Activity}, dismissing
@@ -139,5 +157,77 @@ public class SnackBarManager {
             return snackbarReference.get();
         }
         return null;
+    }
+
+    /**
+     * 显示悬浮提示框（ 异常 ）
+     *
+     * @param context 上下文
+     * @param msg     提示语
+     */
+    public void showError(Context context, String msg) {
+        show(context, msg, R.drawable.corners_bg_bar_error);
+    }
+
+    /**
+     * 显示悬浮提示框（ 成功）
+     *
+     * @param context 上下文
+     * @param msg     提示语
+     */
+    public void showSucceed(Context context, String msg) {
+        show(context, msg, R.drawable.corners_bg_bar_succeed);
+    }
+
+    /**
+     * 显示悬浮提示框（ 警告 ）
+     *
+     * @param context 上下文
+     * @param msg     提示语
+     */
+    public void showWarn(Context context, String msg) {
+        show(context, msg, R.drawable.corners_bg_bar_warn);
+    }
+
+    /**
+     * 显示悬浮提示框
+     *
+     * @param context 上下文
+     * @param msg     提示语
+     * @param resId   设置背景
+     */
+    public void show(Context context, String msg, int resId) {
+        show(context, msg, resId, 15, 220);
+    }
+
+    /**
+     * 显示悬浮提示框
+     *
+     * @param context 上下文
+     * @param msg     提示语
+     * @param resId   设置背景
+     */
+    public void show(Context context, String msg, int resId, int marginLeft, int marginTop) {
+        show(context, msg, resId, marginLeft, marginTop, SnackBar.SnackbarPosition.TOP);
+    }
+
+    /**
+     * 显示悬浮提示框
+     *
+     * @param context 上下文
+     * @param msg     提示语
+     * @param resId   设置背景
+     */
+    public void show(Context context, String msg, int resId, int marginLeft, int marginTop, SnackBar.SnackbarPosition position) {
+        if (null == context) {
+            return;
+        }
+        show(SnackBar
+                .with(context)
+                .position(position)
+                .duration(1000)
+                .margin(marginLeft, marginTop)
+                .backgroundDrawable(resId)
+                .text(msg));
     }
 }
