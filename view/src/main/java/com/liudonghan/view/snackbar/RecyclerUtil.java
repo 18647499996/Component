@@ -14,7 +14,7 @@ public class RecyclerUtil {
 
     static void setScrollListener(final SnackBar snackbar, View view) {
         RecyclerView recyclerView = (RecyclerView) view;
-        recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
