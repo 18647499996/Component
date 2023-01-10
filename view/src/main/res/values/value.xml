@@ -22,7 +22,7 @@
         <attr name="liu_clip_background" />
     </declare-styleable>
 
-    <declare-styleable name="LiuTextView">
+    <declare-styleable name="ADTextView">
         <attr name="liu_is_circle" />
         <attr name="liu_round_corner" />
         <attr name="liu_round_corner_top_left" />
@@ -34,7 +34,7 @@
         <attr name="liu_clip_background" />
     </declare-styleable>
 
-    <declare-styleable name="LiuImageView">
+    <declare-styleable name="ADImageView">
         <attr name="liu_is_circle" />
         <attr name="liu_round_corner" />
         <attr name="liu_round_corner_top_left" />
@@ -46,7 +46,7 @@
         <attr name="liu_clip_background" />
     </declare-styleable>
 
-    <declare-styleable name="LiuLinearLayout">
+    <declare-styleable name="ADLinearLayout">
         <attr name="liu_is_circle" />
         <attr name="liu_round_corner" />
         <attr name="liu_round_corner_top_left" />
@@ -58,7 +58,7 @@
         <attr name="liu_clip_background" />
     </declare-styleable>
 
-    <declare-styleable name="LiuRelativeLayout">
+    <declare-styleable name="ADRelativeLayout">
         <attr name="liu_is_circle" />
         <attr name="liu_round_corner" />
         <attr name="liu_round_corner_top_left" />
@@ -70,7 +70,7 @@
         <attr name="liu_clip_background" />
     </declare-styleable>
 
-    <declare-styleable name="LiuButton">
+    <declare-styleable name="ADButton">
         <attr name="liu_is_circle" />
         <attr name="liu_round_corner" />
         <attr name="liu_round_corner_top_left" />

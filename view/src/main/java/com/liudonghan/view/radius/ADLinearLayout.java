@@ -19,15 +19,15 @@ import com.liudonghan.view.helper.ViewHelper;
  * Time:1/4/23
  */
 @SuppressLint("AppCompatCustomView")
-public class LiuLinearLayout extends LinearLayout implements ViewAttr {
+public class ADLinearLayout extends LinearLayout implements ViewAttr {
 
     private ViewHelper viewHelper;
 
-    public LiuLinearLayout(Context context) {
+    public ADLinearLayout(Context context) {
         super(context, null);
     }
 
-    public LiuLinearLayout(Context context, AttributeSet attrs) {
+    public ADLinearLayout(Context context, AttributeSet attrs) {
         super(context, attrs, 0);
         viewHelper = new ViewHelper();
         viewHelper.initAttrs(context, attrs);

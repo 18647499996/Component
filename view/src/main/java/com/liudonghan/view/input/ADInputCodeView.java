@@ -26,7 +26,7 @@ import java.util.List;
  * @author Created by: Li_Min
  * Time:1/5/23
  */
-public class LiuInputCodeView extends RelativeLayout {
+public class ADInputCodeView extends RelativeLayout {
     private Context context;
     private TextView tv_code1;
     private TextView tv_code2;
@@ -42,13 +42,13 @@ public class LiuInputCodeView extends RelativeLayout {
     private EditText et_code;
     private List<String> codes = new ArrayList<>();
 
-    public LiuInputCodeView(Context context) {
+    public ADInputCodeView(Context context) {
         super(context);
         this.context = context;
         loadView();
     }
 
-    public LiuInputCodeView(Context context, AttributeSet attrs) {
+    public ADInputCodeView(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.context = context;
         loadView();

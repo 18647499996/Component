@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.liudonghan.view.snackbar.SnackBar;
-import com.liudonghan.view.snackbar.SnackBarManager;
+import com.liudonghan.view.snackbar.ADSnackBarManager;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.activity_main_tv).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SnackBarManager.show(SnackBar
+                ADSnackBarManager.show(SnackBar
                         .with(MainActivity.this)
                         .position(SnackBar.SnackbarPosition.TOP)
                         .duration(1000)

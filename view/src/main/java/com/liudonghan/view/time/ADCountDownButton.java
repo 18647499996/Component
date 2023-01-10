@@ -16,7 +16,7 @@ import com.liudonghan.view.R;
  * @author Created by: Li_Min
  * Time:1/5/23
  */
-public class CountDownButton extends AppCompatTextView {
+public class ADCountDownButton extends AppCompatTextView {
 
     private static final long DEFAULT_MILLIS_INFUTURE = 60;
 
@@ -26,16 +26,16 @@ public class CountDownButton extends AppCompatTextView {
     private OnCountListener mListener;
     private String defaultValue = "获取验证码";
 
-    public CountDownButton(Context context) {
+    public ADCountDownButton(Context context) {
         this(context, null);
     }
 
-    public CountDownButton(Context context, AttributeSet attrs) {
+    public ADCountDownButton(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
 
-    public CountDownButton(Context context, AttributeSet attrs, int defStyleAttr) {
+    public ADCountDownButton(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
         init(context, attrs);
@@ -97,9 +97,9 @@ public class CountDownButton extends AppCompatTextView {
     }
 
     public interface OnCountListener {
-        void onTick(CountDownButton button, String second);
+        void onTick(ADCountDownButton button, String second);
 
-        void onFinish(CountDownButton button);
+        void onFinish(ADCountDownButton button);
     }
 
     private class MyCount extends CountDownTimer {
@@ -118,9 +118,9 @@ public class CountDownButton extends AppCompatTextView {
             String time = (millisUntilFinished / 1000) + "s 重新发送";
 
             if (mListener != null) {
-                mListener.onTick(CountDownButton.this, time);
+                mListener.onTick(ADCountDownButton.this, time);
             } else {
-                CountDownButton.this.setText(time);
+                ADCountDownButton.this.setText(time);
             }
         }
 
@@ -128,9 +128,9 @@ public class CountDownButton extends AppCompatTextView {
         public void onFinish() {
             setEnabled(true);
             if (mListener != null) {
-                mListener.onFinish(CountDownButton.this);
+                mListener.onFinish(ADCountDownButton.this);
             } else {
-                CountDownButton.this.setText(defaultValue);
+                ADCountDownButton.this.setText(defaultValue);
 
             }
             isFinished = true;

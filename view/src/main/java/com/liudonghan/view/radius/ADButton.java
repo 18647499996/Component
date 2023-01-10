@@ -19,15 +19,15 @@ import com.liudonghan.view.helper.ViewHelper;
  * Time:1/4/23
  */
 @SuppressLint("AppCompatCustomView")
-public class LiuButton extends Button implements ViewAttr {
+public class ADButton extends Button implements ViewAttr {
 
     private ViewHelper viewHelper;
 
-    public LiuButton(Context context) {
+    public ADButton(Context context) {
         super(context, null);
     }
 
-    public LiuButton(Context context, AttributeSet attrs) {
+    public ADButton(Context context, AttributeSet attrs) {
         super(context, attrs, 0);
         viewHelper = new ViewHelper();
         viewHelper.initAttrs(context, attrs);

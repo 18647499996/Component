@@ -1,35 +1,35 @@
 package com.liudonghan.view.radius;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
+import android.widget.RelativeLayout;
 
-import androidx.constraintlayout.widget.ConstraintLayout;
+import java.util.Arrays;
 
 import com.liudonghan.view.helper.ViewAttr;
 import com.liudonghan.view.helper.ViewHelper;
-
-import java.util.Arrays;
 
 /**
  * Description：
  *
  * @author Created by: Li_Min
- * Time:1/9/23
+ * Time:1/4/23
  */
-public class LiuConstraintLayout extends ConstraintLayout implements ViewAttr {
+@SuppressLint("AppCompatCustomView")
+public class ADRelativeLayout extends RelativeLayout implements ViewAttr {
 
     private ViewHelper viewHelper;
 
-    public LiuConstraintLayout(Context context) {
+    public ADRelativeLayout(Context context) {
         super(context, null);
     }
 
-
-    public LiuConstraintLayout(Context context, AttributeSet attrs) {
-        super(context, attrs);
-         viewHelper = new ViewHelper();
+    public ADRelativeLayout(Context context, AttributeSet attrs) {
+        super(context, attrs, 0);
+        viewHelper = new ViewHelper();
         viewHelper.initAttrs(context, attrs);
     }
 

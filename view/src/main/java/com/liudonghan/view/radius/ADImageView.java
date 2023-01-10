@@ -5,7 +5,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
-import android.widget.TextView;
+import android.widget.ImageView;
 
 import java.util.Arrays;
 
@@ -19,15 +19,15 @@ import com.liudonghan.view.helper.ViewHelper;
  * Time:1/4/23
  */
 @SuppressLint("AppCompatCustomView")
-public class LiuTextView extends TextView implements ViewAttr {
+public class ADImageView extends ImageView implements ViewAttr {
 
     private ViewHelper viewHelper;
 
-    public LiuTextView(Context context) {
+    public ADImageView(Context context) {
         super(context, null);
     }
 
-    public LiuTextView(Context context, AttributeSet attrs) {
+    public ADImageView(Context context, AttributeSet attrs) {
         super(context, attrs, 0);
         viewHelper = new ViewHelper();
         viewHelper.initAttrs(context, attrs);
