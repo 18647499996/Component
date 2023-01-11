@@ -2,6 +2,7 @@ package com.liudonghan.component;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -24,6 +25,12 @@ public class MainActivity extends AppCompatActivity {
                         .margin(15, 15)
                         .backgroundDrawable(R.drawable.corners_snack_bar_bg)
                         .text("哈哈哈哈哈"));
+            }
+        });
+        findViewById(R.id.activity_main_img).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, PhotoActivity.class));
             }
         });
 
