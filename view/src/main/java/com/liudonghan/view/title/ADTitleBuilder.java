@@ -29,7 +29,7 @@ import com.liudonghan.view.R;
  * <p/>
  * ============================================================
  **/
-public class TitleBuilder {
+public class ADTitleBuilder {
 
     /**
      * 标题
@@ -99,7 +99,7 @@ public class TitleBuilder {
      *
      * @param context 上下文
      */
-    public TitleBuilder(Activity context) {
+    public ADTitleBuilder(Activity context) {
         this.context = context;
         titleView = context.findViewById(R.id.act_title_bor);
 
@@ -128,7 +128,7 @@ public class TitleBuilder {
      * @param activity 上下文
      * @param view     fragment布局引用
      */
-    public TitleBuilder(Activity activity, View view) {
+    public ADTitleBuilder(Activity activity, View view) {
         this.context = activity;
         titleView = view.findViewById(R.id.act_title_bor);
 
@@ -152,12 +152,12 @@ public class TitleBuilder {
      *
      * @return TitleBuilder
      */
-    public TitleBuilder setViewHide(boolean isHide) {
+    public ADTitleBuilder setViewHide(boolean isHide) {
         mViewLine.setVisibility(isHide ? View.VISIBLE : View.GONE);
         return this;
     }
 
-    public TitleBuilder setViewLineColor(int lineColor) {
+    public ADTitleBuilder setViewLineColor(int lineColor) {
         if (0 != lineColor) {
             mViewLine.setBackgroundColor(context.getResources().getColor(lineColor));
         }
@@ -170,7 +170,7 @@ public class TitleBuilder {
      * @param text 设置文本
      */
 
-    public TitleBuilder setMiddleTitleBgRes(String text) {
+    public ADTitleBuilder setMiddleTitleBgRes(String text) {
         setMiddleTitleBgRes(text, R.color.color_342e2e, R.color.white);
         return this;
     }
@@ -182,7 +182,7 @@ public class TitleBuilder {
      * @param text 设置文本
      */
 
-    public TitleBuilder setMiddleTitleBgResCover(String text) {
+    public ADTitleBuilder setMiddleTitleBgResCover(String text) {
         setMiddleTitleBgRes(text, R.color.white, R.color.black);
         return this;
     }
@@ -194,7 +194,7 @@ public class TitleBuilder {
      * @param textColor  字体颜色
      * @param titleColor 标题背景颜色
      */
-    public TitleBuilder setMiddleTitleBgRes(String text, int textColor, int titleColor) {
+    public ADTitleBuilder setMiddleTitleBgRes(String text, int textColor, int titleColor) {
         mTvContent.setVisibility(TextUtils.isEmpty(text) ? View.GONE : View.VISIBLE);
         if (!TextUtils.isEmpty(text)) {
             mTvContent.setText(text);
@@ -208,7 +208,7 @@ public class TitleBuilder {
      * title
      * 字体加粗
      */
-    public TitleBuilder setMiddleTitleBgResTypeFace() {
+    public ADTitleBuilder setMiddleTitleBgResTypeFace() {
         mTvContent.setTypeface(Typeface.DEFAULT_BOLD);
         return this;
     }
@@ -218,7 +218,7 @@ public class TitleBuilder {
      *
      * @param resId 资源id
      */
-    public TitleBuilder setLeftImageRes(int resId) {
+    public ADTitleBuilder setLeftImageRes(int resId) {
         mImgLeft.setVisibility(resId > 0 ? View.VISIBLE : View.GONE);
         mImgLeft.setImageResource(resId);
         return this;
@@ -230,7 +230,7 @@ public class TitleBuilder {
      * @param text 文本
      * @return
      */
-    public TitleBuilder setLeftTextRes(String text) {
+    public ADTitleBuilder setLeftTextRes(String text) {
         setLeftTextRes(text, 14, R.color.white);
 
         return this;
@@ -243,7 +243,7 @@ public class TitleBuilder {
      * @param textSize  字体大小
      * @param textColor 字体颜色
      */
-    public TitleBuilder setLeftTextRes(String text, int textSize, int textColor) {
+    public ADTitleBuilder setLeftTextRes(String text, int textSize, int textColor) {
         mTvLeft.setVisibility(TextUtils.isEmpty(text) ? View.GONE : View.VISIBLE);
         if (!TextUtils.isEmpty(text)) {
             mTvLeft.setText(text);
@@ -259,7 +259,7 @@ public class TitleBuilder {
      *
      * @param activity activity引用
      */
-    public TitleBuilder setLeftRelativeLayoutListener(final Activity activity) {
+    public ADTitleBuilder setLeftRelativeLayoutListener(final Activity activity) {
         if (mRelLeft.getVisibility() == View.VISIBLE) {
             mRelLeft.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -278,7 +278,7 @@ public class TitleBuilder {
      *
      * @param resId 资源id
      */
-    public TitleBuilder setRightImageRes(int resId) {
+    public ADTitleBuilder setRightImageRes(int resId) {
         mImgRight.setVisibility(resId > 0 ? View.VISIBLE : View.GONE);
         mImgRight.setImageResource(resId);
         return this;
@@ -289,7 +289,7 @@ public class TitleBuilder {
      *
      * @param resId 资源id
      */
-    public TitleBuilder setRightImageResTwo(int resId) {
+    public ADTitleBuilder setRightImageResTwo(int resId) {
         mImgRightTwo.setVisibility(resId > 0 ? View.VISIBLE : View.GONE);
         mImgRightTwo.setImageResource(resId);
         return this;
@@ -300,7 +300,7 @@ public class TitleBuilder {
      *
      * @param text 文本
      */
-    public TitleBuilder setRightText(String text) {
+    public ADTitleBuilder setRightText(String text) {
         setRightText(text, 12, R.color.color_342e2e);
         return this;
     }
@@ -312,7 +312,7 @@ public class TitleBuilder {
      * @param textSize  字体大小
      * @param textColor 字体颜色
      */
-    public TitleBuilder setRightText(String text, int textSize, int textColor) {
+    public ADTitleBuilder setRightText(String text, int textSize, int textColor) {
         setRightText(text, textSize, textColor, R.color.white);
         return this;
     }
@@ -325,7 +325,7 @@ public class TitleBuilder {
      * @param textColor 字体颜色
      * @param textBg    文字背景
      */
-    public TitleBuilder setRightText(String text, int textSize, int textColor, int textBg) {
+    public ADTitleBuilder setRightText(String text, int textSize, int textColor, int textBg) {
         mTvRight.setVisibility(TextUtils.isEmpty(text) ? View.GONE : View.VISIBLE);
         if (!TextUtils.isEmpty(text)) {
             mTvRight.setText(text);
@@ -339,7 +339,7 @@ public class TitleBuilder {
     /**
      * 设置右边的事件
      */
-    public TitleBuilder setRightRelativeLayoutListener(View.OnClickListener listener) {
+    public ADTitleBuilder setRightRelativeLayoutListener(View.OnClickListener listener) {
         if (mRelRight.getVisibility() == View.VISIBLE) {
             mRelRight.setOnClickListener(listener);
         }
@@ -349,7 +349,7 @@ public class TitleBuilder {
     /**
      * 设置左边返回的事件
      */
-    public TitleBuilder setContentLeftRelativeLayoutListener(View.OnClickListener listener) {
+    public ADTitleBuilder setContentLeftRelativeLayoutListener(View.OnClickListener listener) {
         if (mRelLeft.getVisibility() == View.VISIBLE) {
             mRelLeft.setOnClickListener(listener);
         }
@@ -359,7 +359,7 @@ public class TitleBuilder {
     /**
      * 设置右边的事件
      */
-    public TitleBuilder setContentLeftRelativeLayoutTwoListener(View.OnClickListener listener) {
+    public ADTitleBuilder setContentLeftRelativeLayoutTwoListener(View.OnClickListener listener) {
         if (mRelRightTwo.getVisibility() == View.VISIBLE) {
             mRelRightTwo.setOnClickListener(listener);
         }
