@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         adCellTextLayout = findViewById(R.id.activity_main_cg_one);
+        adCellTextLayout.setLeftText("动态设置");
         findViewById(R.id.activity_main_tv).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
