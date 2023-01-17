@@ -42,9 +42,9 @@ public class ADCountDownButton extends AppCompatTextView {
     }
 
     private void init(Context context, AttributeSet attrs) {
-        TypedArray typedArray = context.getResources().obtainAttributes(attrs, R.styleable.LiuCountDown);
-        countDownInterval = typedArray.getInteger(R.styleable.LiuCountDown_liu_count_down_interval, 1) * 1000;
-        millisInFuture = typedArray.getInteger(R.styleable.LiuCountDown_liu_millis_as_future, 60) * 1000;
+        TypedArray typedArray = context.getResources().obtainAttributes(attrs, R.styleable.ADCountDownButton);
+        countDownInterval = typedArray.getInteger(R.styleable.ADCountDownButton_liu_count_down_interval, 1) * 1000;
+        millisInFuture = typedArray.getInteger(R.styleable.ADCountDownButton_liu_millis_as_future, 60) * 1000;
         typedArray.recycle();
 
     }

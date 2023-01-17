@@ -1,6 +1,7 @@
 package com.liudonghan.view.radius;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -30,7 +31,8 @@ public class ADConstraintLayout extends ConstraintLayout implements ViewAttr {
     public ADConstraintLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
          viewHelper = new ViewHelper();
-        viewHelper.initAttrs(context, attrs);
+        TypedArray typedArray = viewHelper.initAttrs(context, attrs);
+        typedArray.recycle();
     }
 
     @Override

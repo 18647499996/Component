@@ -2,6 +2,7 @@ package com.liudonghan.view.radius;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -30,7 +31,8 @@ public class ADRelativeLayout extends RelativeLayout implements ViewAttr {
     public ADRelativeLayout(Context context, AttributeSet attrs) {
         super(context, attrs, 0);
         viewHelper = new ViewHelper();
-        viewHelper.initAttrs(context, attrs);
+        TypedArray typedArray = viewHelper.initAttrs(context, attrs);
+        typedArray.recycle();
     }
 
     @Override

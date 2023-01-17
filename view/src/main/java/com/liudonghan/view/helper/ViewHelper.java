@@ -86,8 +86,9 @@ public class ViewHelper {
      *
      * @param context 上下文
      * @param attrs   属性
+     * @return TypedArray
      */
-    public void initAttrs(Context context, AttributeSet attrs) {
+    public TypedArray initAttrs(Context context, AttributeSet attrs) {
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.Liu_Attrs);
         mRoundAsCircle = ta.getBoolean(R.styleable.Liu_Attrs_liu_is_circle, false);
         mStrokeColorStateList = ta.getColorStateList(R.styleable.Liu_Attrs_liu_stroke_color);
@@ -105,7 +106,7 @@ public class ViewHelper {
         int roundCornerTopRight = ta.getDimensionPixelSize(R.styleable.Liu_Attrs_liu_round_corner_top_right, roundCorner);
         int roundCornerBottomLeft = ta.getDimensionPixelSize(R.styleable.Liu_Attrs_liu_round_corner_bottom_left, roundCorner);
         int roundCornerBottomRight = ta.getDimensionPixelSize(R.styleable.Liu_Attrs_liu_round_corner_bottom_right, roundCorner);
-        ta.recycle();
+//        ta.recycle();
 
         radii[0] = roundCornerTopLeft;
         radii[1] = roundCornerTopLeft;
@@ -125,6 +126,7 @@ public class ViewHelper {
         mPaint = new Paint();
         mPaint.setColor(Color.WHITE);
         mPaint.setAntiAlias(true);
+        return ta;
     }
 
 
