@@ -95,49 +95,60 @@
         android:layout_marginRight="30dp"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.liudonghan.view.cell.ADCellGroupLayout
-        android:id="@+id/activity_main_cg_one"
-        android:layout_width="match_parent"
-        android:layout_height="52dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:background="@color/white"
-        app:layout_constraintBottom_toTopOf="@id/activity_main_img"
-        app:liu_left_drawable="@mipmap/ic_launcher"
-        app:liu_left_drawable_height="18dp"
-        app:liu_left_drawable_padding="8dp"
-        app:liu_left_drawable_width="18dp"
-        app:liu_left_text="不不不不"
-        app:liu_left_text_color="@color/color_342e2e"
-        app:liu_left_text_size="13"
-        app:liu_right_drawable="@mipmap/ic_launcher"
-        app:liu_right_drawable_height="18dp"
-        app:liu_right_drawable_padding="8dp"
-        app:liu_right_drawable_width="18dp"
-        app:liu_right_text="进入"
-        app:liu_right_text_color="@color/colorPrimary"
-        app:liu_right_text_size="12" />
 
-    <com.liudonghan.view.cell.ADCellGroupLayout
+    <com.liudonghan.view.radius.ADConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="52dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
         android:background="@color/white"
-        app:layout_constraintBottom_toTopOf="@id/activity_main_cg_one"
-        app:liu_left_drawable="@mipmap/ic_launcher"
-        app:liu_left_drawable_height="18dp"
-        app:liu_left_drawable_padding="8dp"
-        app:liu_left_drawable_width="18dp"
-        app:liu_left_text="不不不不"
-        app:liu_left_text_color="@color/color_342e2e"
-        app:liu_left_text_size="13"
-        app:liu_right_drawable="@mipmap/ic_launcher"
-        app:liu_right_drawable_height="18dp"
-        app:liu_right_drawable_padding="8dp"
-        app:liu_right_drawable_width="18dp"
-        app:liu_right_text_color="@color/colorPrimary"
-        app:liu_right_text_size="12" />
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@id/activity_main_img"
+        app:liu_round_corner="6dp">
+
+
+        <com.liudonghan.view.cell.ADCellTextLayout
+            android:id="@+id/activity_main_cg_one"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:background="@color/white"
+            app:liu_left_drawable="@mipmap/ic_launcher"
+            app:liu_left_drawable_height="18dp"
+            app:liu_left_drawable_padding="8dp"
+            app:liu_left_drawable_width="18dp"
+            app:liu_left_text="不不不不"
+            app:liu_left_text_color="@color/color_342e2e"
+            app:liu_left_text_size="13"
+            app:liu_right_drawable="@mipmap/ic_launcher"
+            app:liu_right_drawable_height="18dp"
+            app:liu_right_drawable_padding="8dp"
+            app:liu_right_drawable_width="18dp"
+            app:liu_right_text="进入"
+            app:liu_right_text_color="@color/colorPrimary"
+            app:liu_right_text_size="12" />
+
+        <com.liudonghan.view.cell.ADCellTextLayout
+            android:id="@+id/activity_main_cg_two"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:background="@color/white"
+            app:layout_constraintTop_toBottomOf="@id/activity_main_cg_one"
+            app:liu_left_drawable="@mipmap/ic_launcher"
+            app:liu_left_drawable_height="18dp"
+            app:liu_left_drawable_padding="8dp"
+            app:liu_left_drawable_width="18dp"
+            app:liu_left_text="哈哈哈哈哈"
+            app:liu_left_text_color="@color/color_342e2e"
+            app:liu_left_text_size="13"
+            app:liu_right_drawable="@mipmap/ic_launcher"
+            app:liu_right_drawable_height="18dp"
+            app:liu_right_drawable_padding="8dp"
+            app:liu_right_drawable_width="18dp"
+            app:liu_right_text_color="@color/colorPrimary"
+            app:liu_right_text_size="12" />
+
+    </com.liudonghan.view.radius.ADConstraintLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

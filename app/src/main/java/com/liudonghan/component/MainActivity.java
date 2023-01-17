@@ -6,15 +6,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.liudonghan.view.cell.ADCellTextLayout;
 import com.liudonghan.view.snackbar.SnackBar;
 import com.liudonghan.view.snackbar.ADSnackBarManager;
 
 public class MainActivity extends AppCompatActivity {
 
+    private ADCellTextLayout adCellTextLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        adCellTextLayout = findViewById(R.id.activity_main_cg_one);
         findViewById(R.id.activity_main_tv).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

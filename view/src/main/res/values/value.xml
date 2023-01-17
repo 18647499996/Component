@@ -87,7 +87,7 @@
         <attr name="liu_count_down_interval" format="integer" />
     </declare-styleable>
 
-    <declare-styleable name="ADCellGroupLayout">
+    <declare-styleable name="ADCellTextLayout">
         <attr name="liu_left_text" format="string" />
         <attr name="liu_left_text_color" format="color" />
         <attr name="liu_left_text_size" format="float" />
