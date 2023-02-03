@@ -35,8 +35,8 @@ public class ADCitySelector extends LinearLayout implements View.OnClickListener
     //列表的适配器
     private ADCitySelector.AddressAdapter addressAdapter;
 
-    private OnItemClickListener onItemClickListener;
-    private OnTabSelectedListener onTabSelectedListener;
+    private OnADItemClickListener onItemClickListener;
+    private OnADTabSelectedListener onTabSelectedListener;
     private RecyclerView list;
     //tabs的外层layout
     private LinearLayout tabs_layout;
@@ -49,7 +49,7 @@ public class ADCitySelector extends LinearLayout implements View.OnClickListener
     private int tabIndex = 0;
     //分隔线
     private View grayLine;
-    private List<CityModel> cities;
+    private List<ADCityModel> cities;
 
     public ADCitySelector(Context context) {
         super(context);
@@ -131,14 +131,14 @@ public class ADCitySelector extends LinearLayout implements View.OnClickListener
     /**
      * 设置列表的点击事件回调接口
      */
-    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+    public void setOnItemClickListener(OnADItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
 
     /**
      * 设置列表的数据源，设置后立即生效
      */
-    public void setCities(List<CityModel> cities) {
+    public void setCities(List<ADCityModel> cities) {
         this.cities = cities;
         if (cities == null || cities.size() <= 0)
             return;
@@ -152,7 +152,7 @@ public class ADCitySelector extends LinearLayout implements View.OnClickListener
     /**
      * 设置顶部tab的点击事件回调
      */
-    public void setOnTabSelectedListener(OnTabSelectedListener onTabSelectedListener) {
+    public void setOnTabSelectedListener(OnADTabSelectedListener onTabSelectedListener) {
         this.onTabSelectedListener = onTabSelectedListener;
     }
 

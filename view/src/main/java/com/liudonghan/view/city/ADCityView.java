@@ -11,7 +11,6 @@ import android.widget.ViewSwitcher;
 
 import com.liudonghan.view.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -70,7 +69,8 @@ public class ADCityView extends RelativeLayout {
         imageView = inflate.findViewById(R.id.view_multi_city_img_close);
     }
 
-    public void setData(List<CityModel> cityModelList) {
+    public void setData(List<ADCityModel> cityModelList) {
         adCitySelector.setCities(cityModelList);
+        viewSwitcher.setDisplayedChild(1);
     }
 }

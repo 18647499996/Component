@@ -6,7 +6,7 @@ package com.liudonghan.view.city;
  * @author Created by: Li_Min
  * Time:2/3/23
  */
-public interface OnTabSelectedListener {
+public interface OnADTabSelectedListener {
 
     void onTabSelected(ADCitySelector addressSelector, ADCitySelector.Tab tab);
 
