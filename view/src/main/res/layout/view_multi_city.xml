@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:liu="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ViewSwitcher
+        android:id="@+id/view_multi_city_switcher"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:minHeight="280dp"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <ProgressBar
+            android:id="@+id/view_multi_city_progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminateTint="#ff7900"
+            android:indeterminateTintMode="src_atop" />
+
+        <com.liudonghan.view.city.ADCitySelector
+            android:id="@+id/dialog_city_wheel_address"
+            android:layout_width="match_parent"
+            android:layout_height="280dp"
+            android:background="@color/white" />
+
+    </ViewSwitcher>
+
+    <com.liudonghan.view.radius.ADRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toTopOf="@id/view_multi_city_switcher"
+        app:liu_round_corner_top_left="12dp"
+        app:liu_round_corner_top_right="12dp">
+
+        <TextView
+            android:id="@+id/view_multi_city_tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="所在地区"
+            android:textColor="@color/color_342e2e"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/view_multi_city_img_close"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/ad_cancel" />
+
+    </com.liudonghan.view.radius.ADRelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

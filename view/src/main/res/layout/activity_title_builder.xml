@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            tools:src="@drawable/nav_fanhui_hei" />
+            tools:src="@drawable/ad_back_black" />
 
         <TextView
             android:id="@+id/act_title_left_tv"
