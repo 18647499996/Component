@@ -20,5 +20,5 @@ public abstract class ADCityModel {
      *
      * @return long类型编号
      */
-    public abstract long getCityCode();
+    public abstract String getCityCode();
 }
