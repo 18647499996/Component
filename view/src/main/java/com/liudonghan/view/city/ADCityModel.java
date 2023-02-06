@@ -6,6 +6,7 @@ package com.liudonghan.view.city;
  * @author Created by: Li_Min
  * Time:2/3/23
  */
-public interface ADCityModel {
-    String getCityName();
+public abstract class ADCityModel {
+
+    public abstract String getCityName();
 }

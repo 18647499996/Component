@@ -314,29 +314,26 @@ public class ADCitySelector extends LinearLayout implements View.OnClickListener
 
         @Override
         public void onBindViewHolder(ADCitySelector.AddressAdapter.MyViewHolder holder, final int position) {
-            if (cities.get(position) instanceof ADCityModel){
-                final ADCityModel adCityModel = (ADCityModel) cities.get(position);
-                holder.tv.setText(adCityModel.getCityName());
-                holder.itemView.setTag(cities.get(position));
-                holder.itemView.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (onItemClickListener != null) {
-                            onItemClickListener.itemClick(ADCitySelector.this, adCityModel, tabIndex, position);
-                            tabs.get(tabIndex).setText(adCityModel.getCityName());
-                            tabs.get(tabIndex).setTag(v.getTag());
-                            if (tabIndex + 1 < tabs.size()) {
-                                tabIndex++;
-                                resetAllTabs(tabIndex);
-                                line.setIndex(tabIndex);
-                                tabs.get(tabIndex).setText("请选择");
-                                tabs.get(tabIndex).setSelected(true);
-                            }
+            final ADCityModel adCityModel = cities.get(position);
+            holder.tv.setText(adCityModel.getCityName());
+            holder.itemView.setTag(cities.get(position));
+            holder.itemView.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (onItemClickListener != null) {
+                        onItemClickListener.itemClick(ADCitySelector.this, adCityModel, tabIndex, position);
+                        tabs.get(tabIndex).setText(adCityModel.getCityName());
+                        tabs.get(tabIndex).setTag(v.getTag());
+                        if (tabIndex + 1 < tabs.size()) {
+                            tabIndex++;
+                            resetAllTabs(tabIndex);
+                            line.setIndex(tabIndex);
+                            tabs.get(tabIndex).setText("请选择");
+                            tabs.get(tabIndex).setSelected(true);
                         }
                     }
-                });
-            }
-
+                }
+            });
         }
 
         @Override
