@@ -19,7 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:indeterminateTint="#ff7900"
+            android:indeterminateTint="@color/color_ff7900"
             android:indeterminateTintMode="src_atop" />
 
         <com.liudonghan.view.city.ADCitySelector

@@ -1,6 +1,8 @@
 package com.liudonghan.view.city;
 
 import android.content.Context;
+import android.graphics.PorterDuff;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
@@ -72,5 +74,15 @@ public class ADCityView extends RelativeLayout {
     public void setData(List<ADCityModel> cityModelList) {
         adCitySelector.setCities(cityModelList);
         viewSwitcher.setDisplayedChild(1);
+    }
+
+    public void setProgressBarColor(int color) {
+        progressBar.setInterpolator(getContext(), color);
+    }
+
+    public void setProgressBarMode(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            progressBar.setIndeterminateTintMode(PorterDuff.Mode.SRC_ATOP);
+        }
     }
 }
