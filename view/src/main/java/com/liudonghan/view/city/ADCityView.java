@@ -61,7 +61,7 @@ public class ADCityView extends RelativeLayout {
     }
 
     private void init(Context context) {
-        View inflate = View.inflate(context, R.layout.view_multi_city, this);
+        View inflate = View.inflate(context, R.layout.ad_multi_city, this);
         viewSwitcher = inflate.findViewById(R.id.view_multi_city_switcher);
         progressBar = inflate.findViewById(R.id.view_multi_city_progress_bar);
         adCitySelector = inflate.findViewById(R.id.dialog_city_wheel_address);

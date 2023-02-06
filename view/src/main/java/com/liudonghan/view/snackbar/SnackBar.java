@@ -599,7 +599,7 @@ public class SnackBar extends SnackBarLayout {
 
     private ViewGroup.MarginLayoutParams init(Context context, Activity targetActivity, ViewGroup parent, boolean usePhoneLayout) {
         SnackBarLayout layout = (SnackBarLayout) LayoutInflater.from(context)
-                .inflate(R.layout.view_snack_bar, this, true);
+                .inflate(R.layout.ad_snack_bar, this, true);
         layout.setOrientation(LinearLayout.VERTICAL);
 
         Resources res = getResources();
@@ -632,7 +632,7 @@ public class SnackBar extends SnackBarLayout {
                     mMaxWidthPercentage == null
                             ? res.getDimensionPixelSize(R.dimen.dip_568)
                             : DisplayCompat.getWidthFromPercentage(targetActivity, mMaxWidthPercentage));
-            layout.setBackgroundResource(R.drawable.corners_snack_bar_bg);
+            layout.setBackgroundResource(R.drawable.ad_snack_bar_bg);
             GradientDrawable bg = (GradientDrawable) layout.getBackground();
             bg.setColor(mColor);
 
@@ -640,7 +640,7 @@ public class SnackBar extends SnackBarLayout {
                     parent, FrameLayout.LayoutParams.WRAP_CONTENT, dpToPx(mType.getMaxHeight(), scale), mWidePosition);
 
             if (mLineColor != null) {
-                divider.setBackgroundResource(R.drawable.corners_snack_bar_divder_bg);
+                divider.setBackgroundResource(R.drawable.ad_snack_bar_divder_bg);
                 GradientDrawable dbg = (GradientDrawable) divider.getBackground();
                 dbg.setColor(mLineColor);
             } else {

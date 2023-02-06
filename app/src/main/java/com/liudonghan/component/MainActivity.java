@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
                         .position(SnackBar.SnackbarPosition.TOP)
                         .duration(1000)
                         .margin(15, 15)
-                        .backgroundDrawable(R.drawable.corners_snack_bar_bg)
+                        .backgroundDrawable(R.drawable.ad_snack_bar_bg)
                         .text("哈哈哈哈哈"));
             }
         });
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 //                        .position(Snackbar.SnackbarPosition.TOP)
 //                        .duration(1000)
 //                        .margin(15, 15)
-//                        .backgroundDrawable(R.drawable.corners_snack_bar_bg)
+//                        .backgroundDrawable(R.drawable.ad_snack_bar_bg)
 //                        .text("咕咕咕咕咕咕"));
             }
         });

@@ -55,7 +55,7 @@ public class ADInputCodeView extends RelativeLayout {
     }
 
     private void loadView() {
-        View view = LayoutInflater.from(context).inflate(R.layout.view_input_code, this);
+        View view = LayoutInflater.from(context).inflate(R.layout.ad_input_code, this);
         initView(view);
         initEvent();
         initListener();

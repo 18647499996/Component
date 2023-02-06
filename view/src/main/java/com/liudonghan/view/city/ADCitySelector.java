@@ -308,7 +308,7 @@ public class ADCitySelector extends LinearLayout implements View.OnClickListener
     private class AddressAdapter extends RecyclerView.Adapter<ADCitySelector.AddressAdapter.MyViewHolder> {
         @Override
         public ADCitySelector.AddressAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            ADCitySelector.AddressAdapter.MyViewHolder viewHolder = new ADCitySelector.AddressAdapter.MyViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_address, parent, false));
+            ADCitySelector.AddressAdapter.MyViewHolder viewHolder = new ADCitySelector.AddressAdapter.MyViewHolder(LayoutInflater.from(mContext).inflate(R.layout.ad_item_address, parent, false));
             return viewHolder;
         }
 

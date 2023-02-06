@@ -38,7 +38,7 @@ public class ADCellTextLayout extends ADConstraintLayout {
     public ADCellTextLayout(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         this.context = context;
-        View inflate = View.inflate(context, R.layout.view_cell_group, this);
+        View inflate = View.inflate(context, R.layout.ad_cell_group, this);
         textViewLeft = inflate.findViewById(R.id.view_cell_group_tv_left);
         textViewRight = inflate.findViewById(R.id.view_cell_group_tv_right);
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.ADCellTextLayout);

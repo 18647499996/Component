@@ -137,7 +137,7 @@ public class ADSnackBarManager {
      * @param msg     提示语
      */
     public void showError(Context context, String msg) {
-        show(context, msg, R.drawable.corners_bg_bar_error);
+        show(context, msg, R.drawable.ad_bg_bar_error);
     }
 
     /**
@@ -147,7 +147,7 @@ public class ADSnackBarManager {
      * @param msg     提示语
      */
     public void showSucceed(Context context, String msg) {
-        show(context, msg, R.drawable.corners_bg_bar_succeed);
+        show(context, msg, R.drawable.ad_bg_bar_succeed);
     }
 
     /**
@@ -157,7 +157,7 @@ public class ADSnackBarManager {
      * @param msg     提示语
      */
     public void showWarn(Context context, String msg) {
-        show(context, msg, R.drawable.corners_bg_bar_warn);
+        show(context, msg, R.drawable.ad_bg_bar_warn);
     }
 
     /**
