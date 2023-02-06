@@ -32,7 +32,7 @@
 
     <com.liudonghan.view.radius.ADRelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="45dp"
         android:background="@color/white"
         app:layout_constraintBottom_toTopOf="@id/view_multi_city_switcher"
         app:liu_round_corner_top_left="12dp"

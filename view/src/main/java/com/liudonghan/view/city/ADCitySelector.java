@@ -280,8 +280,7 @@ public class ADCitySelector extends LinearLayout implements View.OnClickListener
 
         private void init(Context context) {
             setOrientation(HORIZONTAL);
-            setLayoutParams(new LayoutParams(
-                    LayoutParams.MATCH_PARENT, 1));
+            setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, 1));
             setWeightSum(tabAmount);
             indicator = new View(context);
             indicator.setLayoutParams(new LayoutParams(0, LayoutParams.MATCH_PARENT, 1));
@@ -315,25 +314,29 @@ public class ADCitySelector extends LinearLayout implements View.OnClickListener
 
         @Override
         public void onBindViewHolder(ADCitySelector.AddressAdapter.MyViewHolder holder, final int position) {
-            holder.tv.setText(cities.get(position).getName());
-            holder.itemView.setTag(cities.get(position));
-            holder.itemView.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (onItemClickListener != null) {
-                        onItemClickListener.itemClick(ADCitySelector.this, cities, tabIndex, position);
-                        tabs.get(tabIndex).setText((cities.get(position).getName()));
-                        tabs.get(tabIndex).setTag(v.getTag());
-                        if (tabIndex + 1 < tabs.size()) {
-                            tabIndex++;
-                            resetAllTabs(tabIndex);
-                            line.setIndex(tabIndex);
-                            tabs.get(tabIndex).setText("请选择");
-                            tabs.get(tabIndex).setSelected(true);
+            if (cities.get(position) instanceof ADCityModel){
+                final ADCityModel adCityModel = (ADCityModel) cities.get(position);
+                holder.tv.setText(adCityModel.getCityName());
+                holder.itemView.setTag(cities.get(position));
+                holder.itemView.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (onItemClickListener != null) {
+                            onItemClickListener.itemClick(ADCitySelector.this, adCityModel, tabIndex, position);
+                            tabs.get(tabIndex).setText(adCityModel.getCityName());
+                            tabs.get(tabIndex).setTag(v.getTag());
+                            if (tabIndex + 1 < tabs.size()) {
+                                tabIndex++;
+                                resetAllTabs(tabIndex);
+                                line.setIndex(tabIndex);
+                                tabs.get(tabIndex).setText("请选择");
+                                tabs.get(tabIndex).setSelected(true);
+                            }
                         }
                     }
-                }
-            });
+                });
+            }
+
         }
 
         @Override
