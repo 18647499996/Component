@@ -1,6 +1,8 @@
 package com.liudonghan.view.city;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.graphics.PorterDuff;
 import android.os.Build;
 import android.util.AttributeSet;
@@ -10,6 +12,9 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.ViewSwitcher;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.ColorRes;
 
 import com.liudonghan.view.R;
 
@@ -76,13 +81,8 @@ public class ADCityView extends RelativeLayout {
         viewSwitcher.setDisplayedChild(1);
     }
 
-    public void setProgressBarColor(int color) {
-        progressBar.setInterpolator(getContext(), color);
-    }
-
-    public void setProgressBarMode(){
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            progressBar.setIndeterminateTintMode(PorterDuff.Mode.SRC_ATOP);
-        }
+    @SuppressLint("NewApi")
+    public void setProgressBarBgColor(@ColorRes int colorId) {
+        progressBar.setIndeterminateTintList(ColorStateList.valueOf(getResources().getColor(colorId)));
     }
 }

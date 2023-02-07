@@ -3,10 +3,13 @@ package com.liudonghan.component;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 
 import com.liudonghan.view.cell.ADCellTextLayout;
+import com.liudonghan.view.city.ADCityView;
 import com.liudonghan.view.snackbar.SnackBar;
 import com.liudonghan.view.snackbar.ADSnackBarManager;
 
@@ -19,6 +22,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         adCellTextLayout = findViewById(R.id.activity_main_cg_one);
+        ADCityView adCityView = findViewById(R.id.activity_main_city);
+        adCityView.getViewSwitcher().setDisplayedChild(0);
+        adCityView.getProgressBar().setIndeterminate(true);
+        adCityView.setProgressBarBgColor(R.color.color_342e2e);
+
         adCellTextLayout.setLeftText("动态设置");
         findViewById(R.id.activity_main_tv).setOnClickListener(new View.OnClickListener() {
             @Override
