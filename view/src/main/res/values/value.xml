@@ -90,7 +90,7 @@
     <declare-styleable name="ADCellTextLayout">
         <attr name="liu_left_text" format="string" />
         <attr name="liu_left_text_color" format="color" />
-        <attr name="liu_left_text_size" format="float" />
+        <attr name="liu_left_text_size" format="dimension" />
         <attr name="liu_left_drawable" format="reference" />
         <attr name="liu_left_drawable_width" format="dimension" />
         <attr name="liu_left_drawable_height" format="dimension" />
@@ -103,28 +103,17 @@
         </attr>
         <attr name="liu_right_text" format="string" />
         <attr name="liu_right_text_color" format="color" />
-        <attr name="liu_right_text_size" format="float" />
+        <attr name="liu_right_text_size" format="dimension" />
         <attr name="liu_right_drawable" format="reference" />
         <attr name="liu_right_drawable_width" format="dimension" />
         <attr name="liu_right_drawable_height" format="dimension" />
         <attr name="liu_right_drawable_padding" format="dimension" />
-        <attr name="liu_right_drawable_size" format="dimension" />
         <attr name="liu_right_drawable_direction" format="enum">
             <enum name="left" value="1" />
             <enum name="top" value="2" />
             <enum name="right" value="3" />
             <enum name="bottom" value="4" />
         </attr>
-
-        <attr name="liu_line_left_margin" format="integer" />
-        <attr name="liu_line_right_margin" format="integer" />
-        <attr name="liu_line_right_width" format="integer" />
-        <attr name="liu_line_background_color" format="color" />
-        <attr name="liu_line_visibility" format="enum">
-            <enum name="visibility" value="1" />
-            <enum name="gone" value="2" />
-        </attr>
-
     </declare-styleable>
 
     <bool name="sb__is_swipeable">false</bool>

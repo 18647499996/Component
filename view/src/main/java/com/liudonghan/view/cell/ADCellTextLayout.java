@@ -5,6 +5,7 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.TextView;
 
@@ -44,7 +45,7 @@ public class ADCellTextLayout extends ADConstraintLayout {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.ADCellTextLayout);
         // 左侧标签
         leftText = typedArray.getString(R.styleable.ADCellTextLayout_liu_left_text);
-        leftTextSize = typedArray.getFloat(R.styleable.ADCellTextLayout_liu_left_text_size, 14);
+        leftTextSize = typedArray.getDimensionPixelSize(R.styleable.ADCellTextLayout_liu_left_text_size, 14);
         leftTextColor = typedArray.getColor(R.styleable.ADCellTextLayout_liu_left_text_color, Color.parseColor("#342e2e"));
         leftDrawable = typedArray.getResourceId(R.styleable.ADCellTextLayout_liu_left_drawable, 0);
         leftDrawableDirection = Direction.fromInt(typedArray.getInt(R.styleable.ADCellTextLayout_liu_left_drawable_direction, Direction.left.getValue()));
@@ -54,7 +55,7 @@ public class ADCellTextLayout extends ADConstraintLayout {
 
         // 右侧标签
         rightText = typedArray.getString(R.styleable.ADCellTextLayout_liu_right_text);
-        rightTextSize = typedArray.getFloat(R.styleable.ADCellTextLayout_liu_right_text_size, 12);
+        rightTextSize = typedArray.getDimensionPixelSize(R.styleable.ADCellTextLayout_liu_right_text_size, 12);
         rightTextColor = typedArray.getColor(R.styleable.ADCellTextLayout_liu_right_text_color, Color.parseColor("#999999"));
         rightDrawable = typedArray.getResourceId(R.styleable.ADCellTextLayout_liu_right_drawable, 0);
         rightDrawableDirection = Direction.fromInt(typedArray.getInt(R.styleable.ADCellTextLayout_liu_right_drawable_direction, Direction.right.getValue()));
@@ -63,7 +64,6 @@ public class ADCellTextLayout extends ADConstraintLayout {
         rightDrawablePadding = typedArray.getDimensionPixelOffset(R.styleable.ADCellTextLayout_liu_right_drawable_padding, 0);
 
         typedArray.recycle();
-
         initCell(context);
     }
 
@@ -75,7 +75,7 @@ public class ADCellTextLayout extends ADConstraintLayout {
     private void initCell(Context context) {
         textViewLeft.setText(leftText);
         textViewLeft.setTextColor(leftTextColor);
-        textViewLeft.setTextSize(leftTextSize);
+        textViewLeft.setTextSize(TypedValue.COMPLEX_UNIT_PX, leftTextSize);
         if (0 != leftDrawable) {
             textViewLeft.setCompoundDrawablePadding(leftDrawablePadding);
             Drawable drawable = context.getResources().getDrawable(leftDrawable);
@@ -99,7 +99,7 @@ public class ADCellTextLayout extends ADConstraintLayout {
 
         textViewRight.setText(rightText);
         textViewRight.setTextColor(rightTextColor);
-        textViewRight.setTextSize(rightTextSize);
+        textViewRight.setTextSize(TypedValue.COMPLEX_UNIT_PX, rightTextSize);
         if (0 != rightDrawable) {
             textViewRight.setCompoundDrawablePadding(rightDrawablePadding);
             Drawable drawable = context.getResources().getDrawable(rightDrawable);
