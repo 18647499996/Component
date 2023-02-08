@@ -147,13 +147,12 @@
             app:liu_left_drawable_width="18dp"
             app:liu_left_text="哈哈哈哈哈"
             app:liu_left_text_color="@color/color_342e2e"
-            app:liu_left_text_size="13sp"
             app:liu_right_drawable="@mipmap/ic_launcher"
             app:liu_right_drawable_height="18dp"
             app:liu_right_drawable_padding="8dp"
             app:liu_right_drawable_width="18dp"
-            app:liu_right_text_color="@color/colorPrimary"
-            app:liu_right_text_size="12sp" />
+            app:liu_right_text="哈哈哈"
+            app:liu_right_text_color="@color/colorPrimary" />
 
         <com.liudonghan.view.cell.ADCellTextLayout
             android:layout_width="match_parent"

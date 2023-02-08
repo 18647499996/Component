@@ -45,7 +45,7 @@ public class ADCellTextLayout extends ADConstraintLayout {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.ADCellTextLayout);
         // 左侧标签
         leftText = typedArray.getString(R.styleable.ADCellTextLayout_liu_left_text);
-        leftTextSize = typedArray.getDimensionPixelSize(R.styleable.ADCellTextLayout_liu_left_text_size, 14);
+        leftTextSize = typedArray.getDimensionPixelSize(R.styleable.ADCellTextLayout_liu_left_text_size, 40);
         leftTextColor = typedArray.getColor(R.styleable.ADCellTextLayout_liu_left_text_color, Color.parseColor("#342e2e"));
         leftDrawable = typedArray.getResourceId(R.styleable.ADCellTextLayout_liu_left_drawable, 0);
         leftDrawableDirection = Direction.fromInt(typedArray.getInt(R.styleable.ADCellTextLayout_liu_left_drawable_direction, Direction.left.getValue()));
@@ -55,7 +55,7 @@ public class ADCellTextLayout extends ADConstraintLayout {
 
         // 右侧标签
         rightText = typedArray.getString(R.styleable.ADCellTextLayout_liu_right_text);
-        rightTextSize = typedArray.getDimensionPixelSize(R.styleable.ADCellTextLayout_liu_right_text_size, 12);
+        rightTextSize = typedArray.getDimensionPixelSize(R.styleable.ADCellTextLayout_liu_right_text_size, 40);
         rightTextColor = typedArray.getColor(R.styleable.ADCellTextLayout_liu_right_text_color, Color.parseColor("#999999"));
         rightDrawable = typedArray.getResourceId(R.styleable.ADCellTextLayout_liu_right_drawable, 0);
         rightDrawableDirection = Direction.fromInt(typedArray.getInt(R.styleable.ADCellTextLayout_liu_right_drawable_direction, Direction.right.getValue()));
