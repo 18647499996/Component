@@ -114,6 +114,16 @@
             <enum name="right" value="3" />
             <enum name="bottom" value="4" />
         </attr>
+
+        <attr name="liu_line_left_margin" format="dimension" />
+        <attr name="liu_line_right_margin" format="dimension" />
+        <attr name="liu_line_height" format="dimension" />
+        <attr name="liu_line_background_color" format="color" />
+        <attr name="liu_line_visibility" format="enum">
+            <enum name="visibility" value="1" />
+            <enum name="gone" value="2" />
+        </attr>
+
     </declare-styleable>
 
     <bool name="sb__is_swipeable">false</bool>

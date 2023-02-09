@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="dip_0">0dp</dimen>
+    <dimen name="ad_0_67">0.67dp</dimen>
     <dimen name="dip_288">288dp</dimen>
     <dimen name="dip_568">568dp</dimen>
 </resources>

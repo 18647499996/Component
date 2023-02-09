@@ -7,10 +7,14 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
+import androidx.constraintlayout.widget.Constraints;
 
 import com.liudonghan.view.R;
 import com.liudonghan.view.radius.ADConstraintLayout;
@@ -29,8 +33,11 @@ public class ADCellTextLayout extends ADConstraintLayout {
     private int rightTextColor, rightDrawableWidth, rightDrawableHeight, rightDrawablePadding, rightDrawable;
     private TextView textViewLeft, textViewRight;
     private float leftTextSize, rightTextSize;
+    private View lineView;
+    private int lineMarginRight, lineMarginLeft, lineBgColor,lineHeight;
 
     private Direction leftDrawableDirection, rightDrawableDirection;
+    private Visibility lineVisibility;
 
     public ADCellTextLayout(@NonNull Context context) {
         super(context, null);
@@ -42,6 +49,7 @@ public class ADCellTextLayout extends ADConstraintLayout {
         View inflate = View.inflate(context, R.layout.ad_cell_group, this);
         textViewLeft = inflate.findViewById(R.id.view_cell_group_tv_left);
         textViewRight = inflate.findViewById(R.id.view_cell_group_tv_right);
+        lineView = inflate.findViewById(R.id.view_cell_group_view_line);
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.ADCellTextLayout);
         // 左侧标签
         leftText = typedArray.getString(R.styleable.ADCellTextLayout_liu_left_text);
@@ -63,6 +71,13 @@ public class ADCellTextLayout extends ADConstraintLayout {
         rightDrawableHeight = typedArray.getDimensionPixelOffset(R.styleable.ADCellTextLayout_liu_right_drawable_height, 0);
         rightDrawablePadding = typedArray.getDimensionPixelOffset(R.styleable.ADCellTextLayout_liu_right_drawable_padding, 0);
 
+        // 分割线
+        lineMarginRight = typedArray.getDimensionPixelOffset(R.styleable.ADCellTextLayout_liu_line_right_margin, 0);
+        lineMarginLeft = typedArray.getDimensionPixelOffset(R.styleable.ADCellTextLayout_liu_line_left_margin, 0);
+        lineBgColor = typedArray.getColor(R.styleable.ADCellTextLayout_liu_line_background_color, Color.parseColor("#ebebeb"));
+        lineVisibility = Visibility.fromInt(typedArray.getInt(R.styleable.ADCellTextLayout_liu_line_visibility, Visibility.Visibility.getValue()));
+        lineHeight = typedArray.getDimensionPixelOffset(R.styleable.ADCellTextLayout_liu_line_height,context.getResources().getDimensionPixelOffset(R.dimen.ad_0_67));
+
         typedArray.recycle();
         initCell(context);
     }
@@ -73,6 +88,7 @@ public class ADCellTextLayout extends ADConstraintLayout {
      * @param context 上下文
      */
     private void initCell(Context context) {
+        // 设置左侧view
         textViewLeft.setText(leftText);
         textViewLeft.setTextColor(leftTextColor);
         textViewLeft.setTextSize(TypedValue.COMPLEX_UNIT_PX, leftTextSize);
@@ -97,6 +113,7 @@ public class ADCellTextLayout extends ADConstraintLayout {
             }
         }
 
+        // 设置右侧view
         textViewRight.setText(rightText);
         textViewRight.setTextColor(rightTextColor);
         textViewRight.setTextSize(TypedValue.COMPLEX_UNIT_PX, rightTextSize);
@@ -119,6 +136,14 @@ public class ADCellTextLayout extends ADConstraintLayout {
                     break;
             }
         }
+
+        // 设置line分割线
+        lineView.setVisibility(lineVisibility == Visibility.Visibility ? VISIBLE : GONE);
+        lineView.setBackgroundColor(lineBgColor);
+        ConstraintLayout.LayoutParams layoutParams = (LayoutParams) lineView.getLayoutParams();
+        layoutParams.leftMargin = lineMarginLeft;
+        layoutParams.rightMargin = lineMarginRight;
+        layoutParams.height = lineHeight;
     }
 
     public void setLeftText(String leftText) {
@@ -309,6 +334,32 @@ public class ADCellTextLayout extends ADConstraintLayout {
                     return right;
                 case 4:
                     return bottom;
+                default:
+                    throw new Error("Invalid SourceType");
+            }
+        }
+    }
+
+    public enum Visibility {
+        Visibility(1),
+        Gone(2);
+
+        private int id;
+
+        Visibility(int id) {
+            this.id = id;
+        }
+
+        public int getValue() {
+            return id;
+        }
+
+        public static Visibility fromInt(int value) {
+            switch (value) {
+                case 1:
+                    return Visibility;
+                case 2:
+                    return Gone;
                 default:
                     throw new Error("Invalid SourceType");
             }
