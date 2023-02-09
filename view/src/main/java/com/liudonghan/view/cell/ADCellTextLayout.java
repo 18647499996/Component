@@ -7,14 +7,11 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.constraintlayout.widget.ConstraintSet;
-import androidx.constraintlayout.widget.Constraints;
 
 import com.liudonghan.view.R;
 import com.liudonghan.view.radius.ADConstraintLayout;
@@ -234,6 +231,51 @@ public class ADCellTextLayout extends ADConstraintLayout {
     public void setRightDrawableDirection(Direction rightDrawableDirection) {
         this.rightDrawableDirection = rightDrawableDirection;
         initCell(context);
+    }
+
+    public void setLineBgColor(int lineBgColor) {
+        this.lineBgColor = lineBgColor;
+        initCell(context);
+    }
+
+    public void setLineHeight(int lineHeight) {
+        this.lineHeight = lineHeight;
+        initCell(context);
+    }
+
+    public void setLineMarginLeft(int lineMarginLeft) {
+        this.lineMarginLeft = lineMarginLeft;
+        initCell(context);
+    }
+
+    public void setLineMarginRight(int lineMarginRight) {
+        this.lineMarginRight = lineMarginRight;
+        initCell(context);
+    }
+
+    public void setLineVisibility(Visibility lineVisibility) {
+        this.lineVisibility = lineVisibility;
+        initCell(context);
+    }
+
+    public int getLineMarginRight() {
+        return lineMarginRight;
+    }
+
+    public int getLineMarginLeft() {
+        return lineMarginLeft;
+    }
+
+    public int getLineBgColor() {
+        return lineBgColor;
+    }
+
+    public int getLineHeight() {
+        return lineHeight;
+    }
+
+    public Visibility getLineVisibility() {
+        return lineVisibility;
     }
 
     public String getLeftText() {
