@@ -117,7 +117,8 @@ public class ADCellTextLayout extends ADConstraintLayout {
         if (0 != rightDrawable) {
             textViewRight.setCompoundDrawablePadding(rightDrawablePadding);
             Drawable drawable = context.getResources().getDrawable(rightDrawable);
-            drawable.setBounds(0, 0, 0 == rightDrawableWidth ? textViewRight.getWidth() : rightDrawableWidth, 0 == rightDrawableHeight ? textViewRight.getHeight() : rightDrawableHeight);
+            int height = drawable.getMinimumHeight();
+            drawable.setBounds(0, 0, 0 == rightDrawableWidth ? height : rightDrawableWidth, 0 == rightDrawableHeight ? height : rightDrawableHeight);
             switch (rightDrawableDirection) {
                 case left:
                     textViewRight.setCompoundDrawables(drawable, null, null, null);
