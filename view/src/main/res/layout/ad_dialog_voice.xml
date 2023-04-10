@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+
+    <com.liudonghan.view.radius.ADRelativeLayout
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:background="#49000000"
+        android:paddingTop="30dp"
+        android:paddingBottom="30dp"
+        app:liu_round_corner="8dp">
+
+        <ImageView
+            android:id="@+id/ad_dialog_voice_img_ing"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            android:scaleType="centerCrop" />
+
+        <ImageView
+            android:id="@+id/ad_dialog_voice_img_cancel"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/ad_voice_cancel"
+            android:visibility="invisible" />
+
+
+        <com.liudonghan.view.radius.ADTextView
+            android:id="@+id/ad_dialog_voice_tv_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ad_dialog_voice_img_ing"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:background="#AF2831"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="手指上划，取消发送"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:liu_round_corner="5dp" />
+
+    </com.liudonghan.view.radius.ADRelativeLayout>
+</LinearLayout>

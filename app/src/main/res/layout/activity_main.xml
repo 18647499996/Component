@@ -2,7 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white">
 
     <com.liudonghan.view.radius.ADTextView
         android:id="@+id/activity_main_tv"
@@ -21,6 +22,16 @@
         app:liu_round_corner="8dp"
         app:liu_stroke_color="@color/colorAccent"
         app:liu_stroke_width="1dp" />
+
+    <com.liudonghan.view.voice.ADVoiceRecorderButton
+        android:id="@+id/btn_1"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:background="#7c7c7c"
+        android:text="开始录音"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/activity_main_tv"
+        app:liu_round_corner="8dp" />
 
     <com.liudonghan.view.radius.ADConstraintLayout
         android:id="@+id/activity_main_layout"
@@ -127,13 +138,13 @@
             app:liu_left_text="不不不不"
             app:liu_left_text_color="@color/color_342e2e"
             app:liu_left_text_size="13sp"
+            app:liu_line_left_margin="12dp"
+            app:liu_line_right_margin="12dp"
             app:liu_right_drawable="@mipmap/ic_launcher"
             app:liu_right_drawable_height="18dp"
             app:liu_right_drawable_padding="8dp"
             app:liu_right_drawable_width="18dp"
             app:liu_right_text="进入"
-            app:liu_line_left_margin="12dp"
-            app:liu_line_right_margin="12dp"
             app:liu_right_text_color="@color/colorPrimary"
             app:liu_right_text_size="12sp" />
 
