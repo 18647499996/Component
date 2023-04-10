@@ -23,7 +23,7 @@ public class AudioRecorderDialog {
     private ImageView adDialogVoiceImgCancel;
 
     private static volatile AudioRecorderDialog instance = null;
-    private Dialog mDialog;
+    private Dialog dialog;
 
     private AudioRecorderDialog() {
     }
@@ -41,19 +41,27 @@ public class AudioRecorderDialog {
         return instance;
     }
 
+    public Dialog getDialog() {
+        return dialog;
+    }
+
+    public void setDialog(Dialog dialog) {
+        this.dialog = dialog;
+    }
+
     /**
      * 初始化
      *
      * @param context 上下文
      */
     public void init(Context context) {
-        mDialog = new Dialog(context, R.style.ADDialog);
-        mDialog.setContentView(R.layout.ad_dialog_voice);
-        mDialog.setCancelable(false);
-        mDialog.setCanceledOnTouchOutside(false);
-        adDialogVoiceImgIng = (ImageView) mDialog.findViewById(R.id.ad_dialog_voice_img_ing);
-        adDialogVoiceTvHint = (ADTextView) mDialog.findViewById(R.id.ad_dialog_voice_tv_hint);
-        adDialogVoiceImgCancel = mDialog.findViewById(R.id.ad_dialog_voice_img_cancel);
+        dialog = new Dialog(context, R.style.ADDialog);
+        dialog.setContentView(R.layout.ad_dialog_voice);
+        dialog.setCancelable(false);
+        dialog.setCanceledOnTouchOutside(false);
+        adDialogVoiceImgIng = (ImageView) dialog.findViewById(R.id.ad_dialog_voice_img_ing);
+        adDialogVoiceTvHint = (ADTextView) dialog.findViewById(R.id.ad_dialog_voice_tv_hint);
+        adDialogVoiceImgCancel = dialog.findViewById(R.id.ad_dialog_voice_img_cancel);
         adDialogVoiceImgIng.setBackgroundResource(R.drawable.ad_voice);
         AnimationDrawable animationDrawable = (AnimationDrawable) adDialogVoiceImgIng.getBackground();
         animationDrawable.start();
@@ -63,8 +71,8 @@ public class AudioRecorderDialog {
      * 显示弹窗
      */
     public void showDialog() {
-        if (mDialog != null && !mDialog.isShowing()) {
-            mDialog.show();
+        if (dialog != null && !dialog.isShowing()) {
+            dialog.show();
         }
     }
 
@@ -72,8 +80,8 @@ public class AudioRecorderDialog {
      * 关闭弹窗
      */
     public void dismissDialog() {
-        if (mDialog != null && mDialog.isShowing()) {
-            mDialog.dismiss();
+        if (dialog != null && dialog.isShowing()) {
+            dialog.dismiss();
         }
     }
 
@@ -81,7 +89,7 @@ public class AudioRecorderDialog {
      * 正在录音时，Dialog的显示
      */
     public void start() {
-        if (mDialog != null && mDialog.isShowing()) {
+        if (dialog != null && dialog.isShowing()) {
             adDialogVoiceImgCancel.setVisibility(View.INVISIBLE);
             adDialogVoiceImgIng.setVisibility(View.VISIBLE);
             adDialogVoiceTvHint.setBackgroundColor(Color.parseColor("#00000000"));
@@ -93,7 +101,7 @@ public class AudioRecorderDialog {
      * 取消录音提示对话框
      */
     public void cancel() {
-        if (mDialog != null && mDialog.isShowing()) {
+        if (dialog != null && dialog.isShowing()) {
             adDialogVoiceImgCancel.setVisibility(View.VISIBLE);
             adDialogVoiceImgIng.setVisibility(View.INVISIBLE);
             adDialogVoiceTvHint.setBackgroundColor(Color.parseColor("#AF2831"));

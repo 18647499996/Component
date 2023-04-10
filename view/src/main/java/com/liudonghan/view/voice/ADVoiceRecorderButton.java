@@ -117,6 +117,16 @@ public class ADVoiceRecorderButton extends AppCompatButton {
                 isTranscend = false;
                 setText("松开 结束");
                 audioRecorderDialog.start();
+                if (audioRecorderDialog.getDialog().isShowing()) {
+                    if (System.currentTimeMillis() - downTime >= 20000) {
+                        // 60秒后自动发送
+                        audioRecorderDialog.dismissDialog();
+                        audioRecorderManager.release();
+                        if (null != onADVoiceRecorderButtonListener) {
+                            onADVoiceRecorderButtonListener.onAudioSucceed(audioRecorderManager.getCurrentFilePath(), 60000);
+                        }
+                    }
+                }
                 break;
             case cancel:
                 isTranscend = true;
@@ -143,13 +153,15 @@ public class ADVoiceRecorderButton extends AppCompatButton {
                     }
                 } else {
                     Log.i(TAG, "voice recorder succeed");
-                    audioRecorderManager.release();
-                    if (null != onADVoiceRecorderButtonListener) {
-                        onADVoiceRecorderButtonListener.onAudioSucceed(audioRecorderManager.getCurrentFilePath(), duration);
+                    if (audioRecorderDialog.getDialog().isShowing()) {
+                        audioRecorderManager.release();
+                        if (null != onADVoiceRecorderButtonListener) {
+                            onADVoiceRecorderButtonListener.onAudioSucceed(audioRecorderManager.getCurrentFilePath(), duration);
+                        }
                     }
                 }
                 audioRecorderDialog.dismissDialog();
-
+                downTime = 0;
                 break;
         }
     }
