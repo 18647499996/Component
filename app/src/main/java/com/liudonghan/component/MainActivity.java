@@ -4,12 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.res.ColorStateList;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import com.liudonghan.view.cell.ADCellTextLayout;
 import com.liudonghan.view.city.ADCityView;
@@ -80,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements ADVoiceRecorderBu
     }
 
     @Override
-    public void onAudioSucceed(String filePath) {
+    public void onAudioSucceed(String filePath, long duration) {
         Log.i("Mac_Liu","voice file path ： " + filePath);
     }
 }

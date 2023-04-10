@@ -14,8 +14,6 @@ import androidx.appcompat.widget.AppCompatButton;
 
 import com.liudonghan.view.helper.ViewHelper;
 
-import java.io.File;
-
 /**
  * Description：语音组件
  *
@@ -82,7 +80,7 @@ public class ADVoiceRecorderButton extends AppCompatButton {
             case MotionEvent.ACTION_MOVE:
                 // 移动
                 if (isMoveOutScope(x, y)) {
-                    setAudioStatus(AudioStatus.transcend);
+                    setAudioStatus(AudioStatus.cancel);
                 } else {
                     setAudioStatus(AudioStatus.progress);
                 }
@@ -120,15 +118,16 @@ public class ADVoiceRecorderButton extends AppCompatButton {
                 setText("松开 结束");
                 audioRecorderDialog.start();
                 break;
-            case transcend:
+            case cancel:
                 isTranscend = true;
                 audioRecorderDialog.cancel();
                 setText("取消 发送");
                 break;
             case shutdown:
                 setText("按住 说话");
-                Log.i(TAG, "up time ：" + (System.currentTimeMillis() - downTime));
-                if ((System.currentTimeMillis() - downTime) < 800) {
+                long duration = System.currentTimeMillis() - downTime;
+                Log.i(TAG, "up time ：" + duration);
+                if (duration < 800) {
                     // 语音时长太短
                     Log.i(TAG, "voice recorder short please reset recorder");
                     audioRecorderManager.cancel();
@@ -146,7 +145,7 @@ public class ADVoiceRecorderButton extends AppCompatButton {
                     Log.i(TAG, "voice recorder succeed");
                     audioRecorderManager.release();
                     if (null != onADVoiceRecorderButtonListener) {
-                        onADVoiceRecorderButtonListener.onAudioSucceed(audioRecorderManager.getCurrentFilePath());
+                        onADVoiceRecorderButtonListener.onAudioSucceed(audioRecorderManager.getCurrentFilePath(), duration);
                     }
                 }
                 audioRecorderDialog.dismissDialog();
@@ -190,8 +189,9 @@ public class ADVoiceRecorderButton extends AppCompatButton {
          * 录音完成
          *
          * @param filePath 文件路径
+         * @param duration 时长
          */
-        void onAudioSucceed(String filePath);
+        void onAudioSucceed(String filePath, long duration);
     }
 
     public enum AudioStatus {
@@ -200,7 +200,6 @@ public class ADVoiceRecorderButton extends AppCompatButton {
         shutdown,
         normal,
         cancel,
-        transcend
     }
 
     @Override
