@@ -118,7 +118,7 @@ public class ADVoiceRecorderButton extends AppCompatButton {
                 setText("松开 结束");
                 audioRecorderDialog.start();
                 if (audioRecorderDialog.getDialog().isShowing()) {
-                    if (System.currentTimeMillis() - downTime >= 20000) {
+                    if (System.currentTimeMillis() - downTime >= 60000) {
                         // 60秒后自动发送
                         audioRecorderDialog.dismissDialog();
                         audioRecorderManager.release();
