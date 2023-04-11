@@ -3,6 +3,7 @@ package com.liudonghan.view.cell;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.TypedValue;
@@ -31,7 +32,8 @@ public class ADCellTextLayout extends ADConstraintLayout {
     private TextView textViewLeft, textViewRight;
     private float leftTextSize, rightTextSize;
     private View lineView;
-    private int lineMarginRight, lineMarginLeft, lineBgColor,lineHeight;
+    private int lineMarginRight, lineMarginLeft, lineBgColor, lineHeight;
+    private boolean leftBold, rightBold;
 
     private Direction leftDrawableDirection, rightDrawableDirection;
     private Visibility lineVisibility;
@@ -54,6 +56,7 @@ public class ADCellTextLayout extends ADConstraintLayout {
         leftTextColor = typedArray.getColor(R.styleable.ADCellTextLayout_liu_left_text_color, Color.parseColor("#342e2e"));
         leftDrawable = typedArray.getResourceId(R.styleable.ADCellTextLayout_liu_left_drawable, 0);
         leftDrawableDirection = Direction.fromInt(typedArray.getInt(R.styleable.ADCellTextLayout_liu_left_drawable_direction, Direction.left.getValue()));
+        leftBold = typedArray.getBoolean(R.styleable.ADCellTextLayout_liu_left_text_bold, false);
         leftDrawablePadding = typedArray.getDimensionPixelOffset(R.styleable.ADCellTextLayout_liu_left_drawable_padding, 0);
         leftDrawableWidth = typedArray.getDimensionPixelOffset(R.styleable.ADCellTextLayout_liu_left_drawable_width, 0);
         leftDrawableHeight = typedArray.getDimensionPixelOffset(R.styleable.ADCellTextLayout_liu_left_drawable_height, 0);
@@ -64,6 +67,7 @@ public class ADCellTextLayout extends ADConstraintLayout {
         rightTextColor = typedArray.getColor(R.styleable.ADCellTextLayout_liu_right_text_color, Color.parseColor("#999999"));
         rightDrawable = typedArray.getResourceId(R.styleable.ADCellTextLayout_liu_right_drawable, 0);
         rightDrawableDirection = Direction.fromInt(typedArray.getInt(R.styleable.ADCellTextLayout_liu_right_drawable_direction, Direction.right.getValue()));
+        rightBold = typedArray.getBoolean(R.styleable.ADCellTextLayout_liu_right_text_bold, false);
         rightDrawableWidth = typedArray.getDimensionPixelOffset(R.styleable.ADCellTextLayout_liu_right_drawable_width, 0);
         rightDrawableHeight = typedArray.getDimensionPixelOffset(R.styleable.ADCellTextLayout_liu_right_drawable_height, 0);
         rightDrawablePadding = typedArray.getDimensionPixelOffset(R.styleable.ADCellTextLayout_liu_right_drawable_padding, 0);
@@ -73,7 +77,7 @@ public class ADCellTextLayout extends ADConstraintLayout {
         lineMarginLeft = typedArray.getDimensionPixelOffset(R.styleable.ADCellTextLayout_liu_line_left_margin, 0);
         lineBgColor = typedArray.getColor(R.styleable.ADCellTextLayout_liu_line_background_color, Color.parseColor("#ebebeb"));
         lineVisibility = Visibility.fromInt(typedArray.getInt(R.styleable.ADCellTextLayout_liu_line_visibility, Visibility.Visibility.getValue()));
-        lineHeight = typedArray.getDimensionPixelOffset(R.styleable.ADCellTextLayout_liu_line_height,context.getResources().getDimensionPixelOffset(R.dimen.ad_0_67));
+        lineHeight = typedArray.getDimensionPixelOffset(R.styleable.ADCellTextLayout_liu_line_height, context.getResources().getDimensionPixelOffset(R.dimen.ad_0_67));
 
         typedArray.recycle();
         initCell(context);
@@ -89,6 +93,11 @@ public class ADCellTextLayout extends ADConstraintLayout {
         textViewLeft.setText(leftText);
         textViewLeft.setTextColor(leftTextColor);
         textViewLeft.setTextSize(TypedValue.COMPLEX_UNIT_PX, leftTextSize);
+        if (leftBold) {
+            textViewLeft.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+        } else {
+            textViewLeft.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
+        }
         if (0 != leftDrawable) {
             textViewLeft.setCompoundDrawablePadding(leftDrawablePadding);
             Drawable drawable = context.getResources().getDrawable(leftDrawable);
@@ -114,6 +123,11 @@ public class ADCellTextLayout extends ADConstraintLayout {
         textViewRight.setText(rightText);
         textViewRight.setTextColor(rightTextColor);
         textViewRight.setTextSize(TypedValue.COMPLEX_UNIT_PX, rightTextSize);
+        if (rightBold) {
+            textViewRight.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+        } else {
+            textViewRight.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
+        }
         if (0 != rightDrawable) {
             textViewRight.setCompoundDrawablePadding(rightDrawablePadding);
             Drawable drawable = context.getResources().getDrawable(rightDrawable);
@@ -259,6 +273,24 @@ public class ADCellTextLayout extends ADConstraintLayout {
         initCell(context);
     }
 
+    public void setLeftBold(boolean leftBold) {
+        this.leftBold = leftBold;
+        initCell(context);
+    }
+
+    public void setRightBold(boolean rightBold) {
+        this.rightBold = rightBold;
+        initCell(context);
+    }
+
+    public boolean isLeftBold() {
+        return leftBold;
+    }
+
+    public boolean isRightBold() {
+        return rightBold;
+    }
+
     public int getLineMarginRight() {
         return lineMarginRight;
     }
@@ -351,6 +383,7 @@ public class ADCellTextLayout extends ADConstraintLayout {
         return rightDrawableDirection;
     }
 
+
     public enum Direction {
         left(1),
         top(2),
@@ -403,6 +436,32 @@ public class ADCellTextLayout extends ADConstraintLayout {
                     return Visibility;
                 case 2:
                     return Gone;
+                default:
+                    throw new Error("Invalid SourceType");
+            }
+        }
+    }
+
+    public enum TextStyle {
+        Bold(1),
+        Default(0);
+
+        private int id;
+
+        TextStyle(int id) {
+            this.id = id;
+        }
+
+        public int getId() {
+            return id;
+        }
+
+        public static TextStyle fromInt(int value) {
+            switch (value) {
+                case 0:
+                    return Default;
+                case 1:
+                    return Bold;
                 default:
                     throw new Error("Invalid SourceType");
             }
