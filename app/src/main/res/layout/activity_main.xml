@@ -97,6 +97,21 @@
         app:liu_stroke_color="@color/colorPrimary"
         app:liu_stroke_width="1dp" />
 
+    <com.liudonghan.view.progress.ADCircleProgress
+        android:id="@+id/circle"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="15dp"
+        app:liu_text_size="12sp"
+        app:liu_is_auto_loading_animation="true"
+        app:liu_text_color="@color/color_342e2e"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/activity_main_ad_cl"
+        app:liu_finished_color="@color/color_ff7900"
+        app:liu_finished_stroke_width="3dp"
+        app:liu_unfinished_color="@color/color_dddddd"
+        app:liu_unfinished_stroke_width="3dp" />
+
     <com.liudonghan.view.city.ADCityView
         android:id="@+id/activity_main_city"
         android:layout_width="match_parent"
@@ -132,21 +147,21 @@
             android:layout_height="52dp"
             android:background="@color/white"
             app:liu_left_drawable="@mipmap/ic_launcher"
-            app:liu_left_text_bold="true"
             app:liu_left_drawable_height="18dp"
             app:liu_left_drawable_padding="8dp"
             app:liu_left_drawable_width="18dp"
             app:liu_left_text="不不不不"
+            app:liu_left_text_bold="true"
             app:liu_left_text_color="@color/color_342e2e"
             app:liu_left_text_size="13sp"
             app:liu_line_left_margin="12dp"
             app:liu_line_right_margin="12dp"
             app:liu_right_drawable="@mipmap/ic_launcher"
-            app:liu_right_text_bold="true"
             app:liu_right_drawable_height="18dp"
             app:liu_right_drawable_padding="8dp"
             app:liu_right_drawable_width="18dp"
             app:liu_right_text="进入"
+            app:liu_right_text_bold="true"
             app:liu_right_text_color="@color/colorPrimary"
             app:liu_right_text_size="12sp" />
 

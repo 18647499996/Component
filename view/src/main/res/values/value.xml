@@ -128,6 +128,21 @@
 
     </declare-styleable>
 
+    <declare-styleable name="ADCircleProgress">
+        <attr name="liu_finished_color" format="color" />
+        <attr name="liu_unfinished_color" format="color" />
+        <attr name="liu_finished_stroke_width" format="dimension" />
+        <attr name="liu_unfinished_stroke_width" format="dimension" />
+        <attr name="liu_text" format="string" />
+        <attr name="liu_text_size" format="dimension" />
+        <attr name="liu_text_color" format="color" />
+        <attr name="liu_clock_wise" format="boolean" />
+        <attr name="liu_progress" format="float" />
+        <attr name="liu_max" format="integer" />
+        <attr name="liu_starting_angle" format="integer" />
+        <attr name="liu_is_auto_loading_animation" format="boolean" />
+    </declare-styleable>
+
     <bool name="sb__is_swipeable">false</bool>
 
     <!--dialog弹窗-->

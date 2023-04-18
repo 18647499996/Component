@@ -10,6 +10,7 @@ import android.view.View;
 
 import com.liudonghan.view.cell.ADCellTextLayout;
 import com.liudonghan.view.city.ADCityView;
+import com.liudonghan.view.progress.ADCircleProgress;
 import com.liudonghan.view.snackbar.SnackBar;
 import com.liudonghan.view.snackbar.ADSnackBarManager;
 import com.liudonghan.view.voice.ADVoiceRecorderButton;
@@ -18,6 +19,7 @@ public class MainActivity extends AppCompatActivity implements ADVoiceRecorderBu
 
     private ADCellTextLayout adCellTextLayout;
     private ADVoiceRecorderButton adVoiceRecorderButton;
+    private ADCircleProgress adCircleProgress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +31,13 @@ public class MainActivity extends AppCompatActivity implements ADVoiceRecorderBu
         adCityView.getViewSwitcher().setDisplayedChild(0);
         adCityView.getProgressBar().setIndeterminate(true);
         adCityView.setProgressBarBgColor(R.color.color_342e2e);
-
+        adCircleProgress = findViewById(R.id.circle);
+        adCircleProgress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                adCircleProgress.cancelAnimator();
+            }
+        });
         adCellTextLayout.setLeftText("动态设置");
         findViewById(R.id.activity_main_tv).setOnClickListener(new View.OnClickListener() {
             @Override
