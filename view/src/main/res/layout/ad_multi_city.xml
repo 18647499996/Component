@@ -14,13 +14,13 @@
         android:minHeight="280dp"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <ProgressBar
+        <com.google.android.material.progressindicator.CircularProgressIndicator
             android:id="@+id/view_multi_city_progress_bar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:indeterminateTint="@color/color_ff7900"
-            android:indeterminateTintMode="src_atop" />
+            android:indeterminate="true"
+            app:indicatorColor="@color/color_ff7900" />
 
         <com.liudonghan.view.city.ADCitySelector
             android:id="@+id/dialog_city_wheel_address"
