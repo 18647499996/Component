@@ -16,12 +16,12 @@ afterEvaluate {
     }
 }
 android {
-    compileSdkVersion 31
+    compileSdkVersion 29
     buildToolsVersion "30.0.3"
 
     defaultConfig {
         minSdkVersion 17
-        targetSdkVersion 31
+        targetSdkVersion 29
         versionCode VERSAION_CODE.toInteger()
         versionName VERSAION_NAME.toString()
 
