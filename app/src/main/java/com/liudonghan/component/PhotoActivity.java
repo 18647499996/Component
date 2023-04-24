@@ -9,10 +9,8 @@ import android.util.Log;
 import android.view.View;
 
 import com.liudonghan.view.pdf.ADPdfView;
-import com.liudonghan.view.pdf.FileUtils;
 
 import java.io.File;
-import java.util.Objects;
 
 public class PhotoActivity extends AppCompatActivity {
 
