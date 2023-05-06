@@ -8,7 +8,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-import com.liudonghan.view.pdf.ADPdfView;
+
+import com.liudonghan.pdf.ADPdfView;
 
 import java.io.File;
 
