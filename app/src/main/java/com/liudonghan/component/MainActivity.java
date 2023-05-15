@@ -10,16 +10,22 @@ import android.view.View;
 
 import com.liudonghan.view.cell.ADCellTextLayout;
 import com.liudonghan.view.city.ADCityView;
+import com.liudonghan.view.indicator.ADIndicatorTab;
+import com.liudonghan.view.indicator.Tab;
 import com.liudonghan.view.progress.ADCircleProgress;
 import com.liudonghan.view.snackbar.SnackBar;
 import com.liudonghan.view.snackbar.ADSnackBarManager;
 import com.liudonghan.view.voice.ADVoiceRecorderButton;
+
+import java.util.Arrays;
+import java.util.Collections;
 
 public class MainActivity extends AppCompatActivity implements ADVoiceRecorderButton.OnADVoiceRecorderButtonListener {
 
     private ADCellTextLayout adCellTextLayout;
     private ADVoiceRecorderButton adVoiceRecorderButton;
     private ADCircleProgress adCircleProgress;
+    private ADIndicatorTab adIndicatorTab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +34,14 @@ public class MainActivity extends AppCompatActivity implements ADVoiceRecorderBu
         adCellTextLayout = findViewById(R.id.activity_main_cg_one);
         ADCityView adCityView = findViewById(R.id.activity_main_city);
         adVoiceRecorderButton = findViewById(R.id.btn_1);
+        adIndicatorTab = findViewById(R.id.indicator_tab);
+        adIndicatorTab.setData(Arrays.asList("tab1", "tab2", "tab3"));
+        adIndicatorTab.setOnADIndicatorTabItemClickListener(new ADIndicatorTab.OnADIndicatorTabItemClickListener() {
+            @Override
+            public void onItemClick(Tab.Column text, int position) {
+                Log.i("Mac_Liu","点击条目：" + text.getText());
+            }
+        });
         adCityView.getViewSwitcher().setDisplayedChild(0);
         adCityView.getProgressBar().setIndeterminate(true);
         adCityView.setProgressBarBgColor(R.color.color_342e2e);

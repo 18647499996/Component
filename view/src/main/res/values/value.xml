@@ -143,6 +143,18 @@
         <attr name="liu_is_auto_loading_animation" format="boolean" />
     </declare-styleable>
 
+
+    <declare-styleable name="ADIndicatorTab">
+        <attr name="liu_indicator_text_size" format="dimension" />
+        <attr name="liu_indicator_text_height" format="dimension" />
+        <attr name="liu_indicator_empty_color" format="color" />
+        <attr name="liu_indicator_selected_color" format="color" />
+        <attr name="liu_indicator_line_height" format="dimension" />
+        <attr name="liu_indicator_line_color" format="color" />
+        <attr name="liu_indicator_line_width" format="dimension" />
+        <attr name="liu_indicator_line_duration" format="integer" />
+    </declare-styleable>
+
     <bool name="sb__is_swipeable">false</bool>
 
     <!--dialog弹窗-->
