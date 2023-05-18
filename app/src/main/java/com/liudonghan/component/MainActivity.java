@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements ADVoiceRecorderBu
         adIndicatorTab.setData(Arrays.asList("tab1", "tab2", "tab3"));
         adIndicatorTab.setOnADIndicatorTabItemClickListener(new ADIndicatorTab.OnADIndicatorTabItemClickListener() {
             @Override
-            public void onItemClick(Tab.Column text, int position) {
+            public void onTabItemClick(Tab.Column text, int position) {
                 Log.i("Mac_Liu","点击条目：" + text.getText());
             }
         });

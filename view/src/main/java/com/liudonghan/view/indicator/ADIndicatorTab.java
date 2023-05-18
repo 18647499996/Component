@@ -150,7 +150,7 @@ public class ADIndicatorTab extends LinearLayout implements Tab.OnTabTextClickLi
             tab.getColumnList().get(i).setSelected(position == tab.getColumnList().get(i).getPosition());
         }
         if (null != getOnADIndicatorTabItemClickListener()) {
-            getOnADIndicatorTabItemClickListener().onItemClick(column, position);
+            getOnADIndicatorTabItemClickListener().onTabItemClick(column, position);
         }
     }
 
@@ -234,6 +234,6 @@ public class ADIndicatorTab extends LinearLayout implements Tab.OnTabTextClickLi
     }
 
     public interface OnADIndicatorTabItemClickListener {
-        void onItemClick(Tab.Column text, int position);
+        void onTabItemClick(Tab.Column column, int position);
     }
 }
