@@ -253,6 +253,22 @@ public class ADIndicatorTab extends LinearLayout implements Tab.OnTabTextClickLi
         this.textHeight = textHeight;
     }
 
+    public List<String> getTabList() {
+        return tabList;
+    }
+
+    public int getTabSize() {
+        return tabSize;
+    }
+
+    public Line getLine() {
+        return line;
+    }
+
+    public Tab getTab() {
+        return tab;
+    }
+
     public OnADIndicatorTabItemClickListener getOnADIndicatorTabItemClickListener() {
         return onADIndicatorTabItemClickListener;
     }
