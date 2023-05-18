@@ -3,6 +3,7 @@ package com.liudonghan.view.indicator;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Gravity;
@@ -95,6 +96,15 @@ public class ADIndicatorTab extends LinearLayout implements Tab.OnTabTextClickLi
      * @param indicatorTabList 数据源
      */
     public void setData(List<String> indicatorTabList) {
+        setData(indicatorTabList, 0);
+    }
+
+    /**
+     * 设置指示器数据
+     *
+     * @param indicatorTabList 数据源
+     */
+    public void setData(List<String> indicatorTabList, int position) {
         if (null == indicatorTabList || 0 == indicatorTabList.size()) {
             Log.i(TAG, "indicator tab error is not empty");
             return;
@@ -104,6 +114,7 @@ public class ADIndicatorTab extends LinearLayout implements Tab.OnTabTextClickLi
         this.tabSize = indicatorTabList.size();
         newTab();
         newLine();
+        setDefaultPosition(position);
     }
 
     /**
@@ -139,6 +150,23 @@ public class ADIndicatorTab extends LinearLayout implements Tab.OnTabTextClickLi
         line.setLineWidth(getLineWidth());
         line.builder();
         addView(line);
+    }
+
+    /**
+     * 设置默认position
+     *
+     * @param position 索引
+     */
+    public void setDefaultPosition(final int position) {
+        for (int i = 0; i < tabSize; i++) {
+            tab.getColumnList().get(i).setSelected(position == tab.getColumnList().get(i).getPosition());
+        }
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                line.selectorLine(position);
+            }
+        }, 50);
     }
 
 

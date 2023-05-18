@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements ADVoiceRecorderBu
         adCircleProgress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                adIndicatorTab.setDefaultPosition(1);
                 adCircleProgress.cancelAnimator();
             }
         });
