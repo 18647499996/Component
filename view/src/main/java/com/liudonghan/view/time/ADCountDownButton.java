@@ -25,6 +25,7 @@ public class ADCountDownButton extends AppCompatTextView {
     private MyCount timer;
     private OnCountListener mListener;
     private String defaultValue = "获取验证码";
+    private String postfixValue = "s 重新发送";
 
     public ADCountDownButton(Context context) {
         this(context, null);
@@ -58,6 +59,14 @@ public class ADCountDownButton extends AppCompatTextView {
     public void setTotalSecond(long second) {
         this.millisInFuture = second * 1000;
         startCountDown();
+    }
+
+    public String getPostfixValue() {
+        return postfixValue;
+    }
+
+    public void setPostfixValue(String postfixValue) {
+        this.postfixValue = postfixValue;
     }
 
     public int getTotalSecond() {
@@ -115,7 +124,7 @@ public class ADCountDownButton extends AppCompatTextView {
         public void onTick(long millisUntilFinished) {
             setEnabled(false);
             isFinished = false;
-            String time = (millisUntilFinished / 1000) + "s 重新发送";
+            String time = (millisUntilFinished / 1000) + postfixValue;
 
             if (mListener != null) {
                 mListener.onTick(ADCountDownButton.this, time);
