@@ -26,16 +26,17 @@ import com.liudonghan.view.radius.ADConstraintLayout;
 public class ADCellTextLayout extends ADConstraintLayout {
 
     private Context context;
-    private String leftText, rightText;
+    private String leftText, rightText, subText;
     private int leftTextColor, leftDrawableWidth, leftDrawableHeight, leftDrawablePadding, leftDrawable;
     private int rightTextColor, rightDrawableWidth, rightDrawableHeight, rightDrawablePadding, rightDrawable;
-    private TextView textViewLeft, textViewRight;
-    private float leftTextSize, rightTextSize;
+    private int subTextColor, subDrawableWidth, subDrawableHeight, subDrawablePadding, subDrawable, subMarginRight, subMarginLeft;
+    private TextView textViewLeft, textViewRight, textViewSub;
+    private float leftTextSize, rightTextSize, subTextSize;
     private View lineView;
     private int lineMarginRight, lineMarginLeft, lineBgColor, lineHeight;
-    private boolean leftBold, rightBold;
+    private boolean leftBold, rightBold, subBold;
 
-    private Direction leftDrawableDirection, rightDrawableDirection;
+    private Direction leftDrawableDirection, rightDrawableDirection, subDrawableDirection;
     private Visibility lineVisibility;
 
     public ADCellTextLayout(@NonNull Context context) {
@@ -47,6 +48,7 @@ public class ADCellTextLayout extends ADConstraintLayout {
         this.context = context;
         View inflate = View.inflate(context, R.layout.ad_cell_group, this);
         textViewLeft = inflate.findViewById(R.id.view_cell_group_tv_left);
+        textViewSub = inflate.findViewById(R.id.view_cell_group_tv_sub);
         textViewRight = inflate.findViewById(R.id.view_cell_group_tv_right);
         lineView = inflate.findViewById(R.id.view_cell_group_view_line);
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.ADCellTextLayout);
@@ -60,6 +62,19 @@ public class ADCellTextLayout extends ADConstraintLayout {
         leftDrawablePadding = typedArray.getDimensionPixelOffset(R.styleable.ADCellTextLayout_liu_left_drawable_padding, 0);
         leftDrawableWidth = typedArray.getDimensionPixelOffset(R.styleable.ADCellTextLayout_liu_left_drawable_width, 0);
         leftDrawableHeight = typedArray.getDimensionPixelOffset(R.styleable.ADCellTextLayout_liu_left_drawable_height, 0);
+
+        // 副标签
+        subText = typedArray.getString(R.styleable.ADCellTextLayout_liu_sub_text);
+        subTextSize = typedArray.getDimensionPixelSize(R.styleable.ADCellTextLayout_liu_sub_text_size, 40);
+        subTextColor = typedArray.getColor(R.styleable.ADCellTextLayout_liu_sub_text_color, Color.parseColor("#342e2e"));
+        subDrawable = typedArray.getResourceId(R.styleable.ADCellTextLayout_liu_sub_drawable, 0);
+        subDrawableDirection = Direction.fromInt(typedArray.getInt(R.styleable.ADCellTextLayout_liu_sub_drawable_direction, Direction.left.getValue()));
+        subBold = typedArray.getBoolean(R.styleable.ADCellTextLayout_liu_sub_text_bold, false);
+        subDrawablePadding = typedArray.getDimensionPixelOffset(R.styleable.ADCellTextLayout_liu_sub_drawable_padding, 0);
+        subDrawableWidth = typedArray.getDimensionPixelOffset(R.styleable.ADCellTextLayout_liu_sub_drawable_width, 0);
+        subDrawableHeight = typedArray.getDimensionPixelOffset(R.styleable.ADCellTextLayout_liu_sub_drawable_height, 0);
+        subMarginRight = typedArray.getDimensionPixelOffset(R.styleable.ADCellTextLayout_liu_sub_right_margin, 0);
+        subMarginLeft = typedArray.getDimensionPixelOffset(R.styleable.ADCellTextLayout_liu_sub_left_margin, 0);
 
         // 右侧标签
         rightText = typedArray.getString(R.styleable.ADCellTextLayout_liu_right_text);
@@ -90,36 +105,31 @@ public class ADCellTextLayout extends ADConstraintLayout {
      */
     private void initCell(Context context) {
         // 设置左侧view
-        textViewLeft.setText(leftText);
-        textViewLeft.setTextColor(leftTextColor);
-        textViewLeft.setTextSize(TypedValue.COMPLEX_UNIT_PX, leftTextSize);
-        if (leftBold) {
-            textViewLeft.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
-        } else {
-            textViewLeft.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
-        }
-        if (0 != leftDrawable) {
-            textViewLeft.setCompoundDrawablePadding(leftDrawablePadding);
-            Drawable drawable = context.getResources().getDrawable(leftDrawable);
-            int height = drawable.getMinimumHeight();
-            drawable.setBounds(0, 0, 0 == leftDrawableWidth ? height : leftDrawableWidth, 0 == leftDrawableHeight ? height : leftDrawableHeight);
-            switch (leftDrawableDirection) {
-                case left:
-                    textViewLeft.setCompoundDrawables(drawable, null, null, null);
-                    break;
-                case top:
-                    textViewLeft.setCompoundDrawables(null, drawable, null, null);
-                    break;
-                case right:
-                    textViewLeft.setCompoundDrawables(null, null, drawable, null);
-                    break;
-                case bottom:
-                    textViewLeft.setCompoundDrawables(null, null, null, drawable);
-                    break;
-            }
-        }
-
+        settingLeftTextCell(context);
+        // 副标签
+        settingSubTextCell(context);
         // 设置右侧view
+        settingRightTextCell(context);
+        // 设置line分割线
+        settingLineView(context);
+
+    }
+
+    private void settingLineView(Context context) {
+        lineView.setVisibility(lineVisibility == Visibility.Visibility ? VISIBLE : GONE);
+        lineView.setBackgroundColor(lineBgColor);
+        ConstraintLayout.LayoutParams layoutParams = (LayoutParams) lineView.getLayoutParams();
+        layoutParams.leftMargin = lineMarginLeft;
+        layoutParams.rightMargin = lineMarginRight;
+        layoutParams.height = lineHeight;
+    }
+
+    /**
+     * 右侧标签
+     *
+     * @param context 上下文`
+     */
+    private void settingRightTextCell(Context context) {
         textViewRight.setText(rightText);
         textViewRight.setTextColor(rightTextColor);
         textViewRight.setTextSize(TypedValue.COMPLEX_UNIT_PX, rightTextSize);
@@ -149,14 +159,81 @@ public class ADCellTextLayout extends ADConstraintLayout {
                     break;
             }
         }
+        ConstraintLayout.LayoutParams layoutParams = (LayoutParams) textViewSub.getLayoutParams();
+        layoutParams.leftMargin = subMarginLeft;
+        layoutParams.rightMargin = subMarginRight;
+    }
 
-        // 设置line分割线
-        lineView.setVisibility(lineVisibility == Visibility.Visibility ? VISIBLE : GONE);
-        lineView.setBackgroundColor(lineBgColor);
-        ConstraintLayout.LayoutParams layoutParams = (LayoutParams) lineView.getLayoutParams();
-        layoutParams.leftMargin = lineMarginLeft;
-        layoutParams.rightMargin = lineMarginRight;
-        layoutParams.height = lineHeight;
+    /**
+     * 副标签
+     *
+     * @param context 上下文
+     */
+    private void settingSubTextCell(Context context) {
+        textViewSub.setText(subText);
+        textViewSub.setTextColor(subTextColor);
+        textViewSub.setTextSize(TypedValue.COMPLEX_UNIT_PX, subTextSize);
+        if (subBold) {
+            textViewSub.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+        } else {
+            textViewSub.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
+        }
+        if (0 != subDrawable) {
+            textViewSub.setCompoundDrawablePadding(subDrawablePadding);
+            Drawable drawable = context.getResources().getDrawable(leftDrawable);
+            int height = drawable.getMinimumHeight();
+            drawable.setBounds(0, 0, 0 == subDrawableWidth ? height : subDrawableWidth, 0 == subDrawableHeight ? height : subDrawableHeight);
+            switch (subDrawableDirection) {
+                case left:
+                    textViewSub.setCompoundDrawables(drawable, null, null, null);
+                    break;
+                case top:
+                    textViewSub.setCompoundDrawables(null, drawable, null, null);
+                    break;
+                case right:
+                    textViewSub.setCompoundDrawables(null, null, drawable, null);
+                    break;
+                case bottom:
+                    textViewSub.setCompoundDrawables(null, null, null, drawable);
+                    break;
+            }
+        }
+    }
+
+    /**
+     * 左侧标签
+     *
+     * @param context 上下文
+     */
+    private void settingLeftTextCell(Context context) {
+        textViewLeft.setText(leftText);
+        textViewLeft.setTextColor(leftTextColor);
+        textViewLeft.setTextSize(TypedValue.COMPLEX_UNIT_PX, leftTextSize);
+        if (leftBold) {
+            textViewLeft.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+        } else {
+            textViewLeft.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
+        }
+        if (0 != leftDrawable) {
+            textViewLeft.setCompoundDrawablePadding(leftDrawablePadding);
+            Drawable drawable = context.getResources().getDrawable(leftDrawable);
+            int height = drawable.getMinimumHeight();
+            drawable.setBounds(0, 0, 0 == leftDrawableWidth ? height : leftDrawableWidth, 0 == leftDrawableHeight ? height : leftDrawableHeight);
+            switch (leftDrawableDirection) {
+                case left:
+                    textViewLeft.setCompoundDrawables(drawable, null, null, null);
+                    break;
+                case top:
+                    textViewLeft.setCompoundDrawables(null, drawable, null, null);
+                    break;
+                case right:
+                    textViewLeft.setCompoundDrawables(null, null, drawable, null);
+                    break;
+                case bottom:
+                    textViewLeft.setCompoundDrawables(null, null, null, drawable);
+                    break;
+            }
+        }
     }
 
     public void setLeftText(String leftText) {
@@ -166,6 +243,61 @@ public class ADCellTextLayout extends ADConstraintLayout {
 
     public void setRightText(String rightText) {
         this.rightText = rightText;
+        initCell(context);
+    }
+
+    public void setSubText(String subText) {
+        this.subText = subText;
+        initCell(context);
+    }
+
+    public void setSubTextColor(int subTextColor) {
+        this.subTextColor = subTextColor;
+        initCell(context);
+    }
+
+    public void setSubTextSize(float subTextSize) {
+        this.subTextSize = subTextSize;
+        initCell(context);
+    }
+
+    public void setSubBold(boolean subBold) {
+        this.subBold = subBold;
+        initCell(context);
+    }
+
+    public void setSubDrawable(int subDrawable) {
+        this.subDrawable = subDrawable;
+        initCell(context);
+    }
+
+    public void setSubDrawableHeight(int subDrawableHeight) {
+        this.subDrawableHeight = subDrawableHeight;
+        initCell(context);
+    }
+
+    public void setSubDrawablePadding(int subDrawablePadding) {
+        this.subDrawablePadding = subDrawablePadding;
+        initCell(context);
+    }
+
+    public void setSubDrawableWidth(int subDrawableWidth) {
+        this.subDrawableWidth = subDrawableWidth;
+        initCell(context);
+    }
+
+    public void setSubMarginLeft(int subMarginLeft) {
+        this.subMarginLeft = subMarginLeft;
+        initCell(context);
+    }
+
+    public void setSubMarginRight(int subMarginRight) {
+        this.subMarginRight = subMarginRight;
+        initCell(context);
+    }
+
+    public void setTextViewSub(TextView textViewSub) {
+        this.textViewSub = textViewSub;
         initCell(context);
     }
 
@@ -246,6 +378,11 @@ public class ADCellTextLayout extends ADConstraintLayout {
 
     public void setRightDrawableDirection(Direction rightDrawableDirection) {
         this.rightDrawableDirection = rightDrawableDirection;
+        initCell(context);
+    }
+
+    public void setSubDrawableDirection(Direction subDrawableDirection) {
+        this.subDrawableDirection = subDrawableDirection;
         initCell(context);
     }
 
@@ -368,12 +505,52 @@ public class ADCellTextLayout extends ADConstraintLayout {
         return textViewRight;
     }
 
+    public TextView getTextViewSub() {
+        return textViewSub;
+    }
+
+    public String getSubText() {
+        return subText;
+    }
+
+    public int getSubDrawable() {
+        return subDrawable;
+    }
+
+    public int getSubTextColor() {
+        return subTextColor;
+    }
+
+    public int getSubDrawableHeight() {
+        return subDrawableHeight;
+    }
+
+    public int getSubDrawablePadding() {
+        return subDrawablePadding;
+    }
+
+    public int getSubDrawableWidth() {
+        return subDrawableWidth;
+    }
+
+    public int getSubMarginLeft() {
+        return subMarginLeft;
+    }
+
+    public int getSubMarginRight() {
+        return subMarginRight;
+    }
+
     public float getLeftTextSize() {
         return leftTextSize;
     }
 
     public float getRightTextSize() {
         return rightTextSize;
+    }
+
+    public float getSubTextSize() {
+        return subTextSize;
     }
 
     public Direction getLeftDrawableDirection() {
@@ -384,6 +561,9 @@ public class ADCellTextLayout extends ADConstraintLayout {
         return rightDrawableDirection;
     }
 
+    public Direction getSubDrawableDirection() {
+        return subDrawableDirection;
+    }
 
     public enum Direction {
         left(1),

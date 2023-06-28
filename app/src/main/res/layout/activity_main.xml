@@ -180,7 +180,9 @@
             app:liu_right_text="进入"
             app:liu_right_text_bold="true"
             app:liu_right_text_color="@color/colorPrimary"
-            app:liu_right_text_size="12sp" />
+            app:liu_right_text_size="12sp"
+            app:liu_sub_left_margin="12dp"
+            app:liu_sub_text="！！！！！！" />
 
         <com.liudonghan.view.cell.ADCellTextLayout
             android:id="@+id/activity_main_cg_two"

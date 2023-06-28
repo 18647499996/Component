@@ -20,6 +20,19 @@
         tools:text="左侧标题" />
 
     <TextView
+        android:id="@+id/view_cell_group_tv_sub"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:textColor="#342e2e"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@id/view_cell_group_tv_left"
+        app:layout_constraintLeft_toRightOf="@id/view_cell_group_tv_left"
+        app:layout_constraintRight_toLeftOf="@id/view_cell_group_tv_right"
+        app:layout_constraintTop_toTopOf="@id/view_cell_group_tv_left"
+        tools:text="副标题" />
+
+    <TextView
         android:id="@+id/view_cell_group_tv_right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

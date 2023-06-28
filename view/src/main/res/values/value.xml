@@ -102,6 +102,22 @@
             <enum name="right" value="3" />
             <enum name="bottom" value="4" />
         </attr>
+        <attr name="liu_sub_text" format="string" />
+        <attr name="liu_sub_text_color" format="color" />
+        <attr name="liu_sub_text_size" format="dimension" />
+        <attr name="liu_sub_text_bold" format="boolean" />
+        <attr name="liu_sub_drawable" format="reference" />
+        <attr name="liu_sub_drawable_width" format="dimension" />
+        <attr name="liu_sub_drawable_height" format="dimension" />
+        <attr name="liu_sub_drawable_padding" format="dimension" />
+        <attr name="liu_sub_left_margin" format="dimension" />
+        <attr name="liu_sub_right_margin" format="dimension" />
+        <attr name="liu_sub_drawable_direction" format="enum">
+            <enum name="left" value="1" />
+            <enum name="top" value="2" />
+            <enum name="right" value="3" />
+            <enum name="bottom" value="4" />
+        </attr>
         <attr name="liu_right_text" format="string" />
         <attr name="liu_right_text_color" format="color" />
         <attr name="liu_right_text_size" format="dimension" />
