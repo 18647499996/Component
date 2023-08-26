@@ -74,7 +74,7 @@ public class ADCircleProgress extends View {
         clockWise = typedArray.getBoolean(R.styleable.ADCircleProgress_liu_clock_wise, true);
         max = typedArray.getInt(R.styleable.ADCircleProgress_liu_max, 100);
         progress = typedArray.getFloat(R.styleable.ADCircleProgress_liu_progress, 0);
-        startingAngle = typedArray.getInt(R.styleable.ADCircleProgress_liu_starting_angle, 90);
+        startingAngle = typedArray.getInt(R.styleable.ADCircleProgress_liu_starting_angle, 270);
         isAutoLoadingAnimation = typedArray.getBoolean(R.styleable.ADCircleProgress_liu_is_auto_loading_animation, false);
         typedArray.recycle();
 

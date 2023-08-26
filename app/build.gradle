@@ -6,11 +6,11 @@ android {
 
     defaultConfig {
         applicationId "com.liudonghan.component"
-        minSdkVersion 17
+        minSdkVersion 19
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
-
+        multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -25,6 +25,24 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    lintOptions {
+        disable 'InvalidPackage'
+        abortOnError false
+        checkReleaseBuilds false
+    }
+
+//    dexOptions {
+//        //增量编译
+//        javaMaxHeapSize "3024m"
+//        //关闭预编译
+//        preDexLibraries = false
+//    }
+    dexOptions {
+        dexInProcess true
+        preDexLibraries true
+        javaMaxHeapSize "6g"
+    }
 }
 
 dependencies {
@@ -34,8 +52,12 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation 'androidx.multidex:multidex:2.0.1'
 
     implementation project(':view')
     implementation 'com.github.18647499996:pdf-view:1.0'
-
+    implementation 'com.github.18647499996:base:2.2.6'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.0.0'
+    implementation 'com.jakewharton:butterknife:10.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
 }

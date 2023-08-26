@@ -8,6 +8,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import com.liudonghan.component.calendar.CalendarActivity;
+import com.liudonghan.view.calendar.ADCalendarHelp;
+import com.liudonghan.view.calendar.ChineseLunarHelp;
 import com.liudonghan.view.cell.ADCellTextLayout;
 import com.liudonghan.view.city.ADCityView;
 import com.liudonghan.view.indicator.ADIndicatorTab;
@@ -36,10 +39,12 @@ public class MainActivity extends AppCompatActivity implements ADVoiceRecorderBu
         adVoiceRecorderButton = findViewById(R.id.btn_1);
         adIndicatorTab = findViewById(R.id.indicator_tab);
         adIndicatorTab.setData(Arrays.asList("tab1", "tab2", "tab3"));
+
         adIndicatorTab.setOnADIndicatorTabItemClickListener(new ADIndicatorTab.OnADIndicatorTabItemClickListener() {
             @Override
             public void onTabItemClick(Tab.Column text, int position) {
-                Log.i("Mac_Liu","点击条目：" + text.getText());
+                Log.i("Mac_Liu", "点击条目：" + text.getText());
+                CalendarActivity.startActivity(MainActivity.this, CalendarActivity.class);
             }
         });
         adCityView.getViewSwitcher().setDisplayedChild(0);
@@ -54,6 +59,7 @@ public class MainActivity extends AppCompatActivity implements ADVoiceRecorderBu
             }
         });
         adCellTextLayout.setLeftText("动态设置");
+        ChineseLunarHelp.getInstance().getLunarHoliday(2024, 2, 9);
         findViewById(R.id.activity_main_tv).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -90,17 +96,17 @@ public class MainActivity extends AppCompatActivity implements ADVoiceRecorderBu
 
     @Override
     public void onShortLimit() {
-        ADSnackBarManager.getInstance().showWarn(this,"录音时间太短");
+        ADSnackBarManager.getInstance().showWarn(this, "录音时间太短");
     }
 
     @SuppressLint("ShowToast")
     @Override
     public void onRangeLimit() {
-        ADSnackBarManager.getInstance().showWarn(this,"取消录音发送");
+        ADSnackBarManager.getInstance().showWarn(this, "取消录音发送");
     }
 
     @Override
     public void onAudioSucceed(String filePath, long duration) {
-        Log.i("Mac_Liu","voice file path ： " + filePath);
+        Log.i("Mac_Liu", "voice file path ： " + filePath);
     }
 }
