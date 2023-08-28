@@ -70,21 +70,23 @@ public class ADCalendarView extends ADConstraintLayout implements CalendarAdapte
         calendarAdapter = new CalendarAdapter(R.layout.ad_item_calendar);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setAdapter(calendarAdapter);
+        // 缓存条目视图
+        recyclerView.setItemViewCacheSize(200);
+        // 是为了更改 adapter的内容不会改变 它的View的高度和宽度，那么就可以设置为 True来避免不必要的 requestLayout
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setNestedScrollingEnabled(false);
         viewSwitcher.setDisplayedChild(0);
         calendarAdapter.setOnCalendarAdapterListener(this);
-        buttonSubmit.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (null == startDay) {
-                    ADSnackBarManager.getInstance().showWarn(context, "请选择开始日期");
-                    return;
-                }
-                if (null == endDay) {
-                    ADSnackBarManager.getInstance().showWarn(context, "请选择结束日期");
-                    return;
-                }
-                onADCalendarViewListener.onCalendarPickData(startDay, endDay);
+        buttonSubmit.setOnClickListener(v -> {
+            if (null == startDay) {
+                ADSnackBarManager.getInstance().showWarn(context, "请选择开始日期");
+                return;
             }
+            if (null == endDay) {
+                ADSnackBarManager.getInstance().showWarn(context, "请选择结束日期");
+                return;
+            }
+            onADCalendarViewListener.onCalendarPickData(startDay, endDay);
         });
     }
 
@@ -99,16 +101,16 @@ public class ADCalendarView extends ADConstraintLayout implements CalendarAdapte
     }
 
     @Override
-    public void onItemClick(CalendarAdapter.CalendarChildAdapter calendarChildAdapter, ADCalendarEntity.Day day, int position, int status, int month) {
+    public void onItemClick(CalendarAdapter.CalendarChildAdapter calendarChildAdapter, ADCalendarEntity.Day day, int position, int status, int month, int adapterPosition) {
         switch (status) {
             case 1:
-                start(calendarChildAdapter, day, position, month);
+                start(calendarChildAdapter, day, position, month, adapterPosition);
                 break;
             case 2:
-                end(calendarChildAdapter, day, position, month);
+                end(calendarChildAdapter, day, position, month, adapterPosition);
                 break;
             case 3:
-                reset(calendarChildAdapter, day, position, month);
+                reset(calendarChildAdapter, day, position, month, adapterPosition);
                 break;
         }
     }
@@ -120,13 +122,14 @@ public class ADCalendarView extends ADConstraintLayout implements CalendarAdapte
      * @param day                  日期信息
      * @param position             索引
      * @param month                月份
+     * @param adapterPosition      一级列表索引
      */
     @SuppressLint("SetTextI18n")
-    private void start(CalendarAdapter.CalendarChildAdapter calendarChildAdapter, ADCalendarEntity.Day day, int position, int month) {
+    private void start(CalendarAdapter.CalendarChildAdapter calendarChildAdapter, ADCalendarEntity.Day day, int position, int month, int adapterPosition) {
         if (null == startDay) {
             calendarChildAdapter.getData().get(position).setSelector(true);
             calendarAdapter.setStartDate(day.getTimeInMillis());
-            calendarAdapter.notifyDataSetChanged();
+            calendarAdapter.notifyItemChanged(adapterPosition);
             startDay = day;
             textViewStartDate.setText(month + "月" + day.getDay() + "日");
             textViewStartWeek.setText(day.getWeekDesc());
@@ -136,6 +139,7 @@ public class ADCalendarView extends ADConstraintLayout implements CalendarAdapte
             textViewEndWeek.setVisibility(INVISIBLE);
             textViewEndHint.setVisibility(INVISIBLE);
             textViewEndDate.setText("结束日期");
+            textViewDayCount.setText("");
         }
     }
 
@@ -146,11 +150,12 @@ public class ADCalendarView extends ADConstraintLayout implements CalendarAdapte
      * @param day                  日期信息
      * @param position             索引
      * @param month                月份
+     * @param adapterPosition      一级列表索引
      */
     @SuppressLint("SetTextI18n")
-    private void end(CalendarAdapter.CalendarChildAdapter calendarChildAdapter, ADCalendarEntity.Day day, int position, int month) {
+    private void end(CalendarAdapter.CalendarChildAdapter calendarChildAdapter, ADCalendarEntity.Day day, int position, int month, int adapterPosition) {
         if (startDay.getTimeInMillis() > day.getTimeInMillis()) {
-            reset(calendarChildAdapter, day, position, month);
+            reset(calendarChildAdapter, day, position, month, adapterPosition);
             return;
         }
         if (null == endDay) {
@@ -171,7 +176,7 @@ public class ADCalendarView extends ADConstraintLayout implements CalendarAdapte
      * 重置选中日期
      */
     public void reset() {
-        reset(null, null, 0, 0);
+        reset(null, null, 0, 0, 0);
     }
 
     /**
@@ -181,14 +186,23 @@ public class ADCalendarView extends ADConstraintLayout implements CalendarAdapte
      * @param day                  日期信息
      * @param position             索引
      * @param month                月份
+     * @param adapterPosition      一级列表索引
      */
-    private void reset(CalendarAdapter.CalendarChildAdapter calendarChildAdapter, ADCalendarEntity.Day day, int position, int month) {
+    private void reset(CalendarAdapter.CalendarChildAdapter calendarChildAdapter, ADCalendarEntity.Day day, int position, int month, int adapterPosition) {
         calendarAdapter.setResetData();
         calendarAdapter.notifyDataSetChanged();
         startDay = null;
         endDay = null;
         if (null != calendarChildAdapter) {
-            start(calendarChildAdapter, day, position, month);
+            start(calendarChildAdapter, day, position, month, adapterPosition);
+        } else {
+            textViewStartHint.setVisibility(INVISIBLE);
+            textViewStartWeek.setVisibility(INVISIBLE);
+            textViewEndWeek.setVisibility(INVISIBLE);
+            textViewEndHint.setVisibility(INVISIBLE);
+            textViewStartDate.setText("开始日期");
+            textViewEndDate.setText("结束日期");
+            textViewDayCount.setText("");
         }
     }
 

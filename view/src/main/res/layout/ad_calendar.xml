@@ -58,7 +58,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="共1天"
+            android:text=""
             android:textColor="@color/color_ff7900"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@id/ad_calendar_tv_start_date"

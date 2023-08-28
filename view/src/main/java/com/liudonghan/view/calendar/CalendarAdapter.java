@@ -34,6 +34,9 @@ public class CalendarAdapter extends BaseQuickAdapter<ADCalendarEntity, BaseView
         recyclerView.setLayoutManager(new GridLayoutManager(mContext, 7));
         CalendarChildAdapter calendarChildAdapter = new CalendarChildAdapter(R.layout.ad_item_calendar_child);
         recyclerView.setAdapter(calendarChildAdapter);
+        recyclerView.setItemViewCacheSize(200);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setNestedScrollingEnabled(false);
         calendarChildAdapter.setNewData(item.getDayList());
         calendarChildAdapter.setOnItemClickListener((adapter, view, position) -> {
             ADCalendarEntity.Day day = (ADCalendarEntity.Day) adapter.getItem(position);
@@ -41,7 +44,7 @@ public class CalendarAdapter extends BaseQuickAdapter<ADCalendarEntity, BaseView
                 // todo 小于当天的日期无法点击
                 return;
             }
-            onCalendarAdapterListener.onItemClick((CalendarChildAdapter) adapter, day, position, 0 == startTimeInMillis ? 1 : 0 == endTimeInMillis ? 2 : 3, item.getMonth());
+            onCalendarAdapterListener.onItemClick((CalendarChildAdapter) adapter, day, position, 0 == startTimeInMillis ? 1 : 0 == endTimeInMillis ? 2 : 3, item.getMonth(), helper.getAdapterPosition());
         });
     }
 
@@ -115,11 +118,12 @@ public class CalendarAdapter extends BaseQuickAdapter<ADCalendarEntity, BaseView
         /**
          * 条目点击事件
          *
-         * @param day      点击
-         * @param position 索引
-         * @param status   点击状态 1.开始 2.结束 3.重置
-         * @param month    月份
+         * @param day             点击
+         * @param position        索引
+         * @param status          点击状态 1.开始 2.结束 3.重置
+         * @param month           月份
+         * @param adapterPosition 一级列表索引
          */
-        void onItemClick(CalendarChildAdapter calendarChildAdapter, ADCalendarEntity.Day day, int position, int status, int month);
+        void onItemClick(CalendarChildAdapter calendarChildAdapter, ADCalendarEntity.Day day, int position, int status, int month, int adapterPosition);
     }
 }
