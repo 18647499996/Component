@@ -1,5 +1,6 @@
 package com.liudonghan.view.calendar;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
@@ -120,6 +121,7 @@ public class ADCalendarView extends ADConstraintLayout implements CalendarAdapte
      * @param position             索引
      * @param month                月份
      */
+    @SuppressLint("SetTextI18n")
     private void start(CalendarAdapter.CalendarChildAdapter calendarChildAdapter, ADCalendarEntity.Day day, int position, int month) {
         if (null == startDay) {
             calendarChildAdapter.getData().get(position).setSelector(true);
@@ -145,6 +147,7 @@ public class ADCalendarView extends ADConstraintLayout implements CalendarAdapte
      * @param position             索引
      * @param month                月份
      */
+    @SuppressLint("SetTextI18n")
     private void end(CalendarAdapter.CalendarChildAdapter calendarChildAdapter, ADCalendarEntity.Day day, int position, int month) {
         if (startDay.getTimeInMillis() > day.getTimeInMillis()) {
             reset(calendarChildAdapter, day, position, month);
@@ -160,7 +163,15 @@ public class ADCalendarView extends ADConstraintLayout implements CalendarAdapte
             buttonSubmit.setAlpha((float) 1.0);
             textViewEndHint.setVisibility(View.VISIBLE);
             textViewEndWeek.setVisibility(View.VISIBLE);
+            textViewDayCount.setText("共" + ADCalendarHelp.getInstance().getDifferDay(endDay.getTimeInMillis(), startDay.getTimeInMillis()) + "天");
         }
+    }
+
+    /**
+     * 重置选中日期
+     */
+    public void reset() {
+        reset(null, null, 0, 0);
     }
 
     /**
@@ -176,7 +187,9 @@ public class ADCalendarView extends ADConstraintLayout implements CalendarAdapte
         calendarAdapter.notifyDataSetChanged();
         startDay = null;
         endDay = null;
-        start(calendarChildAdapter, day, position, month);
+        if (null != calendarChildAdapter) {
+            start(calendarChildAdapter, day, position, month);
+        }
     }
 
     public void setOnADCalendarViewListener(OnADCalendarViewListener onADCalendarViewListener) {

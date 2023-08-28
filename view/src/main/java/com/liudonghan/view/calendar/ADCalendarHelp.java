@@ -40,6 +40,7 @@ public class ADCalendarHelp {
 
     /**
      * todo 获取日历列表（ 当前时间 ）
+     *
      * @return List<ADCalendarEntity>
      */
     public List<ADCalendarEntity> getCalendarList() {
@@ -53,7 +54,7 @@ public class ADCalendarHelp {
      * @return List<ADCalendarEntity>
      */
     public List<ADCalendarEntity> getCalendarList(Date date) {
-        return getCalendarList(date, 24);
+        return getCalendarList(date, 6);
     }
 
     /**
@@ -100,7 +101,7 @@ public class ADCalendarHelp {
                 day.setFitAvoid(ChineseLunarHelp.getInstance().getFitAvoid(year, month, j));
                 day.setWeekDesc(formatWeekDesc(findDateByWeek(year, month, j)));
                 day.setWeek(findDateByWeek(year, month, j));
-                day.setTimeInMillis(getTimeInMillis(year,month,j));
+                day.setTimeInMillis(getTimeInMillis(year, month, j));
                 dayList.add(day);
             }
 
@@ -202,5 +203,16 @@ public class ADCalendarHelp {
             e.printStackTrace();
         }
         return calendar.getTimeInMillis();
+    }
+
+    /**
+     * todo 计算两个时间戳相差天数
+     *
+     * @param end   结束时间戳
+     * @param start 开始时间戳
+     * @return long
+     */
+    public long getDifferDay(long end, long start) {
+        return (end - start) / (1000 * 60 * 60 * 24);
     }
 }
