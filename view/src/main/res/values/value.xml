@@ -118,7 +118,7 @@
         </attr>
         <attr name="liu_orientation" format="enum">
             <enum name="Vertical" value="1" />
-            <enum name="Horizontal" value="2" />
+            <enum name="Horizontal" value="0" />
         </attr>
         <attr name="liu_span_count" format="integer" />
     </declare-styleable>

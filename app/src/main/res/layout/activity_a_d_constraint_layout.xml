@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context=".constraintLayout.ADConstraintLayoutActivity">
+
+    <include layout="@layout/ad_title_builder" />
+
+    <com.liudonghan.view.radius.ADConstraintLayout
+        android:id="@+id/activity_main_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="50dp"
+        android:background="#eb2525"
+        android:padding="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:liu_round_corner="8dp"
+        app:liu_stroke_color="#000000"
+        app:liu_stroke_width="2dp">
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="啊啊啊啊啊"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/textView2" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="买买买买买"
+            app:layout_constraintLeft_toRightOf="@id/textView1"
+            app:layout_constraintRight_toRightOf="parent" />
+
+    </com.liudonghan.view.radius.ADConstraintLayout>
+
+</LinearLayout>

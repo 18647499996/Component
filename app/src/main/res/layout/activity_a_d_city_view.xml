@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context=".cityview.ADCityViewActivity">
+
+
+    <include layout="@layout/ad_title_builder" />
+
+    <com.liudonghan.view.city.ADCityView
+        android:id="@+id/activity_main_city"
+        android:layout_width="match_parent"
+        android:layout_height="280dp" />
+
+</LinearLayout>

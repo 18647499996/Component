@@ -1,112 +1,97 @@
 package com.liudonghan.component;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.liudonghan.component.button.ADButtonActivity;
 import com.liudonghan.component.calendar.CalendarActivity;
-import com.liudonghan.view.calendar.ADCalendarHelp;
-import com.liudonghan.view.calendar.ChineseLunarHelp;
-import com.liudonghan.view.cell.ADCellTextLayout;
-import com.liudonghan.view.city.ADCityView;
-import com.liudonghan.view.indicator.ADIndicatorTab;
-import com.liudonghan.view.indicator.Tab;
-import com.liudonghan.view.progress.ADCircleProgress;
-import com.liudonghan.view.snackbar.SnackBar;
-import com.liudonghan.view.snackbar.ADSnackBarManager;
-import com.liudonghan.view.voice.ADVoiceRecorderButton;
+import com.liudonghan.component.cell.ADCellTextLayoutActivity;
+import com.liudonghan.component.circleprogress.ADCircleProgressActivity;
+import com.liudonghan.component.cityview.ADCityViewActivity;
+import com.liudonghan.component.constraintLayout.ADConstraintLayoutActivity;
+import com.liudonghan.component.imageview.ADImageViewActivity;
+import com.liudonghan.component.indicatortab.ADIndicatorTabActivity;
+import com.liudonghan.component.input.ADInputCodeActivity;
+import com.liudonghan.component.recyclerview.ADRecyclerViewActivity;
+import com.liudonghan.component.textview.ADTextViewActivity;
+import com.liudonghan.component.voicerecorder.ADVoiceRecorderButtonActivity;
+import com.liudonghan.view.recycler.ADRecyclerView;
 
 import java.util.Arrays;
-import java.util.Collections;
 
-public class MainActivity extends AppCompatActivity implements ADVoiceRecorderButton.OnADVoiceRecorderButtonListener {
+public class MainActivity extends AppCompatActivity implements BaseQuickAdapter.OnItemClickListener {
 
-    private ADCellTextLayout adCellTextLayout;
-    private ADVoiceRecorderButton adVoiceRecorderButton;
-    private ADCircleProgress adCircleProgress;
-    private ADIndicatorTab adIndicatorTab;
+    private String[] array = new String[]{
+            "验证码输入框", "ADButton", "ADImageView", "ADCircleProgress",
+            "ADCityView", "ADIndicatorTab", "ADConstraintLayout", "ADCellTextLayout",
+            "ADTextView", "ADVoiceRecorderButton", "日历组件", "ADRecyclerView"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        adCellTextLayout = findViewById(R.id.activity_main_cg_one);
-        ADCityView adCityView = findViewById(R.id.activity_main_city);
-        adVoiceRecorderButton = findViewById(R.id.btn_1);
-        adIndicatorTab = findViewById(R.id.indicator_tab);
-        adIndicatorTab.setData(Arrays.asList("tab1", "tab2", "tab3"));
-
-        adIndicatorTab.setOnADIndicatorTabItemClickListener(new ADIndicatorTab.OnADIndicatorTabItemClickListener() {
-            @Override
-            public void onTabItemClick(Tab.Column text, int position) {
-                Log.i("Mac_Liu", "点击条目：" + text.getText());
-                CalendarActivity.startActivity(MainActivity.this, CalendarActivity.class);
-            }
-        });
-        adCityView.getViewSwitcher().setDisplayedChild(0);
-        adCityView.getProgressBar().setIndeterminate(true);
-        adCityView.setProgressBarBgColor(R.color.color_342e2e);
-        adCircleProgress = findViewById(R.id.circle);
-        adCircleProgress.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                adIndicatorTab.setDefaultPosition(1);
-                adCircleProgress.cancelAnimator();
-            }
-        });
-        adCellTextLayout.setLeftText("动态设置");
-        ChineseLunarHelp.getInstance().getLunarHoliday(2024, 2, 9);
-        findViewById(R.id.activity_main_tv).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ADSnackBarManager.show(SnackBar
-                        .with(MainActivity.this)
-                        .position(SnackBar.SnackbarPosition.TOP)
-                        .duration(1000)
-                        .margin(15, 15)
-                        .backgroundDrawable(R.drawable.ad_snack_bar_bg)
-                        .text("哈哈哈哈哈"));
-            }
-        });
-        findViewById(R.id.activity_main_img).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, PhotoActivity.class));
-            }
-        });
-
-        findViewById(R.id.activity_main_layout).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                SnackbarManager.show(Snackbar
-//                        .with(MainActivity.this)
-//                        .position(Snackbar.SnackbarPosition.TOP)
-//                        .duration(1000)
-//                        .margin(15, 15)
-//                        .backgroundDrawable(R.drawable.ad_snack_bar_bg)
-//                        .text("咕咕咕咕咕咕"));
-            }
-        });
-        adVoiceRecorderButton.setOnADVoiceRecorderButtonListener(this);
+        FlowAdapter flowAdapter = new FlowAdapter(R.layout.item_flow);
+        ADRecyclerView adRecyclerView = findViewById(R.id.recyclerView);
+        adRecyclerView.setAdapter(flowAdapter);
+        flowAdapter.setNewData(Arrays.asList(array));
+        flowAdapter.setOnItemClickListener(this);
     }
 
-    @Override
-    public void onShortLimit() {
-        ADSnackBarManager.getInstance().showWarn(this, "录音时间太短");
-    }
-
-    @SuppressLint("ShowToast")
-    @Override
-    public void onRangeLimit() {
-        ADSnackBarManager.getInstance().showWarn(this, "取消录音发送");
-    }
 
     @Override
-    public void onAudioSucceed(String filePath, long duration) {
-        Log.i("Mac_Liu", "voice file path ： " + filePath);
+    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+        switch (position) {
+            case 0:
+                // todo 验证码输入框
+                ADInputCodeActivity.startActivity(this, ADInputCodeActivity.class);
+                break;
+            case 1:
+                // todo 自定义Button按钮
+                ADButtonActivity.startActivity(this, ADButtonActivity.class);
+                break;
+            case 2:
+                // todo 自定义ImageView
+                ADImageViewActivity.startActivity(this, ADImageViewActivity.class);
+                break;
+            case 3:
+                // todo 自定义进度加载框
+                ADCircleProgressActivity.startActivity(this, ADCircleProgressActivity.class);
+                break;
+            case 4:
+                // todo 自定义城市选择器
+                ADCityViewActivity.startActivity(this, ADCityViewActivity.class);
+                break;
+            case 5:
+                // todo 自定义tab指示器
+                ADIndicatorTabActivity.startActivity(this, ADIndicatorTabActivity.class);
+                break;
+            case 6:
+                // todo 约束性布局
+                ADConstraintLayoutActivity.startActivity(this, ADConstraintLayoutActivity.class);
+                break;
+            case 7:
+                // todo 单元格组件
+                ADCellTextLayoutActivity.startActivity(this, ADCellTextLayoutActivity.class);
+                break;
+            case 8:
+                // todo 自定义TextView
+                ADTextViewActivity.startActivity(this, ADTextViewActivity.class);
+                break;
+            case 9:
+                // todo 语音录制按钮组件
+                ADVoiceRecorderButtonActivity.startActivity(this, ADVoiceRecorderButtonActivity.class);
+                break;
+            case 10:
+                // todo 日历选择器（ 开始、结束 ）
+                CalendarActivity.startActivity(this, CalendarActivity.class);
+                break;
+            case 11:
+                // todo RecyclerView
+                ADRecyclerViewActivity.startActivity(this, ADRecyclerViewActivity.class);
+                break;
+        }
     }
 }

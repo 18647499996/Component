@@ -22,6 +22,17 @@
         android:theme="@style/Theme.AppCompat.NoActionBar"
         android:usesCleartextTraffic="true"
         tools:targetApi="n">
+        <activity android:name=".recyclerview.ADRecyclerViewActivity"></activity>
+        <activity android:name=".cityview.ADCityViewActivity" />
+        <activity android:name=".voicerecorder.ADVoiceRecorderButtonActivity" />
+        <activity android:name=".constraintLayout.ADConstraintLayoutActivity" />
+        <activity android:name=".cell.ADCellTextLayoutActivity" />
+        <activity android:name=".indicatortab.ADIndicatorTabActivity" />
+        <activity android:name=".circleprogress.ADCircleProgressActivity" />
+        <activity android:name=".button.ADButtonActivity" />
+        <activity android:name=".imageview.ADImageViewActivity" />
+        <activity android:name=".input.ADInputCodeActivity" />
+        <activity android:name=".textview.ADTextViewActivity" />
         <activity
             android:name=".calendar.CalendarActivity"
             android:screenOrientation="portrait" />

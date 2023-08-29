@@ -106,7 +106,7 @@ public class ADRecyclerView extends RecyclerView implements ViewAttr {
 
     public enum Orientation {
         Vertical(1),
-        Horizontal(2);
+        Horizontal(0);
 
         private int id;
 
@@ -122,7 +122,7 @@ public class ADRecyclerView extends RecyclerView implements ViewAttr {
             switch (id) {
                 case 1:
                     return Vertical;
-                case 2:
+                case 0:
                     return Horizontal;
                 default:
                     throw new Error("Invalid SourceType");
