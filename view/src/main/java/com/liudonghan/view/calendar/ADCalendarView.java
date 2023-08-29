@@ -14,6 +14,7 @@ import com.google.android.material.progressindicator.CircularProgressIndicator;
 import com.liudonghan.view.R;
 import com.liudonghan.view.radius.ADButton;
 import com.liudonghan.view.radius.ADConstraintLayout;
+import com.liudonghan.view.recycler.ADRecyclerView;
 import com.liudonghan.view.snackbar.ADSnackBarManager;
 
 import java.util.List;
@@ -27,7 +28,7 @@ import java.util.List;
 public class ADCalendarView extends ADConstraintLayout implements CalendarAdapter.OnCalendarAdapterListener {
 
     private Context context;
-    private RecyclerView recyclerView;
+    private ADRecyclerView recyclerView;
     private CalendarAdapter calendarAdapter;
     private CircularProgressIndicator circularProgressIndicator;
     private ViewSwitcher viewSwitcher;
@@ -68,7 +69,6 @@ public class ADCalendarView extends ADConstraintLayout implements CalendarAdapte
      */
     private void initData() {
         calendarAdapter = new CalendarAdapter(R.layout.ad_item_calendar);
-        recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setAdapter(calendarAdapter);
         // 缓存条目视图
         recyclerView.setItemViewCacheSize(200);

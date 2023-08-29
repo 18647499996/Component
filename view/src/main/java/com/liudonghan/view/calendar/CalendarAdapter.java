@@ -9,6 +9,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.liudonghan.view.R;
 import com.liudonghan.view.radius.ADConstraintLayout;
+import com.liudonghan.view.recycler.ADRecyclerView;
 
 import java.util.Objects;
 
@@ -30,8 +31,7 @@ public class CalendarAdapter extends BaseQuickAdapter<ADCalendarEntity, BaseView
     @Override
     protected void convert(BaseViewHolder helper, ADCalendarEntity item) {
         helper.setText(R.id.ad_item_calendar_tv_date, item.getDescribe());
-        RecyclerView recyclerView = helper.getView(R.id.ad_item_calendar_rv_child);
-        recyclerView.setLayoutManager(new GridLayoutManager(mContext, 7));
+        ADRecyclerView recyclerView = helper.getView(R.id.ad_item_calendar_rv_child);
         CalendarChildAdapter calendarChildAdapter = new CalendarChildAdapter(R.layout.ad_item_calendar_child);
         recyclerView.setAdapter(calendarChildAdapter);
         recyclerView.setItemViewCacheSize(200);

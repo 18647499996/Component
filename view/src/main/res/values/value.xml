@@ -70,6 +70,18 @@
         <attr name="liu_clip_background" />
     </declare-styleable>
 
+    <declare-styleable name="ADConstraintLayout">
+        <attr name="liu_is_circle" />
+        <attr name="liu_round_corner" />
+        <attr name="liu_round_corner_top_left" />
+        <attr name="liu_round_corner_top_right" />
+        <attr name="liu_round_corner_bottom_left" />
+        <attr name="liu_round_corner_bottom_right" />
+        <attr name="liu_stroke_color" />
+        <attr name="liu_stroke_width" />
+        <attr name="liu_clip_background" />
+    </declare-styleable>
+
     <declare-styleable name="ADButton">
         <attr name="liu_is_circle" />
         <attr name="liu_round_corner" />
@@ -85,6 +97,30 @@
     <declare-styleable name="ADCountDownButton">
         <attr name="liu_millis_as_future" format="integer" />
         <attr name="liu_count_down_interval" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="ADRecyclerView">
+        <attr name="liu_is_circle" />
+        <attr name="liu_round_corner" />
+        <attr name="liu_round_corner_top_left" />
+        <attr name="liu_round_corner_top_right" />
+        <attr name="liu_round_corner_bottom_left" />
+        <attr name="liu_round_corner_bottom_right" />
+        <attr name="liu_stroke_color" />
+        <attr name="liu_stroke_width" />
+        <attr name="liu_clip_background" />
+        <attr name="liu_layout_manager" format="enum">
+            <enum name="linear" value="1" />
+            <enum name="grid" value="2" />
+            <enum name="storage" value="3" />
+            <enum name="center" value="4" />
+            <enum name="flow" value="5" />
+        </attr>
+        <attr name="liu_orientation" format="enum">
+            <enum name="Vertical" value="1" />
+            <enum name="Horizontal" value="2" />
+        </attr>
+        <attr name="liu_span_count" format="integer" />
     </declare-styleable>
 
     <declare-styleable name="ADCellTextLayout">
