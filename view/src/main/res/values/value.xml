@@ -207,6 +207,12 @@
         <attr name="liu_indicator_line_duration" format="integer" />
     </declare-styleable>
 
+    <declare-styleable name="ADFieldTextLayout">
+        <attr name="liu_is_required" format="boolean" />
+        <attr name="liu_title" format="string" />
+        <attr name="liu_hint" format="string" />
+    </declare-styleable>
+
     <bool name="sb__is_swipeable">false</bool>
 
     <!--dialog弹窗-->

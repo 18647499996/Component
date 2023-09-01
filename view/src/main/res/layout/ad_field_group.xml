@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/view_field_tv_required"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:text="*"
+        android:textColor="@color/color_eb2525"
+        android:textSize="13sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/view_field_tv_title"
+        android:layout_width="85dp"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:singleLine="true"
+        android:textColor="@color/color_342e2e"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/view_field_tv_required"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="左侧标题" />
+
+    <EditText
+        android:id="@+id/view_field_edt_content"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:paddingLeft="5dp"
+        android:paddingTop="5dp"
+        android:paddingRight="12dp"
+        android:paddingBottom="5dp"
+        android:singleLine="true"
+        android:textColor="@color/color_342e2e"
+        android:textColorHint="@color/color_cccccc"
+        android:textCursorDrawable="@null"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/view_field_tv_title"
+        app:layout_constraintRight_toLeftOf="@id/view_field_btn_go"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:hint="请输入内容" />
+
+    <com.liudonghan.view.radius.ADButton
+        android:id="@+id/view_field_btn_go"
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:background="@color/color_eeeeee"
+        android:gravity="center"
+        android:paddingTop="7dp"
+        android:paddingBottom="7dp"
+        android:text="获取验证码"
+        android:textColor="@color/color_505257"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:liu_round_corner="75dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

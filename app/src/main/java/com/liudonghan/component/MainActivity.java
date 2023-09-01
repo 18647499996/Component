@@ -12,6 +12,7 @@ import com.liudonghan.component.cell.ADCellTextLayoutActivity;
 import com.liudonghan.component.circleprogress.ADCircleProgressActivity;
 import com.liudonghan.component.cityview.ADCityViewActivity;
 import com.liudonghan.component.constraintLayout.ADConstraintLayoutActivity;
+import com.liudonghan.component.field.FieldActivity;
 import com.liudonghan.component.imageview.ADImageViewActivity;
 import com.liudonghan.component.indicatortab.ADIndicatorTabActivity;
 import com.liudonghan.component.input.ADInputCodeActivity;
@@ -27,7 +28,8 @@ public class MainActivity extends AppCompatActivity implements BaseQuickAdapter.
     private String[] array = new String[]{
             "验证码输入框", "ADButton", "ADImageView", "ADCircleProgress",
             "ADCityView", "ADIndicatorTab", "ADConstraintLayout", "ADCellTextLayout",
-            "ADTextView", "ADVoiceRecorderButton", "日历组件", "ADRecyclerView"};
+            "ADTextView", "ADVoiceRecorderButton", "日历组件", "ADRecyclerView",
+            "ADFieldTextLayout"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +93,9 @@ public class MainActivity extends AppCompatActivity implements BaseQuickAdapter.
             case 11:
                 // todo RecyclerView
                 ADRecyclerViewActivity.startActivity(this, ADRecyclerViewActivity.class);
+                break;
+            case 12:
+                FieldActivity.startActivity(this, FieldActivity.class);
                 break;
         }
     }
