@@ -11,6 +11,7 @@
     <include layout="@layout/ad_title_builder" />
 
     <com.liudonghan.view.field.ADFieldTextLayout
+        android:id="@+id/field"
         android:layout_width="match_parent"
         android:layout_height="52dp"
         android:layout_marginLeft="12dp"

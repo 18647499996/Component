@@ -34,8 +34,8 @@ public class ADFieldTextLayout extends ADConstraintLayout implements ViewAttr {
     private EditText editTextContent;
     private ADButton buttonGo;
     private ViewHelper viewHelper;
-    private boolean isRequired;
-    private String titleDesc,editHint;
+    private boolean isRequired, isInsert;
+    private String titleDesc, editHint;
 
     public ADFieldTextLayout(@NonNull Context context) {
         super(context, null);
@@ -53,6 +53,7 @@ public class ADFieldTextLayout extends ADConstraintLayout implements ViewAttr {
         buttonGo = inflate.findViewById(R.id.view_field_btn_go);
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.ADFieldTextLayout);
         isRequired = typedArray.getBoolean(R.styleable.ADFieldTextLayout_liu_is_required, false);
+        isInsert = typedArray.getBoolean(R.styleable.ADFieldTextLayout_liu_is_insert, false);
         titleDesc = typedArray.getString(R.styleable.ADFieldTextLayout_liu_title);
         editHint = typedArray.getString(R.styleable.ADFieldTextLayout_liu_hint);
         typedArray.recycle();
@@ -62,8 +63,22 @@ public class ADFieldTextLayout extends ADConstraintLayout implements ViewAttr {
 
     private void initField(Context context) {
         textViewRequired.setVisibility(isRequired ? VISIBLE : INVISIBLE);
+        buttonGo.setVisibility(isInsert ? VISIBLE : GONE);
         editTextContent.setHint(editHint);
         textViewTitle.setText(titleDesc);
+    }
+
+
+    public TextView getTextViewRequired() {
+        return textViewRequired;
+    }
+
+    public TextView getTextViewTitle() {
+        return textViewTitle;
+    }
+
+    public EditText getEditTextContent() {
+        return editTextContent;
     }
 
     @Override

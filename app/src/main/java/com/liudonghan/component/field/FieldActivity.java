@@ -2,11 +2,18 @@ package com.liudonghan.component.field;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.liudonghan.component.R;
 import com.liudonghan.mvp.ADBaseActivity;
+import com.liudonghan.view.field.ADFieldTextLayout;
 import com.liudonghan.view.snackbar.ADSnackBarManager;
 import com.liudonghan.view.title.ADTitleBuilder;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Description：
@@ -15,6 +22,9 @@ import com.liudonghan.view.title.ADTitleBuilder;
  * Time:
  */
 public class FieldActivity extends ADBaseActivity<FieldPresenter> implements FieldContract.View {
+
+    @BindView(R.id.field)
+    ADFieldTextLayout field;
 
     @Override
     protected int getLayout() throws RuntimeException {
@@ -33,7 +43,7 @@ public class FieldActivity extends ADBaseActivity<FieldPresenter> implements Fie
 
     @Override
     protected void initData(Bundle savedInstanceState) throws RuntimeException {
-
+        field.getTextViewTitle().setText("开户行信息");
     }
 
     @Override
@@ -62,4 +72,10 @@ public class FieldActivity extends ADBaseActivity<FieldPresenter> implements Fie
     }
 
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+    }
 }

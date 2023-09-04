@@ -211,6 +211,7 @@
         <attr name="liu_is_required" format="boolean" />
         <attr name="liu_title" format="string" />
         <attr name="liu_hint" format="string" />
+        <attr name="liu_is_insert" format="boolean" />
     </declare-styleable>
 
     <bool name="sb__is_swipeable">false</bool>
