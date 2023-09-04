@@ -1,6 +1,7 @@
 package com.liudonghan.component.field;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -21,10 +22,14 @@ import butterknife.ButterKnife;
  * @author Created by: Li_Min
  * Time:
  */
-public class FieldActivity extends ADBaseActivity<FieldPresenter> implements FieldContract.View {
+public class FieldActivity extends ADBaseActivity<FieldPresenter> implements FieldContract.View, ADFieldTextLayout.OnADFieldTextLayoutListener {
 
     @BindView(R.id.field)
     ADFieldTextLayout field;
+    @BindView(R.id.field1)
+    ADFieldTextLayout field1;
+    @BindView(R.id.field2)
+    ADFieldTextLayout field2;
 
     @Override
     protected int getLayout() throws RuntimeException {
@@ -48,7 +53,9 @@ public class FieldActivity extends ADBaseActivity<FieldPresenter> implements Fie
 
     @Override
     protected void addListener() throws RuntimeException {
-
+        field.setOnADFieldTextLayoutListener(this);
+        field1.setOnADFieldTextLayoutListener(this);
+        field2.setOnADFieldTextLayoutListener(this);
     }
 
     @Override
@@ -71,6 +78,10 @@ public class FieldActivity extends ADBaseActivity<FieldPresenter> implements Fie
         ADSnackBarManager.getInstance().showError(this, msg);
     }
 
+    @Override
+    public void onField(View view, String title) {
+        Log.i("Mac_Liu", "点击按钮：" + title);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

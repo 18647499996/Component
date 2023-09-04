@@ -212,6 +212,15 @@
         <attr name="liu_title" format="string" />
         <attr name="liu_hint" format="string" />
         <attr name="liu_is_insert" format="boolean" />
+        <attr name="liu_is_divider" format="boolean" />
+        <attr name="liu_divider_margin" format="dimension" />
+        <attr name="liu_divider_background_color" format="color" />
+        <attr name="liu_divider_height" format="dimension" />
+        <attr name="liu_insert_radius" format="dimension" />
+        <attr name="liu_insert_hint" format="string" />
+        <attr name="liu_insert_hint_color" format="color" />
+        <attr name="liu_insert_background_color" format="color"/>
+
     </declare-styleable>
 
     <bool name="sb__is_swipeable">false</bool>

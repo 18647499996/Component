@@ -10,17 +10,55 @@
 
     <include layout="@layout/ad_title_builder" />
 
-    <com.liudonghan.view.field.ADFieldTextLayout
-        android:id="@+id/field"
+    <com.liudonghan.view.radius.ADConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="52dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="12dp"
         android:layout_marginTop="12dp"
         android:layout_marginRight="12dp"
         android:background="@color/white"
-        app:liu_hint="请输入持卡人姓名"
-        app:liu_is_required="true"
-        app:liu_round_corner="8dp"
-        app:liu_title="持卡人姓名" />
+        app:liu_round_corner="8dp">
+
+        <com.liudonghan.view.field.ADFieldTextLayout
+            android:id="@+id/field"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            app:liu_hint="请输入持卡人姓名"
+            app:liu_is_divider="true"
+            app:liu_is_required="true"
+            app:liu_title="持卡人证件号" />
+
+        <com.liudonghan.view.field.ADFieldTextLayout
+            android:id="@+id/field1"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:background="@color/white"
+            app:layout_constraintTop_toBottomOf="@id/field"
+            app:liu_divider_background_color="@color/color_342e2e"
+            app:liu_divider_height="0.67dp"
+            app:liu_divider_margin="100dp"
+            app:liu_hint="请输入持卡人姓名"
+            app:liu_insert_hint="验证"
+            app:liu_is_divider="true"
+            app:liu_is_insert="true"
+            app:liu_is_required="true"
+            app:liu_title="银行卡号" />
+
+        <com.liudonghan.view.field.ADFieldTextLayout
+            android:id="@+id/field2"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:background="@color/white"
+            app:layout_constraintTop_toBottomOf="@id/field1"
+            app:liu_hint="请输入持卡人姓名"
+            app:liu_insert_hint="获取验证码"
+            app:liu_is_divider="false"
+            app:liu_is_insert="true"
+            app:liu_is_required="true"
+            app:liu_title="手机号码" />
+
+
+    </com.liudonghan.view.radius.ADConstraintLayout>
+
 
 </LinearLayout>

@@ -57,19 +57,28 @@
 
     <com.liudonghan.view.radius.ADButton
         android:id="@+id/view_field_btn_go"
-        android:layout_width="75dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="10dp"
         android:background="@color/color_eeeeee"
         android:gravity="center"
+        android:paddingLeft="18dp"
         android:paddingTop="7dp"
+        android:paddingRight="18dp"
         android:paddingBottom="7dp"
-        android:text="获取验证码"
+        android:text="获取"
         android:textColor="@color/color_505257"
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:liu_round_corner="75dp" />
+        app:liu_round_corner="4dp" />
+
+    <View
+        android:id="@+id/view_field_view_divider"
+        android:layout_width="match_parent"
+        android:layout_height="0.67dp"
+        android:background="@color/color_ebebeb"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,10 +1,9 @@
 package com.liudonghan.view.field;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
-import android.text.InputType;
+import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -13,6 +12,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.liudonghan.view.R;
 import com.liudonghan.view.helper.ViewAttr;
@@ -33,9 +33,12 @@ public class ADFieldTextLayout extends ADConstraintLayout implements ViewAttr {
     private TextView textViewRequired, textViewTitle;
     private EditText editTextContent;
     private ADButton buttonGo;
+    private View viewDivider;
     private ViewHelper viewHelper;
-    private boolean isRequired, isInsert;
-    private String titleDesc, editHint;
+    private boolean isRequired, isInsert, isDivider;
+    private String titleDesc, editHint, insertHint;
+    private int dividerMargin, dividerBgColor, dividerHeight, insertRadius, insertHintColor, insertBgColor;
+    private OnADFieldTextLayoutListener onADFieldTextLayoutListener;
 
     public ADFieldTextLayout(@NonNull Context context) {
         super(context, null);
@@ -51,21 +54,64 @@ public class ADFieldTextLayout extends ADConstraintLayout implements ViewAttr {
         textViewTitle = inflate.findViewById(R.id.view_field_tv_title);
         editTextContent = inflate.findViewById(R.id.view_field_edt_content);
         buttonGo = inflate.findViewById(R.id.view_field_btn_go);
+        viewDivider = inflate.findViewById(R.id.view_field_view_divider);
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.ADFieldTextLayout);
         isRequired = typedArray.getBoolean(R.styleable.ADFieldTextLayout_liu_is_required, false);
         isInsert = typedArray.getBoolean(R.styleable.ADFieldTextLayout_liu_is_insert, false);
+        isDivider = typedArray.getBoolean(R.styleable.ADFieldTextLayout_liu_is_divider, false);
         titleDesc = typedArray.getString(R.styleable.ADFieldTextLayout_liu_title);
         editHint = typedArray.getString(R.styleable.ADFieldTextLayout_liu_hint);
+        // 分割线
+        dividerMargin = typedArray.getDimensionPixelOffset(R.styleable.ADFieldTextLayout_liu_divider_margin, 0);
+        dividerBgColor = typedArray.getColor(R.styleable.ADFieldTextLayout_liu_divider_background_color, Color.parseColor("#ebebeb"));
+        dividerHeight = typedArray.getDimensionPixelOffset(R.styleable.ADFieldTextLayout_liu_divider_height, context.getResources().getDimensionPixelOffset(R.dimen.ad_0_67));
+        // 插入按钮
+        insertRadius = typedArray.getDimensionPixelOffset(R.styleable.ADFieldTextLayout_liu_insert_radius, context.getResources().getDimensionPixelOffset(R.dimen.dp_4));
+        insertHint = typedArray.getString(R.styleable.ADFieldTextLayout_liu_insert_hint);
+        insertHintColor = typedArray.getColor(R.styleable.ADFieldTextLayout_liu_insert_hint_color, Color.parseColor("#505257"));
+        insertBgColor = typedArray.getColor(R.styleable.ADFieldTextLayout_liu_insert_background_color, Color.parseColor("#eeeeee"));
         typedArray.recycle();
         viewTypedArray.recycle();
         initField(context);
+        initDivider(context);
+        initListener();
+        initInsert(context);
+    }
+
+    private void initInsert(Context context) {
+        buttonGo.setVisibility(isInsert ? VISIBLE : GONE);
+        buttonGo.setRadius(insertRadius);
+        buttonGo.setText(insertHint);
+        buttonGo.setTextColor(insertHintColor);
+        buttonGo.setBackgroundColor(insertBgColor);
+        buttonGo.setPadding(
+                context.getResources().getDimensionPixelOffset(buttonGo.getText().toString().trim().length() < 4 ? R.dimen.dip_18 : R.dimen.dip_12),
+                context.getResources().getDimensionPixelOffset(R.dimen.dip_7),
+                context.getResources().getDimensionPixelOffset(buttonGo.getText().toString().trim().length() < 4 ? R.dimen.dip_18 : R.dimen.dip_12),
+                context.getResources().getDimensionPixelOffset(R.dimen.dip_7));
+
     }
 
     private void initField(Context context) {
         textViewRequired.setVisibility(isRequired ? VISIBLE : INVISIBLE);
-        buttonGo.setVisibility(isInsert ? VISIBLE : GONE);
         editTextContent.setHint(editHint);
         textViewTitle.setText(titleDesc);
+    }
+
+    private void initDivider(Context context) {
+        viewDivider.setVisibility(isDivider ? VISIBLE : GONE);
+        viewDivider.setBackgroundColor(dividerBgColor);
+        ConstraintLayout.LayoutParams layoutParams = (LayoutParams) viewDivider.getLayoutParams();
+        layoutParams.leftMargin = dividerMargin;
+        layoutParams.height = dividerHeight;
+    }
+
+    private void initListener() {
+        buttonGo.setOnClickListener(v -> {
+            if (null != onADFieldTextLayoutListener) {
+                onADFieldTextLayoutListener.onField(v, textViewTitle.getText().toString().trim());
+            }
+        });
     }
 
 
@@ -211,5 +257,20 @@ public class ADFieldTextLayout extends ADConstraintLayout implements ViewAttr {
             refreshDrawableState();
         }
         return super.dispatchTouchEvent(ev);
+    }
+
+    public void setOnADFieldTextLayoutListener(OnADFieldTextLayoutListener onADFieldTextLayoutListener) {
+        this.onADFieldTextLayoutListener = onADFieldTextLayoutListener;
+    }
+
+    public interface OnADFieldTextLayoutListener {
+
+        /**
+         * 数据框点击
+         *
+         * @param view  view组件
+         * @param title field标题
+         */
+        void onField(View view, String title);
     }
 }

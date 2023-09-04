@@ -4,4 +4,7 @@
     <dimen name="ad_0_67">0.67dp</dimen>
     <dimen name="dip_288">288dp</dimen>
     <dimen name="dip_568">568dp</dimen>
+    <dimen name="dip_18">18dp</dimen>
+    <dimen name="dip_7">7dp</dimen>
+    <dimen name="dip_12">12dp</dimen>
 </resources>
