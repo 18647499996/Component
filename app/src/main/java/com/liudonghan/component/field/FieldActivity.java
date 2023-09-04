@@ -83,10 +83,4 @@ public class FieldActivity extends ADBaseActivity<FieldPresenter> implements Fie
         Log.i("Mac_Liu", "点击按钮：" + title);
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
 }

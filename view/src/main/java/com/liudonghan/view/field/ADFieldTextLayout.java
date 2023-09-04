@@ -156,6 +156,10 @@ public class ADFieldTextLayout extends ADConstraintLayout implements ViewAttr {
         return editTextContent;
     }
 
+    public ADButton getButtonGo() {
+        return buttonGo;
+    }
+
     @Override
     public void setClipBackground(boolean clipBackground) {
         viewHelper.mClipBackground = clipBackground;
