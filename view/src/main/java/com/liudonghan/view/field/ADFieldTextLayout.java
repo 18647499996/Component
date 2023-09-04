@@ -5,6 +5,7 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
@@ -37,7 +38,8 @@ public class ADFieldTextLayout extends ADConstraintLayout implements ViewAttr {
     private ViewHelper viewHelper;
     private boolean isRequired, isInsert, isDivider;
     private String titleDesc, editHint, insertHint;
-    private int dividerMargin, dividerBgColor, dividerHeight, insertRadius, insertHintColor, insertBgColor;
+    private int dividerMargin, dividerBgColor, dividerHeight, insertRadius, insertHintColor, insertBgColor, centerColor, centerHintColor, titleColor;
+    private float titleSize, centerSize;
     private OnADFieldTextLayoutListener onADFieldTextLayoutListener;
 
     public ADFieldTextLayout(@NonNull Context context) {
@@ -59,8 +61,15 @@ public class ADFieldTextLayout extends ADConstraintLayout implements ViewAttr {
         isRequired = typedArray.getBoolean(R.styleable.ADFieldTextLayout_liu_is_required, false);
         isInsert = typedArray.getBoolean(R.styleable.ADFieldTextLayout_liu_is_insert, false);
         isDivider = typedArray.getBoolean(R.styleable.ADFieldTextLayout_liu_is_divider, false);
-        titleDesc = typedArray.getString(R.styleable.ADFieldTextLayout_liu_title);
+        // 输入框
         editHint = typedArray.getString(R.styleable.ADFieldTextLayout_liu_hint);
+        centerColor = typedArray.getColor(R.styleable.ADFieldTextLayout_liu_center_color, Color.parseColor("#333333"));
+        centerHintColor = typedArray.getColor(R.styleable.ADFieldTextLayout_liu_center_hint_color, Color.parseColor("#cccccc"));
+        centerSize = typedArray.getDimensionPixelSize(R.styleable.ADFieldTextLayout_liu_center_size, context.getResources().getDimensionPixelOffset(R.dimen.dip_13));
+        // 左侧标签
+        titleDesc = typedArray.getString(R.styleable.ADFieldTextLayout_liu_title);
+        titleColor = typedArray.getColor(R.styleable.ADFieldTextLayout_liu_title_color, Color.parseColor("#333333"));
+        titleSize = typedArray.getDimensionPixelSize(R.styleable.ADFieldTextLayout_liu_title_size, context.getResources().getDimensionPixelOffset(R.dimen.dip_13));
         // 分割线
         dividerMargin = typedArray.getDimensionPixelOffset(R.styleable.ADFieldTextLayout_liu_divider_margin, 0);
         dividerBgColor = typedArray.getColor(R.styleable.ADFieldTextLayout_liu_divider_background_color, Color.parseColor("#ebebeb"));
@@ -78,6 +87,11 @@ public class ADFieldTextLayout extends ADConstraintLayout implements ViewAttr {
         initInsert(context);
     }
 
+    /**
+     * todo 初始化右侧按钮
+     *
+     * @param context 上下文
+     */
     private void initInsert(Context context) {
         buttonGo.setVisibility(isInsert ? VISIBLE : GONE);
         buttonGo.setRadius(insertRadius);
@@ -92,12 +106,27 @@ public class ADFieldTextLayout extends ADConstraintLayout implements ViewAttr {
 
     }
 
+    /**
+     * todo 初始化
+     *
+     * @param context 上下文
+     */
     private void initField(Context context) {
         textViewRequired.setVisibility(isRequired ? VISIBLE : INVISIBLE);
-        editTextContent.setHint(editHint);
         textViewTitle.setText(titleDesc);
+        textViewTitle.setTextColor(titleColor);
+        textViewTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, titleSize);
+        editTextContent.setHint(editHint);
+        editTextContent.setTextSize(TypedValue.COMPLEX_UNIT_PX, centerSize);
+        editTextContent.setTextColor(centerColor);
+        editTextContent.setHintTextColor(centerHintColor);
     }
 
+    /**
+     * todo 初始化分割线
+     *
+     * @param context 上下文
+     */
     private void initDivider(Context context) {
         viewDivider.setVisibility(isDivider ? VISIBLE : GONE);
         viewDivider.setBackgroundColor(dividerBgColor);

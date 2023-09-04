@@ -25,6 +25,7 @@
             android:layout_height="52dp"
             app:liu_hint="请输入持卡人姓名"
             app:liu_is_divider="true"
+            app:liu_title_color="@color/color_7c7c7c"
             app:liu_is_required="true"
             app:liu_title="持卡人证件号" />
 

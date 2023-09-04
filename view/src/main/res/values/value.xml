@@ -219,8 +219,12 @@
         <attr name="liu_insert_radius" format="dimension" />
         <attr name="liu_insert_hint" format="string" />
         <attr name="liu_insert_hint_color" format="color" />
-        <attr name="liu_insert_background_color" format="color"/>
-
+        <attr name="liu_insert_background_color" format="color" />
+        <attr name="liu_title_size" format="dimension" />
+        <attr name="liu_center_size" format="dimension" />
+        <attr name="liu_center_color" format="color" />
+        <attr name="liu_center_hint_color" format="color" />
+        <attr name="liu_title_color" format="color" />
     </declare-styleable>
 
     <bool name="sb__is_swipeable">false</bool>
