@@ -8,6 +8,7 @@ import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -36,11 +37,12 @@ public class ADFieldTextLayout extends ADConstraintLayout implements ViewAttr {
     private ADButton buttonGo;
     private View viewDivider;
     private ViewHelper viewHelper;
-    private boolean isRequired, isInsert, isDivider;
+    private boolean isRequired, isInsert, isDivider, isFocusable;
     private String titleDesc, editHint, insertHint;
     private int dividerMargin, dividerBgColor, dividerHeight, insertRadius, insertHintColor, insertBgColor, centerColor, centerHintColor, titleColor;
     private float titleSize, centerSize;
     private OnADFieldTextLayoutListener onADFieldTextLayoutListener;
+    private InputType inputType;
 
     public ADFieldTextLayout(@NonNull Context context) {
         super(context, null);
@@ -66,6 +68,8 @@ public class ADFieldTextLayout extends ADConstraintLayout implements ViewAttr {
         centerColor = typedArray.getColor(R.styleable.ADFieldTextLayout_liu_center_color, Color.parseColor("#333333"));
         centerHintColor = typedArray.getColor(R.styleable.ADFieldTextLayout_liu_center_hint_color, Color.parseColor("#cccccc"));
         centerSize = typedArray.getDimensionPixelSize(R.styleable.ADFieldTextLayout_liu_center_size, context.getResources().getDimensionPixelOffset(R.dimen.dip_13));
+        inputType = InputType.fromInt(typedArray.getInt(R.styleable.ADFieldTextLayout_liu_input_type, InputType.Text.getId()));
+        isFocusable = typedArray.getBoolean(R.styleable.ADFieldTextLayout_liu_is_focusable, true);
         // 左侧标签
         titleDesc = typedArray.getString(R.styleable.ADFieldTextLayout_liu_title);
         titleColor = typedArray.getColor(R.styleable.ADFieldTextLayout_liu_title_color, Color.parseColor("#333333"));
@@ -120,6 +124,24 @@ public class ADFieldTextLayout extends ADConstraintLayout implements ViewAttr {
         editTextContent.setTextSize(TypedValue.COMPLEX_UNIT_PX, centerSize);
         editTextContent.setTextColor(centerColor);
         editTextContent.setHintTextColor(centerHintColor);
+        editTextContent.setFocusable(isFocusable);
+        switch (inputType) {
+            case Text:
+                editTextContent.setInputType(EditorInfo.TYPE_CLASS_TEXT);
+                break;
+            case Number:
+                editTextContent.setInputType(EditorInfo.TYPE_CLASS_NUMBER);
+                break;
+            case Phone:
+                editTextContent.setInputType(EditorInfo.TYPE_CLASS_PHONE);
+                break;
+            case Decimal:
+                editTextContent.setInputType(EditorInfo.TYPE_CLASS_NUMBER | EditorInfo.TYPE_NUMBER_FLAG_DECIMAL);
+                break;
+            case Empty:
+                editTextContent.setInputType(EditorInfo.TYPE_NULL);
+                break;
+        }
     }
 
     /**
@@ -305,5 +327,40 @@ public class ADFieldTextLayout extends ADConstraintLayout implements ViewAttr {
          * @param title field标题
          */
         void onField(View view, String title);
+    }
+
+    public enum InputType {
+        Text(1),
+        Number(2),
+        Phone(3),
+        Decimal(4),
+        Empty(5);
+
+        private int id;
+
+        InputType(int id) {
+            this.id = id;
+        }
+
+        public int getId() {
+            return id;
+        }
+
+        public static InputType fromInt(int value) {
+            switch (value) {
+                case 1:
+                    return Text;
+                case 2:
+                    return Number;
+                case 3:
+                    return Phone;
+                case 4:
+                    return Decimal;
+                case 5:
+                    return Empty;
+                default:
+                    throw new Error("Invalid SourceType");
+            }
+        }
     }
 }
