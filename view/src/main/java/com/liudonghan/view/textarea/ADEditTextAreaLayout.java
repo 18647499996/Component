@@ -86,10 +86,14 @@ public class ADEditTextAreaLayout extends ADConstraintLayout implements TextWatc
         if (s.length() > maxLength) {
             editText.setText(s.subSequence(0, maxLength));
             Selection.setSelection(editText.getText(), maxLength);
-            onADEditTextAreaLayoutListener.onExceed(s);
+            if (null != onADEditTextAreaLayoutListener) {
+                onADEditTextAreaLayoutListener.onExceed(s);
+            }
         } else {
             textView.setText(editText.getText().toString().trim().length() + "/" + maxLength + " " + (TextUtils.isEmpty(hintLast) ? "字" : hintLast));
-            onADEditTextAreaLayoutListener.onAfter(s);
+            if (null != onADEditTextAreaLayoutListener) {
+                onADEditTextAreaLayoutListener.onAfter(s);
+            }
         }
     }
 
