@@ -97,6 +97,18 @@ public class ADEditTextAreaLayout extends ADConstraintLayout implements TextWatc
         this.onADEditTextAreaLayoutListener = onADEditTextAreaLayoutListener;
     }
 
+    public EditText getEditText() {
+        return editText;
+    }
+
+    public TextView getTextView() {
+        return textView;
+    }
+
+    public String getContent() {
+        return editText.getText().toString().trim();
+    }
+
     public interface OnADEditTextAreaLayoutListener {
 
         /**
