@@ -30,13 +30,12 @@ import java.util.Arrays;
  * @author Created by: Li_Min
  * Time:9/1/23
  */
-public class ADFieldTextLayout extends ADConstraintLayout implements ViewAttr {
+public class ADFieldTextLayout extends ADConstraintLayout {
 
     private TextView textViewRequired, textViewTitle;
     private EditText editTextContent;
     private ADButton buttonGo;
     private View viewDivider;
-    private ViewHelper viewHelper;
     private boolean isRequired, isInsert, isDivider, isFocusable;
     private String titleDesc, editHint, insertHint;
     private int dividerMargin, dividerBgColor, dividerHeight, insertRadius, insertHintColor, insertBgColor, centerColor, centerHintColor, titleColor;
@@ -51,8 +50,6 @@ public class ADFieldTextLayout extends ADConstraintLayout implements ViewAttr {
 
     public ADFieldTextLayout(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        viewHelper = new ViewHelper();
-        TypedArray viewTypedArray = viewHelper.initAttrs(context, attrs);
         View inflate = View.inflate(context, R.layout.ad_field_group, this);
         textViewRequired = inflate.findViewById(R.id.view_field_tv_required);
         textViewTitle = inflate.findViewById(R.id.view_field_tv_title);
@@ -84,7 +81,6 @@ public class ADFieldTextLayout extends ADConstraintLayout implements ViewAttr {
         insertHintColor = typedArray.getColor(R.styleable.ADFieldTextLayout_liu_insert_hint_color, Color.parseColor("#505257"));
         insertBgColor = typedArray.getColor(R.styleable.ADFieldTextLayout_liu_insert_background_color, Color.parseColor("#eeeeee"));
         typedArray.recycle();
-        viewTypedArray.recycle();
         initField(context);
         initDivider(context);
         initListener();
@@ -180,138 +176,6 @@ public class ADFieldTextLayout extends ADConstraintLayout implements ViewAttr {
 
     public ADButton getButtonGo() {
         return buttonGo;
-    }
-
-    @Override
-    public void setClipBackground(boolean clipBackground) {
-        viewHelper.mClipBackground = clipBackground;
-        invalidate();
-    }
-
-    @Override
-    public void setRoundAsCircle(boolean roundAsCircle) {
-        viewHelper.mRoundAsCircle = roundAsCircle;
-    }
-
-    @Override
-    public void setRadius(int radius) {
-        Arrays.fill(viewHelper.radii, radius);
-        invalidate();
-    }
-
-    public void setTopLeftRadius(int topLeftRadius) {
-        viewHelper.radii[0] = topLeftRadius;
-        viewHelper.radii[1] = topLeftRadius;
-        invalidate();
-    }
-
-    public void setTopRightRadius(int topRightRadius) {
-        viewHelper.radii[2] = topRightRadius;
-        viewHelper.radii[3] = topRightRadius;
-        invalidate();
-    }
-
-    public void setBottomLeftRadius(int bottomLeftRadius) {
-        viewHelper.radii[6] = bottomLeftRadius;
-        viewHelper.radii[7] = bottomLeftRadius;
-        invalidate();
-    }
-
-    public void setBottomRightRadius(int bottomRightRadius) {
-        viewHelper.radii[4] = bottomRightRadius;
-        viewHelper.radii[5] = bottomRightRadius;
-        invalidate();
-    }
-
-    public void setStrokeWidth(int strokeWidth) {
-        viewHelper.mStrokeWidth = strokeWidth;
-        invalidate();
-    }
-
-    public void setStrokeColor(int strokeColor) {
-        viewHelper.mStrokeColor = strokeColor;
-        invalidate();
-    }
-
-    public boolean isClipBackground() {
-        return viewHelper.mClipBackground;
-    }
-
-    public boolean isRoundAsCircle() {
-        return viewHelper.mRoundAsCircle;
-    }
-
-    public float getTopLeftRadius() {
-        return viewHelper.radii[0];
-    }
-
-    public float getTopRightRadius() {
-        return viewHelper.radii[2];
-    }
-
-    public float getBottomLeftRadius() {
-        return viewHelper.radii[4];
-    }
-
-    public float getBottomRightRadius() {
-        return viewHelper.radii[6];
-    }
-
-    public int getStrokeWidth() {
-        return viewHelper.mStrokeWidth;
-    }
-
-    public int getStrokeColor() {
-        return viewHelper.mStrokeColor;
-    }
-
-    @Override
-    public void invalidate() {
-        if (null != viewHelper) {
-            viewHelper.refreshRegion(this);
-        }
-        super.invalidate();
-    }
-
-    @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        super.onSizeChanged(w, h, oldw, oldh);
-        viewHelper.onSizeChanged(this, w, h);
-    }
-
-    @Override
-    public void draw(Canvas canvas) {
-        if (viewHelper.mClipBackground) {
-            canvas.save();
-            canvas.clipPath(viewHelper.mClipPath);
-            super.draw(canvas);
-            canvas.restore();
-        } else {
-            super.draw(canvas);
-        }
-    }
-
-    @Override
-    protected void onDraw(Canvas canvas) {
-        canvas.saveLayer(viewHelper.mLayer, null, Canvas.ALL_SAVE_FLAG);
-        super.onDraw(canvas);
-        viewHelper.onClipDraw(canvas);
-        canvas.restore();
-    }
-
-    @Override
-    public boolean dispatchTouchEvent(MotionEvent ev) {
-        int action = ev.getAction();
-        if (action == MotionEvent.ACTION_DOWN && !viewHelper.mAreaRegion.contains((int) ev.getX(), (int) ev.getY())) {
-            return false;
-        }
-        if (action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_UP) {
-            refreshDrawableState();
-        } else if (action == MotionEvent.ACTION_CANCEL) {
-            setPressed(false);
-            refreshDrawableState();
-        }
-        return super.dispatchTouchEvent(ev);
     }
 
     public void setOnADFieldTextLayoutListener(OnADFieldTextLayoutListener onADFieldTextLayoutListener) {
