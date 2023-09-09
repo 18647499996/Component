@@ -92,7 +92,7 @@ public class ADCalendarHelp {
             int month = calendar.get(Calendar.MONTH) + 1;
             // 日
             int day = calendar.get(Calendar.DATE);
-            // todo 星期（ 当月第一天 ）
+            // 星期（ 当月第一天 ）
             int week = findDateByWeek(year, month, 1);
             // 最大天数（ 当月 ）
             int maxDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
@@ -106,7 +106,8 @@ public class ADCalendarHelp {
                 ADCalendarEntity.Day dayEntity = new ADCalendarEntity.Day();
                 dayEntity.setDay(j);
                 dayEntity.setDescribe(year + "年" + month + "月" + formatDayDesc(j) + "日");
-                dayEntity.setEnable(getCurrentYear() != year || (getCurrentMonth() != month || sort ? (j >= day) : (j <= day)));
+//                dayEntity.setEnable(getCurrentYear() != year || (getCurrentMonth() != month || sort ? (j >= day) : (j <= day)));
+                dayEntity.setEnable(sort ? getTimeInMillis(getCurrentYear(), getCurrentMonth(), getCurrentDay()) <= getTimeInMillis(year, month, j) : getTimeInMillis(getCurrentYear(), getCurrentMonth(), getCurrentDay()) >= getTimeInMillis(year, month, j));
                 dayEntity.setLunarMonth(ChineseLunarHelp.getInstance().getLunarMonth(year, month, j));
                 dayEntity.setLunarDay(ChineseLunarHelp.getInstance().getLunarDay(year, month, j));
                 dayEntity.setSolarTerm(ChineseLunarHelp.getInstance().getSolarTerms(year, month, j));
@@ -184,6 +185,15 @@ public class ADCalendarHelp {
     }
 
     /**
+     * todo 获取当前日期
+     *
+     * @return getCurrentDay
+     */
+    public int getCurrentDay() {
+        return Calendar.getInstance().get(Calendar.DATE);
+    }
+
+    /**
      * todo 获取当前年份
      *
      * @return int
@@ -202,7 +212,6 @@ public class ADCalendarHelp {
      */
     @SuppressLint("NewApi")
     public int findDateByWeek(int year, int month, int day) {
-        // todo 这里有个任务待完成（ 获取每个月第一天 ）
         @SuppressLint("SimpleDateFormat") SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Calendar c = Calendar.getInstance();
         try {
