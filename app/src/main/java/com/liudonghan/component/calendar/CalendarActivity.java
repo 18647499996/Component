@@ -1,6 +1,7 @@
 package com.liudonghan.component.calendar;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 
@@ -12,6 +13,7 @@ import com.liudonghan.view.snackbar.ADSnackBarManager;
 import com.liudonghan.view.title.ADTitleBuilder;
 
 import java.util.List;
+import java.util.Objects;
 
 import butterknife.BindView;
 

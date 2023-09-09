@@ -6,6 +6,7 @@ import com.liudonghan.mvp.ADBaseSubscription;
 import com.liudonghan.view.calendar.ADCalendarEntity;
 import com.liudonghan.view.calendar.ADCalendarHelp;
 
+import java.util.Calendar;
 import java.util.List;
 
 import rx.Observable;
@@ -35,7 +36,7 @@ public class CalendarPresenter extends ADBaseSubscription<CalendarContract.View>
     public void getCalendarList() {
         Observable.unsafeCreate((Observable.OnSubscribe<List<ADCalendarEntity>>) subscriber -> {
             subscriber.onStart();
-            subscriber.onNext(ADCalendarHelp.getInstance().getCalendarList());
+            subscriber.onNext(ADCalendarHelp.getInstance().getCalendarList(Calendar.getInstance().getTime(), false));
         })
                 .unsubscribeOn(Schedulers.io())
                 .subscribeOn(Schedulers.io())
