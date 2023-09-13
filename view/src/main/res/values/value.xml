@@ -242,6 +242,7 @@
         <attr name="liu_edit_text_size" format="dimension" />
         <attr name="liu_hint_color" format="color" />
         <attr name="liu_hint_text_size" format="dimension" />
+        <attr name="liu_edit_hint" format="string" />
         <attr name="liu_last" format="string" />
     </declare-styleable>
 

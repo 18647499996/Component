@@ -64,13 +64,13 @@ public class ADFieldTextLayout extends ADConstraintLayout {
         editHint = typedArray.getString(R.styleable.ADFieldTextLayout_liu_hint);
         centerColor = typedArray.getColor(R.styleable.ADFieldTextLayout_liu_center_color, Color.parseColor("#333333"));
         centerHintColor = typedArray.getColor(R.styleable.ADFieldTextLayout_liu_center_hint_color, Color.parseColor("#cccccc"));
-        centerSize = typedArray.getDimensionPixelSize(R.styleable.ADFieldTextLayout_liu_center_size, context.getResources().getDimensionPixelOffset(R.dimen.dip_13));
+        centerSize = typedArray.getDimensionPixelSize(R.styleable.ADFieldTextLayout_liu_center_size, context.getResources().getDimensionPixelOffset(R.dimen.dip_12));
         inputType = InputType.fromInt(typedArray.getInt(R.styleable.ADFieldTextLayout_liu_input_type, InputType.Text.getId()));
         isFocusable = typedArray.getBoolean(R.styleable.ADFieldTextLayout_liu_is_focusable, true);
         // 左侧标签
         titleDesc = typedArray.getString(R.styleable.ADFieldTextLayout_liu_title);
         titleColor = typedArray.getColor(R.styleable.ADFieldTextLayout_liu_title_color, Color.parseColor("#333333"));
-        titleSize = typedArray.getDimensionPixelSize(R.styleable.ADFieldTextLayout_liu_title_size, context.getResources().getDimensionPixelOffset(R.dimen.dip_13));
+        titleSize = typedArray.getDimensionPixelSize(R.styleable.ADFieldTextLayout_liu_title_size, context.getResources().getDimensionPixelOffset(R.dimen.dip_12));
         // 分割线
         dividerMargin = typedArray.getDimensionPixelOffset(R.styleable.ADFieldTextLayout_liu_divider_margin, 0);
         dividerBgColor = typedArray.getColor(R.styleable.ADFieldTextLayout_liu_divider_background_color, Color.parseColor("#ebebeb"));
