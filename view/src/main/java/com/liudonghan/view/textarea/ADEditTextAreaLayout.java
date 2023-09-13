@@ -31,7 +31,7 @@ public class ADEditTextAreaLayout extends ADConstraintLayout implements TextWatc
     private EditText editText;
     private TextView textView;
     private int maxLength, editColor, editHintColor, editTextSize, hintColor, hintTextSize;
-    private String hintLast,editHint;
+    private String hintLast, editHint;
     private OnADEditTextAreaLayoutListener onADEditTextAreaLayoutListener;
 
     public ADEditTextAreaLayout(Context context) {
@@ -66,7 +66,7 @@ public class ADEditTextAreaLayout extends ADConstraintLayout implements TextWatc
         editText.setTextColor(editColor);
         editText.setTextSize(TypedValue.COMPLEX_UNIT_PX, editTextSize);
         editText.setHintTextColor(editHintColor);
-        editText.setHint(editHint);
+        editText.setHint(TextUtils.isEmpty(editHint) ? "请输入" : editHint);
         textView.setTextColor(hintColor);
         textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, hintTextSize);
         textView.setText("0/" + maxLength + " " + (TextUtils.isEmpty(hintLast) ? "字" : hintLast));
