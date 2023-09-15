@@ -231,8 +231,26 @@
 
 
     <com.liudonghan.view.radius.ADButton
+        android:id="@+id/ad_calendar_btn_clear"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="重置"
+        android:textColor="@color/color_333333"
+        android:textSize="14sp"
+        app:liu_stroke_width="0.67dp"
+        app:liu_stroke_color="@color/color_7c7c7c"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:liu_round_corner="5dp" />
+
+    <com.liudonghan.view.radius.ADButton
         android:id="@+id/ad_calendar_btn_submit"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="2dp"
@@ -245,6 +263,8 @@
         android:textColor="#fff"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/ad_calendar_btn_clear"
+        app:layout_constraintRight_toRightOf="parent"
         app:liu_round_corner="5dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

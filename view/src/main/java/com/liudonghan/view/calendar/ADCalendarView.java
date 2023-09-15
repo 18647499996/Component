@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.ViewSwitcher;
 
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.progressindicator.CircularProgressIndicator;
@@ -33,7 +32,7 @@ public class ADCalendarView extends ADConstraintLayout implements CalendarAdapte
     private CircularProgressIndicator circularProgressIndicator;
     private ViewSwitcher viewSwitcher;
     private TextView textViewStartHint, textViewStartDate, textViewStartWeek, textViewEndHint, textViewEndDate, textViewEndWeek, textViewDayCount;
-    private ADButton buttonSubmit;
+    private ADButton buttonSubmit,buttonClear;
     private ADCalendarEntity.Day startDay, endDay;
     private OnADCalendarViewListener onADCalendarViewListener;
 
@@ -53,6 +52,7 @@ public class ADCalendarView extends ADConstraintLayout implements CalendarAdapte
         textViewEndWeek = inflate.findViewById(R.id.ad_calendar_tv_end_week);
         textViewDayCount = inflate.findViewById(R.id.ad_calendar_tv_day_count);
         buttonSubmit = inflate.findViewById(R.id.ad_calendar_btn_submit);
+        buttonClear = inflate.findViewById(R.id.ad_calendar_btn_clear);
         initData();
         initView();
     }
@@ -87,6 +87,12 @@ public class ADCalendarView extends ADConstraintLayout implements CalendarAdapte
                 return;
             }
             onADCalendarViewListener.onCalendarPickData(startDay, endDay);
+        });
+        buttonClear.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                reset();
+            }
         });
     }
 
