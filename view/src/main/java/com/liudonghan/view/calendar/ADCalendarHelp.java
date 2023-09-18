@@ -104,6 +104,8 @@ public class ADCalendarHelp {
             // 获取天数（ 当月 ）
             for (int j = 1; j <= maxDay; j++) {
                 ADCalendarEntity.Day dayEntity = new ADCalendarEntity.Day();
+                dayEntity.setYear(year);
+                dayEntity.setMonth(month);
                 dayEntity.setDay(j);
                 dayEntity.setDescribe(year + "年" + month + "月" + formatDayDesc(j) + "日");
 //                dayEntity.setEnable(getCurrentYear() != year || (getCurrentMonth() != month || sort ? (j >= day) : (j <= day)));

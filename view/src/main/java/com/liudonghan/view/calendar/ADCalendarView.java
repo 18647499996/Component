@@ -32,7 +32,7 @@ public class ADCalendarView extends ADConstraintLayout implements CalendarAdapte
     private CircularProgressIndicator circularProgressIndicator;
     private ViewSwitcher viewSwitcher;
     private TextView textViewStartHint, textViewStartDate, textViewStartWeek, textViewEndHint, textViewEndDate, textViewEndWeek, textViewDayCount;
-    private ADButton buttonSubmit,buttonClear;
+    private ADButton buttonSubmit, buttonClear;
     private ADCalendarEntity.Day startDay, endDay;
     private OnADCalendarViewListener onADCalendarViewListener;
 
@@ -92,6 +92,7 @@ public class ADCalendarView extends ADConstraintLayout implements CalendarAdapte
             @Override
             public void onClick(View v) {
                 reset();
+                onADCalendarViewListener.onResetPicData();
             }
         });
     }
@@ -212,6 +213,53 @@ public class ADCalendarView extends ADConstraintLayout implements CalendarAdapte
         }
     }
 
+    /**
+     * 设置默认时间
+     *
+     * @param startDay
+     * @param endDay
+     */
+    @SuppressLint("SetTextI18n")
+    public void setDefaultDay(ADCalendarEntity.Day startDay, ADCalendarEntity.Day endDay) {
+        this.startDay = startDay;
+        this.endDay = endDay;
+        textViewStartDate.setText(startDay.getMonth() + "月" + startDay.getDay() + "日");
+        textViewStartWeek.setText(startDay.getWeekDesc());
+
+        textViewEndDate.setText(endDay.getMonth() + "月" + endDay.getDay() + "日");
+        textViewEndWeek.setText(endDay.getWeekDesc());
+
+        textViewDayCount.setText("共" + ADCalendarHelp.getInstance().getDifferDay(endDay.getTimeInMillis(), startDay.getTimeInMillis()) + "天");
+
+        buttonSubmit.setAlpha((float) 1.0);
+        textViewStartHint.setVisibility(VISIBLE);
+        textViewStartWeek.setVisibility(VISIBLE);
+        textViewEndWeek.setVisibility(VISIBLE);
+        textViewEndHint.setVisibility(VISIBLE);
+
+
+        List<ADCalendarEntity> data = calendarAdapter.getData();
+        for (int i = 0; i < data.size(); i++) {
+            if (startDay.getYear() == data.get(i).getYear() && startDay.getMonth() == data.get(i).getMonth()) {
+                for (int j = 0; j < data.get(i).getDayList().size(); j++) {
+                    if (startDay.getTimeInMillis() == data.get(i).getDayList().get(j).getTimeInMillis()) {
+                        data.get(i).getDayList().get(j).setSelector(true);
+                        calendarAdapter.setStartDate(data.get(i).getDayList().get(j).getTimeInMillis());
+                    }
+                }
+            }
+            if (endDay.getYear() == data.get(i).getYear() && endDay.getMonth() == data.get(i).getMonth()) {
+                for (int j = 0; j < data.get(i).getDayList().size(); j++) {
+                    if (endDay.getTimeInMillis() == data.get(i).getDayList().get(j).getTimeInMillis()) {
+                        data.get(i).getDayList().get(j).setSelector(true);
+                        calendarAdapter.setEndDate(data.get(i).getDayList().get(j).getTimeInMillis());
+                    }
+                }
+            }
+        }
+        calendarAdapter.notifyDataSetChanged();
+    }
+
     public void setOnADCalendarViewListener(OnADCalendarViewListener onADCalendarViewListener) {
         this.onADCalendarViewListener = onADCalendarViewListener;
     }
@@ -272,6 +320,7 @@ public class ADCalendarView extends ADConstraintLayout implements CalendarAdapte
         return endDay;
     }
 
+
     public interface OnADCalendarViewListener {
         /**
          * 选择日期数据
@@ -280,5 +329,10 @@ public class ADCalendarView extends ADConstraintLayout implements CalendarAdapte
          * @param end   结束时间
          */
         void onCalendarPickData(ADCalendarEntity.Day start, ADCalendarEntity.Day end);
+
+        /**
+         * 重置日期
+         */
+        void onResetPicData();
     }
 }

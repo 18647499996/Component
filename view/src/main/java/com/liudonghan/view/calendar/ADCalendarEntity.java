@@ -57,8 +57,13 @@ public class ADCalendarEntity {
     }
 
     public static class Day {
+        // todo 年
+        private int year;
+        // todo 月
+        private int month;
         // todo 日期
         private int day;
+
         // todo 是否可点击
         private boolean enable;
         // todo 是否选中
@@ -206,6 +211,22 @@ public class ADCalendarEntity {
 
         public void setDay(int day) {
             this.day = day;
+        }
+
+        public int getYear() {
+            return year;
+        }
+
+        public void setYear(int year) {
+            this.year = year;
+        }
+
+        public int getMonth() {
+            return month;
+        }
+
+        public void setMonth(int month) {
+            this.month = month;
         }
 
         @Override

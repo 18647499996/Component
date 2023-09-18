@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 
+import com.liudonghan.component.MainActivity;
 import com.liudonghan.component.R;
 import com.liudonghan.mvp.ADBaseActivity;
 import com.liudonghan.view.calendar.ADCalendarEntity;
@@ -76,10 +77,21 @@ public class CalendarActivity extends ADBaseActivity<CalendarPresenter> implemen
     @Override
     public void showCalendarList(List<ADCalendarEntity> adCalendarEntities) {
         activityCalendarCv.setData(adCalendarEntities);
+        if (null != MainActivity.startDay) {
+            activityCalendarCv.setDefaultDay(MainActivity.startDay, MainActivity.endDay);
+        }
     }
 
     @Override
     public void onCalendarPickData(ADCalendarEntity.Day start, ADCalendarEntity.Day end) {
         Log.i("Mac_Liu", start.getDescribe() + " - " + end.getDescribe());
+        MainActivity.startDay = start;
+        MainActivity.endDay = end;
+    }
+
+    @Override
+    public void onResetPicData() {
+        MainActivity.startDay = null;
+        MainActivity.endDay = null;
     }
 }

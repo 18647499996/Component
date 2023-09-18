@@ -19,11 +19,15 @@ import com.liudonghan.component.input.ADInputCodeActivity;
 import com.liudonghan.component.recyclerview.ADRecyclerViewActivity;
 import com.liudonghan.component.textview.ADTextViewActivity;
 import com.liudonghan.component.voicerecorder.ADVoiceRecorderButtonActivity;
+import com.liudonghan.view.calendar.ADCalendarEntity;
 import com.liudonghan.view.recycler.ADRecyclerView;
 
 import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity implements BaseQuickAdapter.OnItemClickListener {
+
+    public static ADCalendarEntity.Day startDay;
+    public static ADCalendarEntity.Day endDay;
 
     private String[] array = new String[]{
             "验证码输入框", "ADButton", "ADImageView", "ADCircleProgress",
