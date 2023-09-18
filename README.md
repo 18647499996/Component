@@ -1,3 +1,6 @@
-# Component
-公共组件库
-![ic_launcher](https://github.com/18647499996/Component/assets/39830642/9462bbfb-8d4b-4982-bbb6-b528d22d9c83)
+# Component android 常用组件库
+
+## 直接看效果图，建议下载demo体验，最下面有各个View的效果图
+
+
+
