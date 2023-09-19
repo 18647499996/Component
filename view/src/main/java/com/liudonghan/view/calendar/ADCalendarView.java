@@ -15,7 +15,6 @@ import com.liudonghan.view.R;
 import com.liudonghan.view.radius.ADButton;
 import com.liudonghan.view.radius.ADConstraintLayout;
 import com.liudonghan.view.recycler.ADRecyclerView;
-import com.liudonghan.view.snackbar.ADSnackBarManager;
 
 import java.util.List;
 
@@ -56,20 +55,13 @@ public class ADCalendarView extends ADConstraintLayout implements CalendarAdapte
         buttonSubmit = inflate.findViewById(R.id.ad_calendar_btn_submit);
         buttonClear = inflate.findViewById(R.id.ad_calendar_btn_clear);
         initData();
-        initView();
-    }
-
-    /**
-     * 初始化View
-     */
-    private void initView() {
-        buttonSubmit.setAlpha((float) 0.3);
     }
 
     /**
      * 初始化列表
      */
     private void initData() {
+        buttonSubmit.setAlpha((float) 0.3);
         calendarAdapter = new CalendarAdapter(R.layout.ad_item_calendar);
         recyclerView.setAdapter(calendarAdapter);
         // 缓存条目视图
@@ -101,7 +93,8 @@ public class ADCalendarView extends ADConstraintLayout implements CalendarAdapte
             public void onClick(View v) {
                 reset();
                 if (null != onADCalendarViewListener) {
-                    onADCalendarViewListener.onResetPicData();
+                    buttonSubmit.setAlpha((float) 0.3);
+                    onADCalendarViewListener.onResetPickDate();
                 }
             }
         });
@@ -351,7 +344,7 @@ public class ADCalendarView extends ADConstraintLayout implements CalendarAdapte
         /**
          * 重置日期
          */
-        void onResetPicData();
+        void onResetPickDate();
 
         /**
          * 异常处理

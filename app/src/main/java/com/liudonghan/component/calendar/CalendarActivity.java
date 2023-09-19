@@ -90,7 +90,7 @@ public class CalendarActivity extends ADBaseActivity<CalendarPresenter> implemen
     }
 
     @Override
-    public void onResetPicData() {
+    public void onResetPickDate() {
         MainActivity.startDay = null;
         MainActivity.endDay = null;
     }
