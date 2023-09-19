@@ -3,6 +3,7 @@ package com.liudonghan.view.calendar;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.ViewSwitcher;
@@ -26,6 +27,7 @@ import java.util.List;
  */
 public class ADCalendarView extends ADConstraintLayout implements CalendarAdapter.OnCalendarAdapterListener {
 
+    private static final String MAC_LIU = "Mac_Liu";
     private Context context;
     private ADRecyclerView recyclerView;
     private CalendarAdapter calendarAdapter;
@@ -79,20 +81,28 @@ public class ADCalendarView extends ADConstraintLayout implements CalendarAdapte
         calendarAdapter.setOnCalendarAdapterListener(this);
         buttonSubmit.setOnClickListener(v -> {
             if (null == startDay) {
-                ADSnackBarManager.getInstance().showWarn(context, "请选择开始日期");
+                if (null != onADCalendarViewListener) {
+                    onADCalendarViewListener.onError(1, "请选择开始日期");
+                }
                 return;
             }
             if (null == endDay) {
-                ADSnackBarManager.getInstance().showWarn(context, "请选择结束日期");
+                if (null != onADCalendarViewListener) {
+                    onADCalendarViewListener.onError(2, "请选择结束日期");
+                }
                 return;
             }
-            onADCalendarViewListener.onCalendarPickData(startDay, endDay);
+            if (null != onADCalendarViewListener) {
+                onADCalendarViewListener.onCalendarPickData(startDay, endDay);
+            }
         });
         buttonClear.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 reset();
-                onADCalendarViewListener.onResetPicData();
+                if (null != onADCalendarViewListener) {
+                    onADCalendarViewListener.onResetPicData();
+                }
             }
         });
     }
@@ -214,13 +224,21 @@ public class ADCalendarView extends ADConstraintLayout implements CalendarAdapte
     }
 
     /**
-     * 设置默认时间
+     * todo 设置默认日期
      *
-     * @param startDay
-     * @param endDay
+     * @param startDay 开始日期
+     * @param endDay   结束日期
      */
     @SuppressLint("SetTextI18n")
     public void setDefaultDay(ADCalendarEntity.Day startDay, ADCalendarEntity.Day endDay) {
+        if (null == startDay) {
+            Log.i(MAC_LIU, "start day error is not empty");
+            return;
+        }
+        if (null == endDay) {
+            Log.i(MAC_LIU, "end day error is not empty");
+            return;
+        }
         this.startDay = startDay;
         this.endDay = endDay;
         textViewStartDate.setText(startDay.getMonth() + "月" + startDay.getDay() + "日");
@@ -334,5 +352,13 @@ public class ADCalendarView extends ADConstraintLayout implements CalendarAdapte
          * 重置日期
          */
         void onResetPicData();
+
+        /**
+         * 异常处理
+         *
+         * @param errorCode 异常code
+         * @param errorMsg  异常信息
+         */
+        void onError(int errorCode, String errorMsg);
     }
 }

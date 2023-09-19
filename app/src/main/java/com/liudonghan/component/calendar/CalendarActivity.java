@@ -94,4 +94,9 @@ public class CalendarActivity extends ADBaseActivity<CalendarPresenter> implemen
         MainActivity.startDay = null;
         MainActivity.endDay = null;
     }
+
+    @Override
+    public void onError(int errorCode, String errorMsg) {
+
+    }
 }
