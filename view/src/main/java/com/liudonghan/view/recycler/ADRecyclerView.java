@@ -36,6 +36,7 @@ public class ADRecyclerView extends RecyclerView implements ViewAttr {
     private StaggeredGridLayoutManager staggeredGridLayoutManager;
     private CenterLayoutManager centerLayoutManager;
     private FlowLayoutManager flowLayoutManager;
+    private PagerLayoutManager pagerLayoutManager;
 
     public ADRecyclerView(@NonNull Context context) {
         super(context, null);
@@ -81,6 +82,10 @@ public class ADRecyclerView extends RecyclerView implements ViewAttr {
                 flowLayoutManager = new FlowLayoutManager();
                 setLayoutManager(flowLayoutManager);
                 break;
+            case PagerLayoutManager:
+                pagerLayoutManager = new PagerLayoutManager(context, orientation.getId());
+                setLayoutManager(pagerLayoutManager);
+                break;
         }
     }
 
@@ -102,6 +107,10 @@ public class ADRecyclerView extends RecyclerView implements ViewAttr {
 
     public FlowLayoutManager getFlowLayoutManager() {
         return flowLayoutManager;
+    }
+
+    public PagerLayoutManager getPagerLayoutManager() {
+        return pagerLayoutManager;
     }
 
     public enum Orientation {
@@ -140,7 +149,9 @@ public class ADRecyclerView extends RecyclerView implements ViewAttr {
         // todo 居中滑动
         CenterLayoutManager(4),
         // todo 流式排版
-        FlowLayoutManager(5);
+        FlowLayoutManager(5),
+        // todo 分页排版
+        PagerLayoutManager(6);
 
         private int id;
 
@@ -164,6 +175,8 @@ public class ADRecyclerView extends RecyclerView implements ViewAttr {
                     return CenterLayoutManager;
                 case 5:
                     return FlowLayoutManager;
+                case 6:
+                    return PagerLayoutManager;
                 default:
                     throw new Error("Invalid SourceType");
             }

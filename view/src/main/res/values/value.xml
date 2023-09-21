@@ -115,6 +115,7 @@
             <enum name="storage" value="3" />
             <enum name="center" value="4" />
             <enum name="flow" value="5" />
+            <enum name="pager" value="6" />
         </attr>
         <attr name="liu_orientation" format="enum">
             <enum name="Vertical" value="1" />
