@@ -17,6 +17,7 @@ import com.liudonghan.component.imageview.ADImageViewActivity;
 import com.liudonghan.component.indicatortab.ADIndicatorTabActivity;
 import com.liudonghan.component.input.ADInputCodeActivity;
 import com.liudonghan.component.recyclerview.ADRecyclerViewActivity;
+import com.liudonghan.component.tabhost.FragmentTabHostActivity;
 import com.liudonghan.component.textview.ADTextViewActivity;
 import com.liudonghan.component.voicerecorder.ADVoiceRecorderButtonActivity;
 import com.liudonghan.view.calendar.ADCalendarEntity;
@@ -33,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements BaseQuickAdapter.
             "验证码输入框", "ADButton", "ADImageView", "ADCircleProgress",
             "ADCityView", "ADIndicatorTab", "ADConstraintLayout", "ADCellTextLayout",
             "ADTextView", "ADVoiceRecorderButton", "日历组件", "ADRecyclerView",
-            "ADFieldTextLayout"};
+            "ADFieldTextLayout", "ADFragmentTabHost"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,7 +100,11 @@ public class MainActivity extends AppCompatActivity implements BaseQuickAdapter.
                 ADRecyclerViewActivity.startActivity(this, ADRecyclerViewActivity.class);
                 break;
             case 12:
+                // todo 自定义输入框
                 FieldActivity.startActivity(this, FieldActivity.class);
+                break;
+            case 13:
+                FragmentTabHostActivity.startActivity(this, FragmentTabHostActivity.class);
                 break;
         }
     }

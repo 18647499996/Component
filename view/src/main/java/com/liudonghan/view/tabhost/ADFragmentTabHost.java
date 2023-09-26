@@ -2,23 +2,20 @@ package com.liudonghan.view.tabhost;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.os.Bundle;
-import android.os.Parcel;
-import android.os.Parcelable;
+import android.graphics.Color;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
-import android.widget.TabHost;
-import android.widget.TabWidget;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.FragmentActivity;
 
-import java.util.ArrayList;
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.liudonghan.view.R;
+import com.liudonghan.view.radius.ADConstraintLayout;
+import com.liudonghan.view.recycler.ADRecyclerView;
+
+import java.util.List;
 
 /**
  * Description：
@@ -26,278 +23,103 @@ import java.util.ArrayList;
  * @author Created by: Li_Min
  * Time:9/25/23
  */
-public class ADFragmentTabHost extends TabHost implements TabHost.OnTabChangeListener {
-    private final ArrayList<TabInfo> mTabs = new ArrayList();
-    private FrameLayout mRealTabContent;
-    private Context mContext;
-    private FragmentManager mFragmentManager;
-    private int mContainerId;
-    private OnTabChangeListener mOnTabChangeListener;
-    private ADFragmentTabHost.TabInfo mLastTab;
-    private boolean mAttached;
+public class ADFragmentTabHost extends ADConstraintLayout implements BaseQuickAdapter.OnItemClickListener {
+
+    private static final String MAC_LIU = "Mac_Liu";
+    private Context context;
+    private ADRecyclerView recyclerView;
+    private FragmentActivity fragmentActivity;
+    private FragmentTabHost fragmentTabHost;
+    private View viewDivider;
+    private TabHostAdapter tabHostAdapter;
+    private OnADFragmentTabHostListener onADFragmentTabHostListener;
+    private int tabHeight, tabBgColor;
+    private boolean isDivider;
 
     public ADFragmentTabHost(Context context) {
-        super(context, (AttributeSet)null);
-        this.initFragmentTabHost(context, (AttributeSet)null);
+        super(context, null);
     }
 
     public ADFragmentTabHost(Context context, AttributeSet attrs) {
         super(context, attrs);
-        this.initFragmentTabHost(context, attrs);
+        this.fragmentActivity = (FragmentActivity) context;
+        this.context = context;
+        View inflate = View.inflate(context, R.layout.ad_fragment_tab_host, this);
+        recyclerView = inflate.findViewById(R.id.ad_fragment_tab_host_rv);
+        fragmentTabHost = inflate.findViewById(android.R.id.tabhost);
+        viewDivider = inflate.findViewById(R.id.ad_fragment_tab_view_divider);
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.ADFragmentTabHost);
+        tabHeight = typedArray.getDimensionPixelOffset(R.styleable.ADFragmentTabHost_liu_tab_height, context.getResources().getDimensionPixelOffset(R.dimen.dip_52));
+        tabBgColor = typedArray.getColor(R.styleable.ADFragmentTabHost_liu_tab_bg_color, Color.parseColor("#ffffff"));
+        isDivider = typedArray.getBoolean(R.styleable.ADFragmentTabHost_liu_tab_divider, false);
+        typedArray.recycle();
+        init(context);
     }
 
-    private void initFragmentTabHost(Context context, AttributeSet attrs) {
-        TypedArray a = context.obtainStyledAttributes(attrs, new int[]{16842995}, 0, 0);
-        this.mContainerId = a.getResourceId(0, 0);
-        a.recycle();
-        super.setOnTabChangedListener(this);
+    private void init(Context context) {
+        ConstraintLayout.LayoutParams params = (LayoutParams) recyclerView.getLayoutParams();
+        params.height = tabHeight;
+        recyclerView.setLayoutParams(params);
+        recyclerView.setBackgroundColor(tabBgColor);
+        viewDivider.setVisibility(isDivider ? VISIBLE : GONE);
+        fragmentTabHost.setup(context, fragmentActivity.getSupportFragmentManager(), android.R.id.tabcontent);
+        tabHostAdapter = new TabHostAdapter(R.layout.item_ad_tab_host);
+        recyclerView.setAdapter(tabHostAdapter);
+        tabHostAdapter.setOnItemClickListener(this);
     }
 
-    private void ensureHierarchy(Context context) {
-        if (this.findViewById(16908307) == null) {
-            LinearLayout ll = new LinearLayout(context);
-            ll.setOrientation(1);
-            this.addView(ll, new LayoutParams(-1, -1));
-            TabWidget tw = new TabWidget(context);
-            tw.setId(16908307);
-            tw.setOrientation(0);
-            ll.addView(tw, new LinearLayout.LayoutParams(-1, -2, 0.0F));
-            FrameLayout fl = new FrameLayout(context);
-            fl.setId(16908305);
-            ll.addView(fl, new LinearLayout.LayoutParams(0, 0, 0.0F));
-            this.mRealTabContent = fl = new FrameLayout(context);
-            this.mRealTabContent.setId(this.mContainerId);
-            ll.addView(fl, new LinearLayout.LayoutParams(-1, 0, 1.0F));
+    public void setData(List<ADNavigationEntity> tab) {
+        if (null == tab) {
+            Log.i(MAC_LIU, "tab navigation list is not empty");
+            return;
         }
-
-    }
-
-    /** @deprecated */
-    @Deprecated
-    public void setup() {
-        throw new IllegalStateException("Must call setup() that takes a Context and FragmentManager");
-    }
-
-    public void setup(Context context, FragmentManager manager) {
-        this.ensureHierarchy(context);
-        super.setup();
-        this.mContext = context;
-        this.mFragmentManager = manager;
-        this.ensureContent();
-    }
-
-    public void setup(Context context, FragmentManager manager, int containerId) {
-        this.ensureHierarchy(context);
-        super.setup();
-        this.mContext = context;
-        this.mFragmentManager = manager;
-        this.mContainerId = containerId;
-        this.ensureContent();
-        this.mRealTabContent.setId(containerId);
-        if (this.getId() == -1) {
-            this.setId(16908306);
-        }
-
-    }
-
-    private void ensureContent() {
-        if (this.mRealTabContent == null) {
-            this.mRealTabContent = (FrameLayout)this.findViewById(this.mContainerId);
-            if (this.mRealTabContent == null) {
-                throw new IllegalStateException("No tab content FrameLayout found for id " + this.mContainerId);
-            }
-        }
-
-    }
-
-    public void setOnTabChangedListener(OnTabChangeListener l) {
-        this.mOnTabChangeListener = l;
-    }
-
-    public void addTab(@NonNull TabSpec tabSpec, @NonNull Class<?> clss, @Nullable Bundle args) {
-        tabSpec.setContent(new ADFragmentTabHost.DummyTabFactory(this.mContext));
-        String tag = tabSpec.getTag();
-        ADFragmentTabHost.TabInfo info = new ADFragmentTabHost.TabInfo(tag, clss, args);
-        if (this.mAttached) {
-            info.fragment = this.mFragmentManager.findFragmentByTag(tag);
-            if (info.fragment != null && !info.fragment.isDetached()) {
-                FragmentTransaction ft = this.mFragmentManager.beginTransaction();
-                ft.detach(info.fragment);
-                ft.commitAllowingStateLoss();
-            }
-        }
-
-        this.mTabs.add(info);
-        this.addTab(tabSpec);
-    }
-
-    protected void onAttachedToWindow() {
-        super.onAttachedToWindow();
-        String currentTag = this.getCurrentTabTag();
-        FragmentTransaction ft = null;
-        int i = 0;
-
-        for(int count = this.mTabs.size(); i < count; ++i) {
-            ADFragmentTabHost.TabInfo tab = (ADFragmentTabHost.TabInfo)this.mTabs.get(i);
-            tab.fragment = this.mFragmentManager.findFragmentByTag(tab.tag);
-            if (tab.fragment != null && !tab.fragment.isDetached()) {
-                if (tab.tag.equals(currentTag)) {
-                    this.mLastTab = tab;
-                } else {
-                    if (ft == null) {
-                        ft = this.mFragmentManager.beginTransaction();
-                    }
-
-                    ft.detach(tab.fragment);
-                }
-            }
-        }
-
-        this.mAttached = true;
-        ft = this.doTabChanged(currentTag, ft);
-        if (ft != null) {
-            ft.commitAllowingStateLoss();
-            this.mFragmentManager.executePendingTransactions();
-        }
-
-    }
-
-    protected void onDetachedFromWindow() {
-        super.onDetachedFromWindow();
-        this.mAttached = false;
-    }
-
-    protected Parcelable onSaveInstanceState() {
-        Parcelable superState = super.onSaveInstanceState();
-        ADFragmentTabHost.SavedState ss = new ADFragmentTabHost.SavedState(superState);
-        ss.curTab = this.getCurrentTabTag();
-        return ss;
-    }
-
-    protected void onRestoreInstanceState(Parcelable state) {
-        if (!(state instanceof ADFragmentTabHost.SavedState)) {
-            super.onRestoreInstanceState(state);
-        } else {
-            ADFragmentTabHost.SavedState ss = (ADFragmentTabHost.SavedState)state;
-            super.onRestoreInstanceState(ss.getSuperState());
-            this.setCurrentTabByTag(ss.curTab);
+        recyclerView.setSpanCount(tab.size());
+        tabHostAdapter.setNewData(tab);
+        for (int i = 0; i < tab.size(); i++) {
+            View view = View.inflate(context, R.layout.item_ad_tab_host, null);
+            fragmentTabHost.addTab(fragmentTabHost.newTabSpec(String.valueOf(i)).setIndicator(view), tab.get(i).getFragment().getClass(), null);
         }
     }
 
-    public void onTabChanged(String tabId) {
-        if (this.mAttached) {
-            FragmentTransaction ft = this.doTabChanged(tabId, (FragmentTransaction)null);
-            if (ft != null) {
-                ft.commitAllowingStateLoss();
-            }
-        }
-
-        if (this.mOnTabChangeListener != null) {
-            this.mOnTabChangeListener.onTabChanged(tabId);
-        }
-
-    }
-
-    @Nullable
-    private FragmentTransaction doTabChanged(@Nullable String tag, @Nullable FragmentTransaction ft) {
-        ADFragmentTabHost.TabInfo newTab = this.getTabInfoForTag(tag);
-        if (this.mLastTab != newTab) {
-            if (ft == null) {
-                ft = this.mFragmentManager.beginTransaction();
-            }
-
-            if (this.mLastTab != null && this.mLastTab.fragment != null) {
-                ft.detach(this.mLastTab.fragment);
-            }
-
-            if (newTab != null) {
-                if (newTab.fragment == null) {
-                    newTab.fragment = Fragment.instantiate(this.mContext, newTab.clss.getName(), newTab.args);
-                    ft.add(this.mContainerId, newTab.fragment, newTab.tag);
-                } else {
-                    ft.attach(newTab.fragment);
-                }
-            }
-
-            this.mLastTab = newTab;
-        }
-
-        return ft;
-    }
-
-    @Nullable
-    private ADFragmentTabHost.TabInfo getTabInfoForTag(String tabId) {
-        int i = 0;
-
-        for(int count = this.mTabs.size(); i < count; ++i) {
-            ADFragmentTabHost.TabInfo tab = (ADFragmentTabHost.TabInfo)this.mTabs.get(i);
-            if (tab.tag.equals(tabId)) {
-                return tab;
-            }
-        }
-
-        return null;
-    }
-
-    static class SavedState extends BaseSavedState {
-        String curTab;
-        public static final Creator<SavedState> CREATOR = new Creator<SavedState>() {
-            public ADFragmentTabHost.SavedState createFromParcel(Parcel in) {
-                return new ADFragmentTabHost.SavedState(in);
-            }
-
-            public ADFragmentTabHost.SavedState[] newArray(int size) {
-                return new ADFragmentTabHost.SavedState[size];
-            }
-        };
-
-        SavedState(Parcelable superState) {
-            super(superState);
-        }
-
-        SavedState(Parcel in) {
-            super(in);
-            this.curTab = in.readString();
-        }
-
-        public void writeToParcel(Parcel out, int flags) {
-            super.writeToParcel(out, flags);
-            out.writeString(this.curTab);
-        }
-
-        public String toString() {
-            return "FragmentTabHost.SavedState{" + Integer.toHexString(System.identityHashCode(this)) + " curTab=" + this.curTab + "}";
+    @Override
+    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+        ADNavigationEntity item = tabHostAdapter.getItem(position);
+        fragmentTabHost.setCurrentTabByTag(String.valueOf(position));
+        tabHostAdapter.selector(position);
+        if (null != onADFragmentTabHostListener) {
+            onADFragmentTabHostListener.onTabHost(item, position, fragmentTabHost, tabHostAdapter);
         }
     }
 
-    static class DummyTabFactory implements TabContentFactory {
-        private final Context mContext;
-
-        public DummyTabFactory(Context context) {
-            this.mContext = context;
-        }
-
-        public View createTabContent(String tag) {
-            View v = new View(this.mContext);
-            v.setMinimumWidth(0);
-            v.setMinimumHeight(0);
-            return v;
-        }
+    public void setOnADFragmentTabHostListener(OnADFragmentTabHostListener onADFragmentTabHostListener) {
+        this.onADFragmentTabHostListener = onADFragmentTabHostListener;
     }
 
-    static final class TabInfo {
-        @NonNull
-        final String tag;
-        @NonNull
-        final Class<?> clss;
-        @Nullable
-        final Bundle args;
-        Fragment fragment;
+    public ADRecyclerView getRecyclerView() {
+        return recyclerView;
+    }
 
-        TabInfo(@NonNull String _tag, @NonNull Class<?> _class, @Nullable Bundle _args) {
-            this.tag = _tag;
-            this.clss = _class;
-            this.args = _args;
-        }
+    public FragmentTabHost getFragmentTabHost() {
+        return fragmentTabHost;
+    }
+
+    public TabHostAdapter getTabHostAdapter() {
+        return tabHostAdapter;
+    }
+
+    public void setUnreadCount(int position, int count) {
+        tabHostAdapter.setUnreadCount(position, count);
+    }
+
+    public interface OnADFragmentTabHostListener {
+        /**
+         * 切换tab
+         *
+         * @param item            tab条目
+         * @param position        索引
+         * @param fragmentTabHost fragmentTabHost组件
+         * @param tabHostAdapter  配适器引用
+         */
+        void onTabHost(ADNavigationEntity item, int position, FragmentTabHost fragmentTabHost, TabHostAdapter tabHostAdapter);
     }
 }

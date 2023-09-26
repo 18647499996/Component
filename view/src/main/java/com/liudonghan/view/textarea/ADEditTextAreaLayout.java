@@ -47,9 +47,9 @@ public class ADEditTextAreaLayout extends ADConstraintLayout implements TextWatc
         maxLength = typedArray.getInt(R.styleable.ADEditTextAreaLayout_liu_max_length, 50);
         editColor = typedArray.getColor(R.styleable.ADEditTextAreaLayout_liu_edit_color, Color.parseColor("#342e2e"));
         editHintColor = typedArray.getColor(R.styleable.ADEditTextAreaLayout_liu_edit_hint_color, Color.parseColor("#cccccc"));
-        editTextSize = typedArray.getDimensionPixelOffset(R.styleable.ADEditTextAreaLayout_liu_edit_text_size, context.getResources().getDimensionPixelOffset(R.dimen.dip_12));
+        editTextSize = typedArray.getDimensionPixelSize(R.styleable.ADEditTextAreaLayout_liu_edit_text_size, context.getResources().getDimensionPixelOffset(R.dimen.dip_12));
         hintColor = typedArray.getColor(R.styleable.ADEditTextAreaLayout_liu_hint_color, Color.parseColor("#aaaaaa"));
-        hintTextSize = typedArray.getDimensionPixelOffset(R.styleable.ADEditTextAreaLayout_liu_hint_text_size, context.getResources().getDimensionPixelOffset(R.dimen.dip_12));
+        hintTextSize = typedArray.getDimensionPixelSize(R.styleable.ADEditTextAreaLayout_liu_hint_text_size, context.getResources().getDimensionPixelOffset(R.dimen.dip_12));
         editHint = typedArray.getString(R.styleable.ADEditTextAreaLayout_liu_edit_hint);
         hintLast = typedArray.getString(R.styleable.ADEditTextAreaLayout_liu_last);
         typedArray.recycle();

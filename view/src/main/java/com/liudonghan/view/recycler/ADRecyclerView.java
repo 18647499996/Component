@@ -31,6 +31,7 @@ public class ADRecyclerView extends RecyclerView implements ViewAttr {
     private LayoutManagerMode layoutMode;
     private Orientation orientation;
     private int spanCount;
+    private Context context;
     private LinearLayoutManager linearLayoutManager;
     private GridLayoutManager gridLayoutManager;
     private StaggeredGridLayoutManager staggeredGridLayoutManager;
@@ -44,6 +45,7 @@ public class ADRecyclerView extends RecyclerView implements ViewAttr {
 
     public ADRecyclerView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+        this.context = context;
         viewHelper = new ViewHelper();
         TypedArray viewTypeArray = viewHelper.initAttrs(context, attrs);
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.ADRecyclerView);
@@ -111,6 +113,11 @@ public class ADRecyclerView extends RecyclerView implements ViewAttr {
 
     public PagerLayoutManager getPagerLayoutManager() {
         return pagerLayoutManager;
+    }
+
+    public void setSpanCount(int spanCount) {
+        this.spanCount = spanCount;
+        initAttrs(context);
     }
 
     public enum Orientation {

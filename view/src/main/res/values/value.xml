@@ -247,6 +247,12 @@
         <attr name="liu_last" format="string" />
     </declare-styleable>
 
+    <declare-styleable name="ADFragmentTabHost">
+        <attr name="liu_tab_height" format="dimension" />
+        <attr name="liu_tab_bg_color" format="color" />
+        <attr name="liu_tab_divider" format="boolean" />
+    </declare-styleable>
+
     <bool name="sb__is_swipeable">false</bool>
 
     <!--dialog弹窗-->
