@@ -31,15 +31,12 @@
 
     <com.liudonghan.view.radius.ADTextView
         android:id="@+id/item_ad_tab_host_tv_count"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="17dp"
+        android:layout_height="17dp"
         android:layout_marginLeft="25dp"
         android:layout_marginBottom="21dp"
         android:background="@color/color_eb2525"
-        android:paddingLeft="3dp"
-        android:paddingTop="2dp"
-        android:paddingRight="3dp"
-        android:paddingBottom="2dp"
+        android:gravity="center"
         android:text="99"
         android:textColor="@color/white"
         android:textSize="8sp"
