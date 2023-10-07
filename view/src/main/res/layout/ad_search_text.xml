@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="52dp">
+
+    <com.liudonghan.view.radius.ADImageView
+        android:id="@+id/ad_search_text_img_left"
+        android:layout_width="38dp"
+        android:layout_height="match_parent"
+        android:scaleType="centerInside"
+        android:src="@drawable/ad_back_black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.liudonghan.view.radius.ADConstraintLayout
+        android:id="@+id/ad_search_text_cl_content"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@color/color_ebebeb"
+        app:layout_constraintLeft_toRightOf="@id/ad_search_text_img_left"
+        app:layout_constraintRight_toLeftOf="@id/ad_search_text_btn_right"
+        app:layout_constraintRight_toRightOf="parent"
+        app:liu_stroke_width="0.67dp"
+        app:liu_stroke_color="@color/color_eeeeee"
+        app:liu_round_corner="8dp">
+
+        <EditText
+            android:id="@+id/ad_search_text_edt_content"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:drawableLeft="@drawable/ad_search"
+            android:drawablePadding="5dp"
+            android:hint="搜一搜"
+            android:imeOptions="actionGo"
+            android:inputType="text"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:textCursorDrawable="@null"
+            android:textColor="@color/color_342e2e"
+            android:textColorHint="@color/color_aaaaaa"
+            android:singleLine="true"
+            android:textSize="12sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/ad_search_text_img_clear" />
+
+        <ImageView
+            android:id="@+id/ad_search_text_img_clear"
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:scaleType="centerInside"
+            android:src="@drawable/ad_clear"
+            android:visibility="gone"
+            app:layout_constraintRight_toRightOf="parent"
+            tools:visibility="visible" />
+
+    </com.liudonghan.view.radius.ADConstraintLayout>
+
+    <com.liudonghan.view.radius.ADButton
+        android:id="@+id/ad_search_text_btn_right"
+        android:layout_width="@dimen/dip_52"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="8dp"
+        android:background="@color/color_333333"
+        android:gravity="center"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:text="确认"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/ad_search_text_cl_content"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:liu_round_corner="5dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

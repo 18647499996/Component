@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context=".search.SearchTextLayoutActivity">
+
+    <com.liudonghan.view.search.ADSearchTextLayout
+        android:id="@+id/search_text_layout"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:background="@color/white"
+        app:liu_content_corner="8dp"
+        app:liu_search_clear="true"
+        app:liu_search_focusable="false" />
+
+</LinearLayout>

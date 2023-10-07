@@ -17,6 +17,7 @@ import com.liudonghan.component.imageview.ADImageViewActivity;
 import com.liudonghan.component.indicatortab.ADIndicatorTabActivity;
 import com.liudonghan.component.input.ADInputCodeActivity;
 import com.liudonghan.component.recyclerview.ADRecyclerViewActivity;
+import com.liudonghan.component.search.SearchTextLayoutActivity;
 import com.liudonghan.component.tabhost.FragmentTabHostActivity;
 import com.liudonghan.component.textview.ADTextViewActivity;
 import com.liudonghan.component.voicerecorder.ADVoiceRecorderButtonActivity;
@@ -34,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements BaseQuickAdapter.
             "验证码输入框", "ADButton", "ADImageView", "ADCircleProgress",
             "ADCityView", "ADIndicatorTab", "ADConstraintLayout", "ADCellTextLayout",
             "ADTextView", "ADVoiceRecorderButton", "日历组件", "ADRecyclerView",
-            "ADFieldTextLayout", "ADFragmentTabHost"};
+            "ADFieldTextLayout", "ADFragmentTabHost", "ADSearchTextLayout"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,6 +106,12 @@ public class MainActivity extends AppCompatActivity implements BaseQuickAdapter.
                 break;
             case 13:
                 FragmentTabHostActivity.startActivity(this, FragmentTabHostActivity.class);
+                break;
+            case 14:
+                // todo 自定义搜索框
+                SearchTextLayoutActivity.startActivity(this, SearchTextLayoutActivity.class);
+                break;
+            default:
                 break;
         }
     }
