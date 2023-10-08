@@ -4,17 +4,17 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.text.Editable;
-import android.text.Selection;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.liudonghan.view.R;
-import com.liudonghan.view.cell.ADCellTextLayout;
 import com.liudonghan.view.radius.ADButton;
 import com.liudonghan.view.radius.ADConstraintLayout;
 import com.liudonghan.view.radius.ADImageView;
@@ -38,6 +38,7 @@ public class ADSearchTextLayout extends ADConstraintLayout implements TextWatche
     private boolean isFocusable, isClear;
     private OnADSearchTextLayoutListener onADSearchTextLayoutListener;
     private OnADSearchTextLayoutClickListener onADSearchTextLayoutClickListener;
+    private int leftWidth, leftHeight, rightWidth, rightHeight, rightTextSize;
 
     public ADSearchTextLayout(Context context) {
         super(context, null);
@@ -63,6 +64,11 @@ public class ADSearchTextLayout extends ADConstraintLayout implements TextWatche
         rightVisibility = Visibility.fromInt(typedArray.getInt(R.styleable.ADSearchTextLayout_liu_search_right_visibility, Visibility.Gone.getValue()));
         isFocusable = typedArray.getBoolean(R.styleable.ADSearchTextLayout_liu_search_focusable, true);
         isClear = typedArray.getBoolean(R.styleable.ADSearchTextLayout_liu_search_clear, false);
+        leftWidth = typedArray.getDimensionPixelOffset(R.styleable.ADSearchTextLayout_liu_search_left_width, 0);
+        leftHeight = typedArray.getDimensionPixelOffset(R.styleable.ADSearchTextLayout_liu_search_left_height, 0);
+        rightWidth = typedArray.getDimensionPixelOffset(R.styleable.ADSearchTextLayout_liu_search_right_width, 0);
+        rightHeight = typedArray.getDimensionPixelOffset(R.styleable.ADSearchTextLayout_liu_search_right_height, 0);
+        rightTextSize = typedArray.getDimensionPixelSize(R.styleable.ADSearchTextLayout_liu_search_right_text_size, 40);
         typedArray.recycle();
         initLeft(context);
         initContent(context);
@@ -73,8 +79,15 @@ public class ADSearchTextLayout extends ADConstraintLayout implements TextWatche
         buttonRight.setText(TextUtils.isEmpty(rightHint) ? "搜索" : rightHint);
         buttonRight.setBackgroundColor(rightBg);
         buttonRight.setTextColor(rightTextColor);
+        buttonRight.setTextSize(TypedValue.COMPLEX_UNIT_PX,rightTextSize);
         buttonRight.setVisibility(rightVisibility == Visibility.Visibility ? VISIBLE : GONE);
         buttonRight.setOnClickListener(this);
+        if (0 != rightWidth) {
+            ViewGroup.LayoutParams layoutParams = buttonRight.getLayoutParams();
+            layoutParams.height = rightHeight;
+            layoutParams.width = rightWidth;
+            buttonRight.setLayoutParams(layoutParams);
+        }
     }
 
     private void initContent(Context context) {
@@ -91,6 +104,12 @@ public class ADSearchTextLayout extends ADConstraintLayout implements TextWatche
         imageViewLeft.setImageResource(0 != leftDrawable ? leftDrawable : R.drawable.ad_back_black);
         imageViewLeft.setOnClickListener(this);
         imageViewClear.setOnClickListener(this);
+        if (0 != leftWidth) {
+            ViewGroup.LayoutParams layoutParams = imageViewLeft.getLayoutParams();
+            layoutParams.width = leftWidth;
+            layoutParams.height = leftHeight;
+            imageViewLeft.setLayoutParams(layoutParams);
+        }
     }
 
     @Override
@@ -165,6 +184,26 @@ public class ADSearchTextLayout extends ADConstraintLayout implements TextWatche
                     throw new Error("Invalid SourceType");
             }
         }
+    }
+
+    public String getContent() {
+        return editTextContent.getText().toString().trim();
+    }
+
+    public EditText getEditTextContent() {
+        return editTextContent;
+    }
+
+    public ADImageView getImageViewLeft() {
+        return imageViewLeft;
+    }
+
+    public ImageView getImageViewClear() {
+        return imageViewClear;
+    }
+
+    public ADButton getButtonRight() {
+        return buttonRight;
     }
 
     public void setOnADSearchTextLayoutListener(OnADSearchTextLayoutListener onADSearchTextLayoutListener) {

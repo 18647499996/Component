@@ -13,8 +13,12 @@
         android:layout_width="match_parent"
         android:layout_height="52dp"
         android:background="@color/white"
-        app:liu_content_corner="8dp"
+        app:liu_content_corner="75dp"
         app:liu_search_clear="true"
-        app:liu_search_focusable="false" />
+        app:liu_search_focusable="false"
+        app:liu_search_left_visibility="visibility"
+        app:liu_search_left_width="20dp"
+        app:liu_search_right_text_size="12sp"
+        app:liu_search_right_visibility="visibility" />
 
 </LinearLayout>

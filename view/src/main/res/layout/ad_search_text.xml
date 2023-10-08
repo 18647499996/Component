@@ -7,13 +7,14 @@
 
     <com.liudonghan.view.radius.ADImageView
         android:id="@+id/ad_search_text_img_left"
-        android:layout_width="38dp"
-        android:layout_height="match_parent"
+        android:layout_width="25dp"
+        android:layout_height="30dp"
         android:scaleType="centerInside"
         android:src="@drawable/ad_back_black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="8dp"/>
 
     <com.liudonghan.view.radius.ADConstraintLayout
         android:id="@+id/ad_search_text_cl_content"
@@ -27,9 +28,9 @@
         app:layout_constraintLeft_toRightOf="@id/ad_search_text_img_left"
         app:layout_constraintRight_toLeftOf="@id/ad_search_text_btn_right"
         app:layout_constraintRight_toRightOf="parent"
-        app:liu_stroke_width="0.67dp"
+        app:liu_round_corner="8dp"
         app:liu_stroke_color="@color/color_eeeeee"
-        app:liu_round_corner="8dp">
+        app:liu_stroke_width="0.67dp">
 
         <EditText
             android:id="@+id/ad_search_text_edt_content"
@@ -43,10 +44,10 @@
             android:inputType="text"
             android:paddingLeft="12dp"
             android:paddingRight="12dp"
-            android:textCursorDrawable="@null"
+            android:singleLine="true"
             android:textColor="@color/color_342e2e"
             android:textColorHint="@color/color_aaaaaa"
-            android:singleLine="true"
+            android:textCursorDrawable="@null"
             android:textSize="12sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@id/ad_search_text_img_clear" />
@@ -65,13 +66,11 @@
 
     <com.liudonghan.view.radius.ADButton
         android:id="@+id/ad_search_text_btn_right"
-        android:layout_width="@dimen/dip_52"
-        android:layout_height="wrap_content"
+        android:layout_width="52dp"
+        android:layout_height="28dp"
         android:layout_marginRight="8dp"
         android:background="@color/color_333333"
         android:gravity="center"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
         android:text="确认"
         android:textColor="@color/white"
         android:textSize="12sp"

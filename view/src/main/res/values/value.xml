@@ -255,6 +255,8 @@
 
 
     <declare-styleable name="ADSearchTextLayout">
+        <attr name="liu_search_left_width" format="dimension" />
+        <attr name="liu_search_left_height" format="dimension" />
         <attr name="liu_search_left_drawable" format="reference" />
         <attr name="liu_search_left_visibility" format="enum">
             <enum name="visibility" value="1" />
@@ -263,8 +265,11 @@
         <attr name="liu_content_background_color" format="color" />
         <attr name="liu_content_corner" format="dimension" />
         <attr name="liu_content_hint" format="string" />
+        <attr name="liu_search_right_width" format="dimension" />
+        <attr name="liu_search_right_height" format="dimension" />
         <attr name="liu_search_right_background_color" format="color" />
         <attr name="liu_search_right_text_color" format="color" />
+        <attr name="liu_search_right_text_size" format="dimension" />
         <attr name="liu_search_right_hint" format="string" />
         <attr name="liu_search_right_visibility" format="enum">
             <enum name="visibility" value="1" />
