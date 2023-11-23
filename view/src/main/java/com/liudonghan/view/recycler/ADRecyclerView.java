@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import com.liudonghan.view.R;
 import com.liudonghan.view.helper.ViewAttr;
 import com.liudonghan.view.helper.ViewHelper;
+import com.liudonghan.view.recycler.flow.FlowLayoutOptions;
 
 import java.util.Arrays;
 
@@ -81,8 +82,10 @@ public class ADRecyclerView extends RecyclerView implements ViewAttr {
                 setLayoutManager(centerLayoutManager);
                 break;
             case FlowLayoutManager:
-                flowLayoutManager = new FlowLayoutManager();
+                flowLayoutManager = new FlowLayoutManager().setAlignment(FlowLayoutOptions.Alignment.LEFT);
+                flowLayoutManager.setAutoMeasureEnabled(true);
                 setLayoutManager(flowLayoutManager);
+                addItemDecoration(new ADItemDecoration());
                 break;
             case PagerLayoutManager:
                 pagerLayoutManager = new PagerLayoutManager(context, orientation.getId());

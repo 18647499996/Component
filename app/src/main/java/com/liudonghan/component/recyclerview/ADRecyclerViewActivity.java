@@ -1,14 +1,17 @@
 package com.liudonghan.component.recyclerview;
 
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.liudonghan.component.R;
 import com.liudonghan.component.adapter.ADRecyclerViewAdapter;
+import com.liudonghan.component.adapter.ADRecyclerViewFlowAdapter;
 import com.liudonghan.mvp.ADBaseActivity;
 import com.liudonghan.view.recycler.ADRecyclerView;
 import com.liudonghan.view.snackbar.ADSnackBarManager;
@@ -25,7 +28,7 @@ import java.util.Objects;
 public class ADRecyclerViewActivity extends ADBaseActivity<ADRecyeclerViewPresenter> implements ADRecyeclerViewContract.View, BaseQuickAdapter.OnItemClickListener {
 
     private ADRecyclerViewAdapter adRecyclerViewAdapter;
-    private ADRecyclerView adRecyclerView;
+    private ADRecyclerView adRecyclerView, recyclerViewFlow;
     private String[] array = new String[]{
             "验证码输入框", "ADButton", "ADImageView", "ADCircleProgress",
             "ADCityView", "ADIndicatorTab", "ADConstraintLayout", "ADCellTextLayout",
@@ -53,6 +56,16 @@ public class ADRecyclerViewActivity extends ADBaseActivity<ADRecyeclerViewPresen
         adRecyclerViewAdapter = new ADRecyclerViewAdapter(R.layout.item_recyclerview);
         adRecyclerView.setAdapter(adRecyclerViewAdapter);
         adRecyclerViewAdapter.setNewData(Arrays.asList(array));
+
+        recyclerViewFlow = (ADRecyclerView) findViewById(R.id.recyclerView_flow);
+        recyclerViewFlow.setAdapter(new ADRecyclerViewFlowAdapter(R.layout.item_recyclerview_flow, Arrays.asList(array)));
+//        recyclerViewFlow.addItemDecoration(new RecyclerView.ItemDecoration() {
+//            @Override
+//            public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
+//                super.getItemOffsets(outRect, view, parent, state);
+//                outRect.set(10, 10, 10, 10);
+//            }
+//        });
     }
 
     @Override
@@ -84,6 +97,6 @@ public class ADRecyclerViewActivity extends ADBaseActivity<ADRecyeclerViewPresen
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
         Log.i("Mac_Liu", Objects.requireNonNull(adRecyclerViewAdapter.getItem(position)));
-        adRecyclerView.getCenterLayoutManager().smoothScrollToPosition(adRecyclerView,position);
+        adRecyclerView.getCenterLayoutManager().smoothScrollToPosition(adRecyclerView, position);
     }
 }

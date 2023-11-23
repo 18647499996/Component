@@ -18,5 +18,11 @@
         app:liu_orientation="Horizontal"
         app:liu_layout_manager="center" />
 
+    <com.liudonghan.view.recycler.ADRecyclerView
+        android:id="@+id/recyclerView_flow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:liu_layout_manager="flow" />
+
 
 </LinearLayout>
