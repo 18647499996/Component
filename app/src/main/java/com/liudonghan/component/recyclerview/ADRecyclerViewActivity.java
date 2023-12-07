@@ -14,6 +14,7 @@ import com.liudonghan.component.adapter.ADRecyclerViewAdapter;
 import com.liudonghan.component.adapter.ADRecyclerViewFlowAdapter;
 import com.liudonghan.mvp.ADBaseActivity;
 import com.liudonghan.view.recycler.ADRecyclerView;
+import com.liudonghan.view.recycler.PagerLayoutManager;
 import com.liudonghan.view.snackbar.ADSnackBarManager;
 
 import java.util.Arrays;
@@ -25,10 +26,10 @@ import java.util.Objects;
  * @author Created by: Li_Min
  * Time:
  */
-public class ADRecyclerViewActivity extends ADBaseActivity<ADRecyeclerViewPresenter> implements ADRecyeclerViewContract.View, BaseQuickAdapter.OnItemClickListener {
+public class ADRecyclerViewActivity extends ADBaseActivity<ADRecyeclerViewPresenter> implements ADRecyeclerViewContract.View, BaseQuickAdapter.OnItemClickListener, PagerLayoutManager.OnViewPagerListener {
 
     private ADRecyclerViewAdapter adRecyclerViewAdapter;
-    private ADRecyclerView adRecyclerView, recyclerViewFlow;
+    private ADRecyclerView adRecyclerView, recyclerViewFlow, recyclerViewPage;
     private String[] array = new String[]{
             "验证码输入框", "ADButton", "ADImageView", "ADCircleProgress",
             "ADCityView", "ADIndicatorTab", "ADConstraintLayout", "ADCellTextLayout",
@@ -66,11 +67,14 @@ public class ADRecyclerViewActivity extends ADBaseActivity<ADRecyeclerViewPresen
 //                outRect.set(10, 10, 10, 10);
 //            }
 //        });
+        recyclerViewPage = (ADRecyclerView) findViewById(R.id.recyclerView_page);
+        recyclerViewPage.setAdapter(new ADRecyclerViewFlowAdapter(R.layout.item_recyclerview_page, Arrays.asList(array)));
     }
 
     @Override
     protected void addListener() throws RuntimeException {
         adRecyclerViewAdapter.setOnItemClickListener(this);
+        recyclerViewPage.getPagerLayoutManager().setOnViewPagerListener(this);
     }
 
     @Override
@@ -98,5 +102,20 @@ public class ADRecyclerViewActivity extends ADBaseActivity<ADRecyeclerViewPresen
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
         Log.i("Mac_Liu", Objects.requireNonNull(adRecyclerViewAdapter.getItem(position)));
         adRecyclerView.getCenterLayoutManager().smoothScrollToPosition(adRecyclerView, position);
+    }
+
+    @Override
+    public void onInitComplete(View view) {
+        Log.i("Mac_Liu","onInitComplete");
+    }
+
+    @Override
+    public void onPageRelease(boolean isNext, int position, View view) {
+        Log.i("Mac_Liu","onPageRelease：" + isNext + "   position " + position);
+    }
+
+    @Override
+    public void onPageSelected(int position, boolean isBottom, View view) {
+        Log.i("Mac_Liu","onPageSelected：" + isBottom + "   position " + position);
     }
 }

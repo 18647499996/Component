@@ -15,14 +15,20 @@
         android:layout_width="match_parent"
         android:layout_height="52dp"
         android:background="@color/white"
-        app:liu_orientation="Horizontal"
-        app:liu_layout_manager="center" />
+        app:liu_layout_manager="center"
+        app:liu_orientation="Horizontal" />
 
     <com.liudonghan.view.recycler.ADRecyclerView
         android:id="@+id/recyclerView_flow"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:liu_layout_manager="flow" />
+
+    <com.liudonghan.view.recycler.ADRecyclerView
+        android:id="@+id/recyclerView_page"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:liu_layout_manager="pager" />
 
 
 </LinearLayout>
