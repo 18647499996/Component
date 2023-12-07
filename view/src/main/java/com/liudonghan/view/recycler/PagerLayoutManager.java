@@ -1,6 +1,7 @@
 package com.liudonghan.view.recycler;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -20,6 +21,7 @@ public class PagerLayoutManager extends LinearLayoutManager implements RecyclerV
     private RecyclerView mRecyclerView;
 
     private int mDrift;//位移，用来判断移动方向
+    private int positionIdle;
 
     public PagerLayoutManager(Context context, int orientation) {
         super(context, orientation, false);
@@ -58,39 +60,65 @@ public class PagerLayoutManager extends LinearLayoutManager implements RecyclerV
      */
     @Override
     public void onScrollStateChanged(int state) {
-        switch (state) {
-            case RecyclerView.SCROLL_STATE_IDLE:
-                View viewIdle = mPagerSnapHelper.findSnapView(this);
-                if (viewIdle != null) {
-                    int positionIdle = getPosition(viewIdle);
-                    if (mOnViewPagerListener != null && getChildCount() == 1) {
-                        mOnViewPagerListener.onPageSelected(positionIdle, positionIdle == getItemCount() - 1, viewIdle);
-                    }
+        if (state == RecyclerView.SCROLL_STATE_IDLE) {
+            View viewIdle = mPagerSnapHelper.findSnapView(this);
+            if (viewIdle != null) {
+                if (positionIdle == getPosition(viewIdle)) {
+                    // 当前条目未发生改变
+                    return;
                 }
-                break;
-            case RecyclerView.SCROLL_STATE_DRAGGING:
-                View viewDrag = mPagerSnapHelper.findSnapView(this);
-                if (viewDrag != null) {
-                    int positionDrag = getPosition(viewDrag);
+                positionIdle = getPosition(viewIdle);
+                if (mOnViewPagerListener != null && getChildCount() == 1) {
+                    mOnViewPagerListener.onPageSelected(positionIdle, positionIdle == getItemCount() - 1, viewIdle);
                 }
-                break;
-            case RecyclerView.SCROLL_STATE_SETTLING:
-                View viewSettling = mPagerSnapHelper.findSnapView(this);
-                if (viewSettling != null) {
-                    int positionSettling = getPosition(viewSettling);
-                }
-                break;
+            }
         }
+    }
+
+    /**
+     * 监听竖直方向的相对偏移量
+     *
+     * @param dy
+     * @param recycler
+     * @param state
+     * @return
+     */
+    @Override
+    public int scrollVerticallyBy(int dy, RecyclerView.Recycler recycler, RecyclerView.State state) {
+        this.mDrift = dy;
+        return super.scrollVerticallyBy(dy, recycler, state);
+    }
+
+    /**
+     * 监听水平方向的相对偏移量
+     *
+     * @param dx
+     * @param recycler
+     * @param state
+     * @return
+     */
+    @Override
+    public int scrollHorizontallyBy(int dx, RecyclerView.Recycler recycler, RecyclerView.State state) {
+        this.mDrift = dx;
+        return super.scrollHorizontallyBy(dx, recycler, state);
     }
 
     @Override
     public void onChildViewAttachedToWindow(@NonNull View view) {
-
+        if (mOnViewPagerListener != null && getChildCount() == 1) {
+            mOnViewPagerListener.onInitComplete(view);
+        }
     }
 
     @Override
     public void onChildViewDetachedFromWindow(@NonNull View view) {
-
+        if (mDrift >= 0) {
+            if (mOnViewPagerListener != null)
+                mOnViewPagerListener.onPageRelease(true, getPosition(view), view);
+        } else {
+            if (mOnViewPagerListener != null)
+                mOnViewPagerListener.onPageRelease(false, getPosition(view), view);
+        }
     }
 
     public void setOnViewPagerListener(OnViewPagerListener mOnViewPagerListener) {
@@ -105,11 +133,19 @@ public class PagerLayoutManager extends LinearLayoutManager implements RecyclerV
 
         /**
          * 释放
+         *
+         * @param isNext   是否下一个
+         * @param position 离开视图条目索引
+         * @param view     离开视图view
          */
         void onPageRelease(boolean isNext, int position, View view);
 
         /**
          * 选中
+         *
+         * @param position 选中视图索引
+         * @param isBottom 是否底部
+         * @param view     选中view
          */
         void onPageSelected(int position, boolean isBottom, View view);
     }
