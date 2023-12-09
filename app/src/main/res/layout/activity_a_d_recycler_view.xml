@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
     android:orientation="vertical"
     tools:context=".recyclerview.ADRecyclerViewActivity">
 
-    <include layout="@layout/ad_title_builder" />
+    <include layout="@layout/ad_title_builder"
+        android:visibility="gone"/>
 
     <com.liudonghan.view.recycler.ADRecyclerView
         android:id="@+id/recyclerView"
@@ -16,13 +16,15 @@
         android:layout_height="52dp"
         android:background="@color/white"
         app:liu_layout_manager="center"
-        app:liu_orientation="Horizontal" />
+        app:liu_orientation="Horizontal"
+        android:visibility="gone"/>
 
     <com.liudonghan.view.recycler.ADRecyclerView
         android:id="@+id/recyclerView_flow"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:liu_layout_manager="flow" />
+        app:liu_layout_manager="flow"
+        android:visibility="gone"/>
 
     <com.liudonghan.view.recycler.ADRecyclerView
         android:id="@+id/recyclerView_page"

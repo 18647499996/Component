@@ -12,6 +12,25 @@ android {
         versionName "1.0"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        manifestPlaceholders = [
+                // 高德
+                MAP_KEY        : '8810842a68872e87812bce73f44dd938',
+                // 小米
+                MI_APP_ID      : "2882303761518661698",
+                MI_APP_KEY     : "5351866185698",
+                // 华为
+                HMS_APP_ID     : "102877471",
+                // 魅族
+                MEIZU_APP_ID   : "134844",
+                MEIZU_APP_KEY  : "c2c6159ce9614f1787f339c1a4b69b99",
+                // vivo
+                VIVO_APP_ID    : "104444991",
+                VIVO_APP_KEY   : "2c7124f35043962b384c6adee8259c62",
+                // oppo
+                OPPO_APP_KEY   : "0daef59bb48a49c388123bf73eb877ec",
+                OPPO_APP_SECRET: "84e5b792797d48eb88212d57ee295fa7"
+
+        ]
     }
 
     buildTypes {
@@ -56,6 +75,7 @@ dependencies {
     implementation project(':view')
     implementation 'com.github.18647499996:pdf-view:1.0'
     implementation 'com.github.18647499996:base:2.2.9'
+    implementation 'com.github.18647499996:kit:1.3.3'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.0.0'
     implementation 'com.jakewharton:butterknife:10.0.0'
 }

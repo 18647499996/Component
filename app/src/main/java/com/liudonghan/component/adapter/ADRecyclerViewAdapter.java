@@ -4,6 +4,8 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.liudonghan.component.R;
 
+import java.util.List;
+
 /**
  * Description：
  *
@@ -14,6 +16,10 @@ public class ADRecyclerViewAdapter extends BaseQuickAdapter<String, BaseViewHold
 
     public ADRecyclerViewAdapter(int layoutResId) {
         super(layoutResId);
+    }
+
+    public ADRecyclerViewAdapter(int layoutResId, List<String> stringList) {
+        super(layoutResId, stringList);
     }
 
     @Override
