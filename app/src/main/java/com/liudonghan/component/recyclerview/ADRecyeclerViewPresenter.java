@@ -60,7 +60,8 @@ public class ADRecyeclerViewPresenter extends ADBaseSubscription<ADRecyeclerView
         videoView.release();
         removeVideoView(videoView);
         frameLayout.addView(videoView);
-        videoView.setUrl(ADVideoPlayManager.getInstance().getHttpProxyCacheServer().getProxyUrl(adapter.getData().get(position)));
+//        videoView.setUrl(ADVideoPlayManager.getInstance().getHttpProxyCacheServer().getProxyUrl(adapter.getData().get(position)));
+        videoView.setUrl(adapter.getData().get(position));
         videoView.start();
         if (isBottom) {
             //到最后一个加载第二页
