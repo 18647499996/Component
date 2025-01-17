@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.liudonghan.component.R;
+import com.liudonghan.component.databinding.ActivityADInputCodeBinding;
 import com.liudonghan.mvp.ADBaseActivity;
 import com.liudonghan.view.snackbar.ADSnackBarManager;
 
@@ -13,11 +14,16 @@ import com.liudonghan.view.snackbar.ADSnackBarManager;
  * @author Created by: Li_Min
  * Time:
  */
-public class ADInputCodeActivity extends ADBaseActivity<ADInputCodePresenter> implements ADInputCodeContract.View {
+public class ADInputCodeActivity extends ADBaseActivity<ADInputCodePresenter, ActivityADInputCodeBinding> implements ADInputCodeContract.View {
 
     @Override
-    protected int getLayout() throws RuntimeException {
-        return R.layout.activity_a_d_input_code;
+    protected ActivityADInputCodeBinding getActivityBinding() throws RuntimeException {
+        return ActivityADInputCodeBinding.inflate(getLayoutInflater());
+    }
+
+    @Override
+    protected View getViewBindingLayout() throws RuntimeException {
+        return mViewBinding.getRoot();
     }
 
     @Override

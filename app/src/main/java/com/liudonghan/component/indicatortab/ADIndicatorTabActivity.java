@@ -4,12 +4,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-import com.liudonghan.component.MainActivity;
-import com.liudonghan.component.R;
-import com.liudonghan.component.calendar.CalendarActivity;
+import com.liudonghan.component.databinding.ActivityADIndicatorTabBinding;
 import com.liudonghan.mvp.ADBaseActivity;
-import com.liudonghan.view.indicator.ADIndicatorTab;
-import com.liudonghan.view.indicator.Tab;
 import com.liudonghan.view.snackbar.ADSnackBarManager;
 
 import java.util.Arrays;
@@ -20,14 +16,16 @@ import java.util.Arrays;
  * @author Created by: Li_Min
  * Time:
  */
-public class ADIndicatorTabActivity extends ADBaseActivity<ADIndicatorTabPresenter> implements ADIndicatorTabContract.View {
-
-    private ADIndicatorTab adIndicatorTab;
-
+public class ADIndicatorTabActivity extends ADBaseActivity<ADIndicatorTabPresenter, ActivityADIndicatorTabBinding> implements ADIndicatorTabContract.View {
 
     @Override
-    protected int getLayout() throws RuntimeException {
-        return R.layout.activity_a_d_indicator_tab;
+    protected ActivityADIndicatorTabBinding getActivityBinding() throws RuntimeException {
+        return ActivityADIndicatorTabBinding.inflate(getLayoutInflater());
+    }
+
+    @Override
+    protected View getViewBindingLayout() throws RuntimeException {
+        return mViewBinding.getRoot();
     }
 
     @Override
@@ -42,15 +40,11 @@ public class ADIndicatorTabActivity extends ADBaseActivity<ADIndicatorTabPresent
 
     @Override
     protected void initData(Bundle savedInstanceState) throws RuntimeException {
-        adIndicatorTab = (ADIndicatorTab) findViewById(R.id.indicator_tab);
-        adIndicatorTab.setData(Arrays.asList("tab1", "tab2", "tab3"));
+        mViewBinding.indicatorTab.setData(Arrays.asList("tab1", "tab2", "tab3"));
 
-        adIndicatorTab.setOnADIndicatorTabItemClickListener(new ADIndicatorTab.OnADIndicatorTabItemClickListener() {
-            @Override
-            public void onTabItemClick(Tab.Column text, int position) {
-                Log.i("Mac_Liu", "点击条目：" + text.getText());
-                adIndicatorTab.setDefaultPosition(1);
-            }
+        mViewBinding.indicatorTab.setOnADIndicatorTabItemClickListener((text, position) -> {
+            Log.i("Mac_Liu", "点击条目：" + text.getText());
+            mViewBinding.indicatorTab.setDefaultPosition(1);
         });
     }
 

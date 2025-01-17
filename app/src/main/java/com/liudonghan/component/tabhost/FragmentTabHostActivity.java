@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.liudonghan.component.R;
+import com.liudonghan.component.databinding.ActivityFragmentTabHostBinding;
 import com.liudonghan.component.fragment.home.HomeFragment;
 import com.liudonghan.component.fragment.mine.MineFragment;
 import com.liudonghan.mvp.ADBaseActivity;
@@ -16,22 +17,22 @@ import com.liudonghan.view.tabhost.TabHostAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-
 /**
  * Description：
  *
  * @author Created by: Li_Min
  * Time:
  */
-public class FragmentTabHostActivity extends ADBaseActivity<FragmentTabHostPresenter> implements FragmentTabHostContract.View, ADFragmentTabHost.OnADFragmentTabHostListener {
-
-    @BindView(R.id.activity_tab_host)
-    ADFragmentTabHost activityTabHost;
+public class FragmentTabHostActivity extends ADBaseActivity<FragmentTabHostPresenter, ActivityFragmentTabHostBinding> implements FragmentTabHostContract.View, ADFragmentTabHost.OnADFragmentTabHostListener {
 
     @Override
-    protected int getLayout() throws RuntimeException {
-        return R.layout.activity_fragment_tab_host;
+    protected ActivityFragmentTabHostBinding getActivityBinding() throws RuntimeException {
+        return ActivityFragmentTabHostBinding.inflate(getLayoutInflater());
+    }
+
+    @Override
+    protected View getViewBindingLayout() throws RuntimeException {
+        return mViewBinding.getRoot();
     }
 
     @Override
@@ -50,13 +51,13 @@ public class FragmentTabHostActivity extends ADBaseActivity<FragmentTabHostPrese
         list.add(new ADNavigationEntity(R.drawable.icon_home_off, R.drawable.icon_home_on, new HomeFragment(), true));
         list.add(new ADNavigationEntity(R.drawable.icon_like_off, R.drawable.icon_like_on, new MineFragment(), false));
         list.add(new ADNavigationEntity(R.drawable.icon_faxian_off, R.drawable.icon_faxian_on, new HomeFragment(), false));
-        activityTabHost.setData(list);
+        mViewBinding.activityTabHost.setData(list);
     }
 
     @Override
     protected void addListener() throws RuntimeException {
-        activityTabHost.setOnADFragmentTabHostListener(this);
-        activityTabHost.setUnreadCount(1, 20);
+        mViewBinding.activityTabHost.setOnADFragmentTabHostListener(this);
+        mViewBinding.activityTabHost.setUnreadCount(1, 20);
     }
 
     @Override

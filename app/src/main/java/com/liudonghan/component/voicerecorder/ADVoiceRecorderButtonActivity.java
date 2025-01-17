@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.liudonghan.component.R;
+import com.liudonghan.component.databinding.ActivityADVoiceRecorderButtonBinding;
 import com.liudonghan.mvp.ADBaseActivity;
 import com.liudonghan.view.snackbar.ADSnackBarManager;
 import com.liudonghan.view.voice.ADVoiceRecorderButton;
@@ -16,14 +17,16 @@ import com.liudonghan.view.voice.ADVoiceRecorderButton;
  * @author Created by: Li_Min
  * Time:
  */
-public class ADVoiceRecorderButtonActivity extends ADBaseActivity<ADVoiceRecorderButtonPresenter> implements ADVoiceRecorderButtonContract.View, ADVoiceRecorderButton.OnADVoiceRecorderButtonListener {
-
-    private ADVoiceRecorderButton adVoiceRecorderButton;
-
+public class ADVoiceRecorderButtonActivity extends ADBaseActivity<ADVoiceRecorderButtonPresenter, ActivityADVoiceRecorderButtonBinding> implements ADVoiceRecorderButtonContract.View, ADVoiceRecorderButton.OnADVoiceRecorderButtonListener {
 
     @Override
-    protected int getLayout() throws RuntimeException {
-        return R.layout.activity_a_d_voice_recorder_button;
+    protected ActivityADVoiceRecorderButtonBinding getActivityBinding() throws RuntimeException {
+        return ActivityADVoiceRecorderButtonBinding.inflate(getLayoutInflater());
+    }
+
+    @Override
+    protected View getViewBindingLayout() throws RuntimeException {
+        return mViewBinding.getRoot();
     }
 
     @Override
@@ -38,13 +41,12 @@ public class ADVoiceRecorderButtonActivity extends ADBaseActivity<ADVoiceRecorde
 
     @Override
     protected void initData(Bundle savedInstanceState) throws RuntimeException {
-        adVoiceRecorderButton = (ADVoiceRecorderButton) findViewById(R.id.btn_1);
 
     }
 
     @Override
     protected void addListener() throws RuntimeException {
-        adVoiceRecorderButton.setOnADVoiceRecorderButtonListener(this);
+        mViewBinding.btn1.setOnADVoiceRecorderButtonListener(this);
     }
 
     @Override

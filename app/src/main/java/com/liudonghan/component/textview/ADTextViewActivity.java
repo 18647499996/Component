@@ -3,10 +3,9 @@ package com.liudonghan.component.textview;
 import android.os.Bundle;
 import android.view.View;
 
-import com.liudonghan.component.MainActivity;
 import com.liudonghan.component.R;
+import com.liudonghan.component.databinding.ActivityADTextViewBinding;
 import com.liudonghan.mvp.ADBaseActivity;
-import com.liudonghan.view.cell.ADCellTextLayout;
 import com.liudonghan.view.snackbar.ADSnackBarManager;
 import com.liudonghan.view.snackbar.SnackBar;
 
@@ -16,13 +15,17 @@ import com.liudonghan.view.snackbar.SnackBar;
  * @author Created by: Li_Min
  * Time:
  */
-public class ADTextViewActivity extends ADBaseActivity<ADTextViewPresenter> implements ADTextViewContract.View {
-
+public class ADTextViewActivity extends ADBaseActivity<ADTextViewPresenter, ActivityADTextViewBinding> implements ADTextViewContract.View {
 
 
     @Override
-    protected int getLayout() throws RuntimeException {
-        return R.layout.activity_a_d_text_view;
+    protected ActivityADTextViewBinding getActivityBinding() throws RuntimeException {
+        return ActivityADTextViewBinding.inflate(getLayoutInflater());
+    }
+
+    @Override
+    protected View getViewBindingLayout() throws RuntimeException {
+        return mViewBinding.getRoot();
     }
 
     @Override

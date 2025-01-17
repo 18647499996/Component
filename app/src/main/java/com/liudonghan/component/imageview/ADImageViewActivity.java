@@ -4,11 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.liudonghan.component.MainActivity;
 import com.liudonghan.component.PhotoActivity;
 import com.liudonghan.component.R;
+import com.liudonghan.component.databinding.ActivityADImageViewBinding;
 import com.liudonghan.mvp.ADBaseActivity;
-import com.liudonghan.view.radius.ADImageView;
 import com.liudonghan.view.snackbar.ADSnackBarManager;
 
 /**
@@ -17,11 +16,16 @@ import com.liudonghan.view.snackbar.ADSnackBarManager;
  * @author Created by: Li_Min
  * Time:
  */
-public class ADImageViewActivity extends ADBaseActivity<ADImageViewPresenter> implements ADImageViewContract.View {
+public class ADImageViewActivity extends ADBaseActivity<ADImageViewPresenter, ActivityADImageViewBinding> implements ADImageViewContract.View {
 
     @Override
-    protected int getLayout() throws RuntimeException {
-        return R.layout.activity_a_d_image_view;
+    protected ActivityADImageViewBinding getActivityBinding() throws RuntimeException {
+        return ActivityADImageViewBinding.inflate(getLayoutInflater());
+    }
+
+    @Override
+    protected View getViewBindingLayout() throws RuntimeException {
+        return mViewBinding.getRoot();
     }
 
     @Override
@@ -36,12 +40,7 @@ public class ADImageViewActivity extends ADBaseActivity<ADImageViewPresenter> im
 
     @Override
     protected void initData(Bundle savedInstanceState) throws RuntimeException {
-        findViewById(R.id.activity_main_img).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(ADImageViewActivity.this, PhotoActivity.class));
-            }
-        });
+        findViewById(R.id.activity_main_img).setOnClickListener(view -> startActivity(new Intent(ADImageViewActivity.this, PhotoActivity.class)));
     }
 
     @Override

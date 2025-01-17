@@ -3,7 +3,7 @@ package com.liudonghan.component.button;
 import android.os.Bundle;
 import android.view.View;
 
-import com.liudonghan.component.R;
+import com.liudonghan.component.databinding.ActivityADButtonBinding;
 import com.liudonghan.mvp.ADBaseActivity;
 import com.liudonghan.view.snackbar.ADSnackBarManager;
 
@@ -13,11 +13,16 @@ import com.liudonghan.view.snackbar.ADSnackBarManager;
  * @author Created by: Li_Min
  * Time:
  */
-public class ADButtonActivity extends ADBaseActivity<ADButtonPresenter> implements ADButtonContract.View {
+public class ADButtonActivity extends ADBaseActivity<ADButtonPresenter, ActivityADButtonBinding> implements ADButtonContract.View {
 
     @Override
-    protected int getLayout() throws RuntimeException {
-        return R.layout.activity_a_d_button;
+    protected ActivityADButtonBinding getActivityBinding() throws RuntimeException {
+        return ActivityADButtonBinding.inflate(getLayoutInflater());
+    }
+
+    @Override
+    protected View getViewBindingLayout() throws RuntimeException {
+        return mViewBinding.getRoot();
     }
 
     @Override

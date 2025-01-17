@@ -1,10 +1,10 @@
 package com.liudonghan.component.recyclerview;
 
+import android.widget.VideoView;
+
 import com.liudonghan.component.adapter.ADRecyclerViewPageAdapter;
 import com.liudonghan.mvp.ADBasePresenter;
 import com.liudonghan.mvp.ADBaseView;
-
-import xyz.doikki.videoplayer.player.VideoView;
 
 /**
  * Description：

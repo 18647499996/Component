@@ -8,7 +8,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.liudonghan.component.R;
 import com.liudonghan.component.adapter.ADRecyclerViewAdapter;
 import com.liudonghan.component.adapter.ADRecyclerViewPageAdapter;
-import com.liudonghan.kit.ijk.ADVideoPlayManager;
+import com.liudonghan.component.databinding.ActivityADRecyclerViewBinding;
 import com.liudonghan.mvp.ADBaseActivity;
 import com.liudonghan.view.recycler.ADRecyclerView;
 import com.liudonghan.view.recycler.PagerLayoutManager;
@@ -19,7 +19,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-import xyz.doikki.videoplayer.player.VideoView;
 
 /**
  * Description：
@@ -27,7 +26,7 @@ import xyz.doikki.videoplayer.player.VideoView;
  * @author Created by: Li_Min
  * Time:
  */
-public class ADRecyclerViewActivity extends ADBaseActivity<ADRecyeclerViewPresenter> implements ADRecyeclerViewContract.View, BaseQuickAdapter.OnItemClickListener, PagerLayoutManager.OnViewPagerListener {
+public class ADRecyclerViewActivity extends ADBaseActivity<ADRecyeclerViewPresenter, ActivityADRecyclerViewBinding> implements ADRecyeclerViewContract.View, BaseQuickAdapter.OnItemClickListener, PagerLayoutManager.OnViewPagerListener {
 
     private ADRecyclerViewAdapter adRecyclerViewAdapter;
     private ADRecyclerViewPageAdapter adRecyclerViewPageAdapter;
@@ -37,12 +36,16 @@ public class ADRecyclerViewActivity extends ADBaseActivity<ADRecyeclerViewPresen
             "ADCityView", "ADIndicatorTab", "ADConstraintLayout", "ADCellTextLayout",
             "ADTextView", "ADVoiceRecorderButton", "日历组件"};
     private List<String> play = new ArrayList<>();
-    private VideoView videoView;
     private int currentPosition;
 
     @Override
-    protected int getLayout() throws RuntimeException {
-        return R.layout.activity_a_d_recycler_view;
+    protected ActivityADRecyclerViewBinding getActivityBinding() throws RuntimeException {
+        return ActivityADRecyclerViewBinding.inflate(getLayoutInflater());
+    }
+
+    @Override
+    protected View getViewBindingLayout() throws RuntimeException {
+        return mViewBinding.getRoot();
     }
 
     @Override
@@ -57,7 +60,6 @@ public class ADRecyclerViewActivity extends ADBaseActivity<ADRecyeclerViewPresen
 
     @Override
     protected void initData(Bundle savedInstanceState) throws RuntimeException {
-        ADVideoPlayManager.getInstance().init(this);
         immersionBar.transparentStatusBar().statusBarDarkFont(false).init();
         play.add("https://recordcdn.quklive.com/upload/vod/user1462960877450854/1702396014865166/8/video.m3u8");
         play.add("https://findermp.video.qq.com/251/20302/stodownload?encfilekey=oibeqyX228riaCwo9STVsGLPj9UYCicgttv2KWPY60smYM2qLOqwGQZqLkjGSPFc8AoL29xOOoUksTNeGtfTV6KBySEMaKwl6RyOUzp1714kbopib8RvqianG0fhJYVaeSibzs1ugiau02k9Bw&a=1&bizid=1023&dotrans=0&hy=SH&idx=1&m=5fadd3e3712e860e8f1d948d047fab3a&upid=500170&token=ic1n0xDG6awicz0rLxFEoGHPzOhDrIjZTic5RdOZTpaVwrhRDVwfXiaJZLrrxQaTFBzCne7Ls7pQAh4&X-snsvideoflag=xV1");
@@ -83,7 +85,6 @@ public class ADRecyclerViewActivity extends ADBaseActivity<ADRecyeclerViewPresen
         recyclerViewPage = (ADRecyclerView) findViewById(R.id.recyclerView_page);
         adRecyclerViewPageAdapter = new ADRecyclerViewPageAdapter(R.layout.item_recyclerview_page, play);
         recyclerViewPage.setAdapter(adRecyclerViewPageAdapter);
-        videoView = mPresenter.getVideoView();
     }
 
     @Override
@@ -122,22 +123,20 @@ public class ADRecyclerViewActivity extends ADBaseActivity<ADRecyeclerViewPresen
     @Override
     public void onInitComplete(View view, int currentPosition) {
         Log.i("Mac_Liu", "onInitComplete");
-        mPresenter.startPlay(currentPosition, view, adRecyclerViewPageAdapter, videoView, false);
+        mPresenter.startPlay(currentPosition, view, adRecyclerViewPageAdapter, null, false);
     }
 
     @Override
     public void onPageRelease(int currentPosition, View view) {
         Log.i("Mac_Liu", "onPageRelease： position " + currentPosition);
-        if (this.currentPosition == currentPosition) {
-            videoView.pause();
-        }
+
     }
 
     @Override
     public void onPageSelected(int currentPosition, boolean isBottom, View view) {
         this.currentPosition = currentPosition;
         Log.i("Mac_Liu", "onPageSelected：" + isBottom + "   position " + currentPosition);
-        mPresenter.startPlay(currentPosition, view, adRecyclerViewPageAdapter, videoView, isBottom);
+        mPresenter.startPlay(currentPosition, view, adRecyclerViewPageAdapter, null, isBottom);
     }
 
 }

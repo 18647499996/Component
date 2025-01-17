@@ -6,6 +6,7 @@ import android.view.View;
 
 import com.liudonghan.component.MainActivity;
 import com.liudonghan.component.R;
+import com.liudonghan.component.databinding.FragmentHomeBinding;
 import com.liudonghan.mvp.ADBaseFragment;
 import com.liudonghan.view.snackbar.ADSnackBarManager;
 
@@ -15,10 +16,16 @@ import com.liudonghan.view.snackbar.ADSnackBarManager;
  * @author Created by: Li_Min
  * Time:
  */
-public class HomeFragment extends ADBaseFragment<HomePresenter, MainActivity> implements HomeContract.View {
+public class HomeFragment extends ADBaseFragment<HomePresenter, FragmentHomeBinding> implements HomeContract.View {
+
     @Override
-    protected int loadViewLayout() {
-        return R.layout.fragment_home;
+    protected View getViewBindingLayout() {
+        return mViewBinding.getRoot();
+    }
+
+    @Override
+    protected FragmentHomeBinding getFragmentViewBinding() {
+        return FragmentHomeBinding.inflate(getLayoutInflater());
     }
 
     @Override

@@ -12,21 +12,16 @@ import com.liudonghan.mvp.ADBaseActivity;
 
 import java.io.IOException;
 
-public class CardActivity extends ADBaseActivity<CardPresenter> implements CardContract.View {
-    private ActivityCardBinding activityCardBinding;
+public class CardActivity extends ADBaseActivity<CardPresenter,ActivityCardBinding> implements CardContract.View {
 
-    @SuppressLint("SetTextI18n")
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        activityCardBinding = ActivityCardBinding.inflate(getLayoutInflater());
-        setContentView(activityCardBinding.getRoot());
-        activityCardBinding.activityTvHint.setText("viewBinding组件");
+    protected ActivityCardBinding getActivityBinding() throws RuntimeException {
+        return ActivityCardBinding.inflate(getLayoutInflater());
     }
 
     @Override
-    protected int getLayout() throws RuntimeException {
-        return 0;
+    protected View getViewBindingLayout() throws RuntimeException {
+        return mViewBinding.getRoot();
     }
 
     @Override

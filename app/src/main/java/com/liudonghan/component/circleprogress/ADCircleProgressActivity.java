@@ -3,9 +3,8 @@ package com.liudonghan.component.circleprogress;
 import android.os.Bundle;
 import android.view.View;
 
-import com.liudonghan.component.R;
+import com.liudonghan.component.databinding.ActivityADCircleProgressBinding;
 import com.liudonghan.mvp.ADBaseActivity;
-import com.liudonghan.view.progress.ADCircleProgress;
 import com.liudonghan.view.snackbar.ADSnackBarManager;
 
 /**
@@ -14,12 +13,16 @@ import com.liudonghan.view.snackbar.ADSnackBarManager;
  * @author Created by: Li_Min
  * Time:
  */
-public class ADCircleProgressActivity extends ADBaseActivity<ADCircleProgressPresenter> implements ADCircleProgressContract.View {
-    private ADCircleProgress adCircleProgress;
+public class ADCircleProgressActivity extends ADBaseActivity<ADCircleProgressPresenter, ActivityADCircleProgressBinding> implements ADCircleProgressContract.View {
 
     @Override
-    protected int getLayout() throws RuntimeException {
-        return R.layout.activity_a_d_circle_progress;
+    protected ActivityADCircleProgressBinding getActivityBinding() throws RuntimeException {
+        return ActivityADCircleProgressBinding.inflate(getLayoutInflater());
+    }
+
+    @Override
+    protected View getViewBindingLayout() throws RuntimeException {
+        return mViewBinding.getRoot();
     }
 
     @Override
@@ -34,11 +37,10 @@ public class ADCircleProgressActivity extends ADBaseActivity<ADCircleProgressPre
 
     @Override
     protected void initData(Bundle savedInstanceState) throws RuntimeException {
-        adCircleProgress = (ADCircleProgress) findViewById(R.id.circle);
-        adCircleProgress.setOnClickListener(new View.OnClickListener() {
+        mViewBinding.circle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                adCircleProgress.cancelAnimator();
+                mViewBinding.circle.cancelAnimator();
             }
         });
     }

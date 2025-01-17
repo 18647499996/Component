@@ -4,8 +4,8 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.liudonghan.component.R;
+import com.liudonghan.component.databinding.ActivityADCityViewBinding;
 import com.liudonghan.mvp.ADBaseActivity;
-import com.liudonghan.view.city.ADCityView;
 import com.liudonghan.view.snackbar.ADSnackBarManager;
 
 /**
@@ -14,11 +14,16 @@ import com.liudonghan.view.snackbar.ADSnackBarManager;
  * @author Created by: Li_Min
  * Time:
  */
-public class ADCityViewActivity extends ADBaseActivity<ADCityViewPresenter> implements ADCityViewContract.View {
+public class ADCityViewActivity extends ADBaseActivity<ADCityViewPresenter, ActivityADCityViewBinding> implements ADCityViewContract.View {
 
     @Override
-    protected int getLayout() throws RuntimeException {
-        return R.layout.activity_a_d_city_view;
+    protected ActivityADCityViewBinding getActivityBinding() throws RuntimeException {
+        return ActivityADCityViewBinding.inflate(getLayoutInflater());
+    }
+
+    @Override
+    protected View getViewBindingLayout() throws RuntimeException {
+        return mViewBinding.getRoot();
     }
 
     @Override
@@ -33,10 +38,9 @@ public class ADCityViewActivity extends ADBaseActivity<ADCityViewPresenter> impl
 
     @Override
     protected void initData(Bundle savedInstanceState) throws RuntimeException {
-        ADCityView adCityView = (ADCityView) findViewById(R.id.activity_main_city);
-        adCityView.getViewSwitcher().setDisplayedChild(0);
-        adCityView.getProgressBar().setIndeterminate(true);
-        adCityView.setProgressBarBgColor(R.color.color_342e2e);
+        mViewBinding.activityMainCity.getViewSwitcher().setDisplayedChild(0);
+        mViewBinding.activityMainCity.getProgressBar().setIndeterminate(true);
+        mViewBinding.activityMainCity.setProgressBarBgColor(R.color.color_342e2e);
     }
 
     @Override

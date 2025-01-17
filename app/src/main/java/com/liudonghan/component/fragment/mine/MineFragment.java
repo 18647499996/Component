@@ -4,8 +4,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-import com.liudonghan.component.MainActivity;
-import com.liudonghan.component.R;
+import com.liudonghan.component.databinding.FragmentMineBinding;
 import com.liudonghan.mvp.ADBaseFragment;
 import com.liudonghan.view.snackbar.ADSnackBarManager;
 
@@ -15,10 +14,16 @@ import com.liudonghan.view.snackbar.ADSnackBarManager;
  * @author Created by: Li_Min
  * Time:
  */
-public class MineFragment extends ADBaseFragment<MinePresenter, MainActivity> implements MineContract.View {
+public class MineFragment extends ADBaseFragment<MinePresenter, FragmentMineBinding> implements MineContract.View {
+
     @Override
-    protected int loadViewLayout() {
-        return R.layout.fragment_mine;
+    protected View getViewBindingLayout() {
+        return mViewBinding.getRoot();
+    }
+
+    @Override
+    protected FragmentMineBinding getFragmentViewBinding() {
+        return FragmentMineBinding.inflate(getLayoutInflater());
     }
 
     @Override
@@ -33,7 +38,7 @@ public class MineFragment extends ADBaseFragment<MinePresenter, MainActivity> im
 
     @Override
     protected void initData(Bundle savedInstanceState) throws RuntimeException {
-        Log.i("Mac_Liu","创建Mine");
+        Log.i("Mac_Liu", "创建Mine");
     }
 
     @Override

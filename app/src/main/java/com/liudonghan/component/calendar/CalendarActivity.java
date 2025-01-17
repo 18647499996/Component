@@ -1,12 +1,12 @@
 package com.liudonghan.component.calendar;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 
 import com.liudonghan.component.MainActivity;
 import com.liudonghan.component.R;
+import com.liudonghan.component.databinding.ActivityCalendarBinding;
 import com.liudonghan.mvp.ADBaseActivity;
 import com.liudonghan.view.calendar.ADCalendarEntity;
 import com.liudonghan.view.calendar.ADCalendarView;
@@ -14,9 +14,6 @@ import com.liudonghan.view.snackbar.ADSnackBarManager;
 import com.liudonghan.view.title.ADTitleBuilder;
 
 import java.util.List;
-import java.util.Objects;
-
-import butterknife.BindView;
 
 /**
  * Description：
@@ -24,14 +21,16 @@ import butterknife.BindView;
  * @author Created by: Li_Min
  * Time:
  */
-public class CalendarActivity extends ADBaseActivity<CalendarPresenter> implements CalendarContract.View, ADCalendarView.OnADCalendarViewListener {
-
-    @BindView(R.id.activity_calendar_cv)
-    ADCalendarView activityCalendarCv;
+public class CalendarActivity extends ADBaseActivity<CalendarPresenter, ActivityCalendarBinding> implements CalendarContract.View, ADCalendarView.OnADCalendarViewListener {
 
     @Override
-    protected int getLayout() throws RuntimeException {
-        return R.layout.activity_calendar;
+    protected ActivityCalendarBinding getActivityBinding() throws RuntimeException {
+        return ActivityCalendarBinding.inflate(getLayoutInflater());
+    }
+
+    @Override
+    protected View getViewBindingLayout() throws RuntimeException {
+        return mViewBinding.getRoot();
     }
 
     @Override
@@ -51,7 +50,7 @@ public class CalendarActivity extends ADBaseActivity<CalendarPresenter> implemen
 
     @Override
     protected void addListener() throws RuntimeException {
-        activityCalendarCv.setOnADCalendarViewListener(this);
+        mViewBinding.activityCalendarCv.setOnADCalendarViewListener(this);
     }
 
     @Override
@@ -76,9 +75,9 @@ public class CalendarActivity extends ADBaseActivity<CalendarPresenter> implemen
 
     @Override
     public void showCalendarList(List<ADCalendarEntity> adCalendarEntities) {
-        activityCalendarCv.setData(adCalendarEntities);
+        mViewBinding.activityCalendarCv.setData(adCalendarEntities);
         if (null != MainActivity.startDay) {
-            activityCalendarCv.setDefaultDay(MainActivity.startDay, MainActivity.endDay);
+            mViewBinding.activityCalendarCv.setDefaultDay(MainActivity.startDay, MainActivity.endDay);
         }
     }
 

@@ -3,9 +3,8 @@ package com.liudonghan.component.cell;
 import android.os.Bundle;
 import android.view.View;
 
-import com.liudonghan.component.R;
+import com.liudonghan.component.databinding.ActivityADCellTextLayoutBinding;
 import com.liudonghan.mvp.ADBaseActivity;
-import com.liudonghan.view.cell.ADCellTextLayout;
 import com.liudonghan.view.snackbar.ADSnackBarManager;
 
 /**
@@ -14,12 +13,16 @@ import com.liudonghan.view.snackbar.ADSnackBarManager;
  * @author Created by: Li_Min
  * Time:
  */
-public class ADCellTextLayoutActivity extends ADBaseActivity<ADCellTextLayoutPresenter> implements ADCellTextLayoutContract.View {
-    private ADCellTextLayout adCellTextLayout;
+public class ADCellTextLayoutActivity extends ADBaseActivity<ADCellTextLayoutPresenter, ActivityADCellTextLayoutBinding> implements ADCellTextLayoutContract.View {
 
     @Override
-    protected int getLayout() throws RuntimeException {
-        return R.layout.activity_a_d_cell_text_layout;
+    protected ActivityADCellTextLayoutBinding getActivityBinding() throws RuntimeException {
+        return ActivityADCellTextLayoutBinding.inflate(getLayoutInflater());
+    }
+
+    @Override
+    protected View getViewBindingLayout() throws RuntimeException {
+        return mViewBinding.getRoot();
     }
 
     @Override
@@ -34,8 +37,7 @@ public class ADCellTextLayoutActivity extends ADBaseActivity<ADCellTextLayoutPre
 
     @Override
     protected void initData(Bundle savedInstanceState) throws RuntimeException {
-        adCellTextLayout = (ADCellTextLayout) findViewById(R.id.activity_main_cg_one);
-        adCellTextLayout.setLeftText("动态设置");
+        mViewBinding.activityMainCgOne.setLeftText("动态设置");
     }
 
     @Override

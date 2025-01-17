@@ -4,12 +4,10 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.view.View;
 
-import com.liudonghan.component.R;
+import com.liudonghan.component.databinding.ActivitySearchTextLayoutBinding;
 import com.liudonghan.mvp.ADBaseActivity;
 import com.liudonghan.view.search.ADSearchTextLayout;
 import com.liudonghan.view.snackbar.ADSnackBarManager;
-
-import butterknife.BindView;
 
 /**
  * Description：
@@ -17,14 +15,16 @@ import butterknife.BindView;
  * @author Created by: Li_Min
  * Time:
  */
-public class SearchTextLayoutActivity extends ADBaseActivity<SearchTextLayoutPresenter> implements SearchTextLayoutContract.View, ADSearchTextLayout.OnADSearchTextLayoutListener, ADSearchTextLayout.OnADSearchTextLayoutClickListener {
-
-    @BindView(R.id.search_text_layout)
-    ADSearchTextLayout searchTextLayout;
+public class SearchTextLayoutActivity extends ADBaseActivity<SearchTextLayoutPresenter, ActivitySearchTextLayoutBinding> implements SearchTextLayoutContract.View, ADSearchTextLayout.OnADSearchTextLayoutListener, ADSearchTextLayout.OnADSearchTextLayoutClickListener {
 
     @Override
-    protected int getLayout() throws RuntimeException {
-        return R.layout.activity_search_text_layout;
+    protected ActivitySearchTextLayoutBinding getActivityBinding() throws RuntimeException {
+        return ActivitySearchTextLayoutBinding.inflate(getLayoutInflater());
+    }
+
+    @Override
+    protected View getViewBindingLayout() throws RuntimeException {
+        return mViewBinding.getRoot();
     }
 
     @Override
@@ -44,8 +44,8 @@ public class SearchTextLayoutActivity extends ADBaseActivity<SearchTextLayoutPre
 
     @Override
     protected void addListener() throws RuntimeException {
-        searchTextLayout.setOnADSearchTextLayoutListener(this);
-        searchTextLayout.setOnADSearchTextLayoutClickListener(this);
+        mViewBinding.searchTextLayout.setOnADSearchTextLayoutListener(this);
+        mViewBinding.searchTextLayout.setOnADSearchTextLayoutClickListener(this);
     }
 
     @Override

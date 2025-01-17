@@ -3,15 +3,12 @@ package com.liudonghan.component.recyclerview;
 import android.view.View;
 import android.view.ViewParent;
 import android.widget.FrameLayout;
+import android.widget.VideoView;
 
 import com.liudonghan.component.R;
 import com.liudonghan.component.adapter.ADRecyclerViewPageAdapter;
-import com.liudonghan.component.utils.TikTokRenderViewFactory;
-import com.liudonghan.kit.ijk.ADVideoPlayManager;
 import com.liudonghan.mvp.ADBaseSubscription;
 
-import xyz.doikki.videocontroller.StandardVideoController;
-import xyz.doikki.videoplayer.player.VideoView;
 
 
 /**
@@ -38,7 +35,7 @@ public class ADRecyeclerViewPresenter extends ADBaseSubscription<ADRecyeclerView
     public VideoView getVideoView() {
         VideoView mVideoView = new VideoView(getContext());
         //以下只能二选一，看你的需求
-        mVideoView.setLooping(true);
+//        mVideoView.setLooping(true);
 //        mController = new TikTokController(this);
 //        mVideoView.setVideoController(mController);
 
@@ -57,11 +54,11 @@ public class ADRecyeclerViewPresenter extends ADBaseSubscription<ADRecyeclerView
     @Override
     public void startPlay(int position, View view, ADRecyclerViewPageAdapter adapter, VideoView videoView, boolean isBottom) {
         FrameLayout frameLayout = view.findViewById(R.id.item_ijk);
-        videoView.release();
+//        videoView.release();
         removeVideoView(videoView);
         frameLayout.addView(videoView);
 //        videoView.setUrl(ADVideoPlayManager.getInstance().getHttpProxyCacheServer().getProxyUrl(adapter.getData().get(position)));
-        videoView.setUrl(adapter.getData().get(position));
+//        videoView.setUrl(adapter.getData().get(position));
         videoView.start();
         if (isBottom) {
             //到最后一个加载第二页
