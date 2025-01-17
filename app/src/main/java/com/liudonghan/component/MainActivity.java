@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.liudonghan.component.button.ADButtonActivity;
 import com.liudonghan.component.calendar.CalendarActivity;
+import com.liudonghan.component.card.CardActivity;
 import com.liudonghan.component.cell.ADCellTextLayoutActivity;
 import com.liudonghan.component.circleprogress.ADCircleProgressActivity;
 import com.liudonghan.component.cityview.ADCityViewActivity;
@@ -21,6 +22,7 @@ import com.liudonghan.component.search.SearchTextLayoutActivity;
 import com.liudonghan.component.tabhost.FragmentTabHostActivity;
 import com.liudonghan.component.textview.ADTextViewActivity;
 import com.liudonghan.component.voicerecorder.ADVoiceRecorderButtonActivity;
+import com.liudonghan.mvp.ADBaseActivity;
 import com.liudonghan.view.calendar.ADCalendarEntity;
 import com.liudonghan.view.recycler.ADRecyclerView;
 
@@ -35,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements BaseQuickAdapter.
             "验证码输入框", "ADButton", "ADImageView", "ADCircleProgress",
             "ADCityView", "ADIndicatorTab", "ADConstraintLayout", "ADCellTextLayout",
             "ADTextView", "ADVoiceRecorderButton", "日历组件", "ADRecyclerView",
-            "ADFieldTextLayout", "ADFragmentTabHost", "ADSearchTextLayout"};
+            "ADFieldTextLayout", "ADFragmentTabHost", "ADSearchTextLayout", "ViewBinding"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,6 +112,9 @@ public class MainActivity extends AppCompatActivity implements BaseQuickAdapter.
             case 14:
                 // todo 自定义搜索框
                 SearchTextLayoutActivity.startActivity(this, SearchTextLayoutActivity.class);
+                break;
+            case 15:
+                ADBaseActivity.startActivity(this, CardActivity.class);
                 break;
             default:
                 break;

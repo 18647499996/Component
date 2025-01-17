@@ -199,29 +199,40 @@ public class FragmentTabHost extends TabHost implements TabHost.OnTabChangeListe
     }
 
     @Nullable
-    private FragmentTransaction doTabChanged(@Nullable String tag, @Nullable FragmentTransaction ft) {
-        FragmentTabHost.TabInfo newTab = this.getTabInfoForTag(tag);
-        if (this.mLastTab != newTab) {
+    private FragmentTransaction doTabChanged(String tabId, FragmentTransaction ft) {
+        TabInfo newTab = null;
+        for (int i=0; i<mTabs.size(); i++) {
+            TabInfo tab = mTabs.get(i);
+            if (tab.tag.equals(tabId)) {
+                newTab = tab;
+            }
+        }
+        if (newTab == null) {
+            throw new IllegalStateException("No tab known for tag " + tabId);
+        }
+        if (mLastTab != newTab) {
             if (ft == null) {
-                ft = this.mFragmentManager.beginTransaction();
+                ft = mFragmentManager.beginTransaction();
             }
-
-            if (this.mLastTab != null && this.mLastTab.fragment != null) {
-                ft.detach(this.mLastTab.fragment);
-            }
-
-            if (newTab != null) {
-                if (newTab.fragment == null) {
-                    newTab.fragment = Fragment.instantiate(this.mContext, newTab.clss.getName(), newTab.args);
-                    ft.add(this.mContainerId, newTab.fragment, newTab.tag);
-                } else {
-                    ft.attach(newTab.fragment);
+            if (mLastTab != null) {
+                if (mLastTab.fragment != null) {
+                    // 将detach替换为hide，隐藏Fragment
+                    // ft.detach(mLastTab.fragment);
+                    ft.hide(mLastTab.fragment);
                 }
             }
+            if (newTab.fragment == null) {
+                newTab.fragment = Fragment.instantiate(mContext,
+                        newTab.clss.getName(), newTab.args);
+                ft.add(mContainerId, newTab.fragment, newTab.tag);
+            } else {
+                // 将attach替换为show，显示Fragment
+                // ft.attach(newTab.fragment);
+                ft.show(newTab.fragment);
+            }
 
-            this.mLastTab = newTab;
+            mLastTab = newTab;
         }
-
         return ft;
     }
 

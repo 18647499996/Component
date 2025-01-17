@@ -36,12 +36,9 @@
         <activity android:name=".imageview.ADImageViewActivity" />
         <activity android:name=".input.ADInputCodeActivity" />
         <activity android:name=".textview.ADTextViewActivity" />
-        <activity
-            android:name=".calendar.CalendarActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".PhotoActivity"
-            android:screenOrientation="portrait" />
+        <activity android:name=".card.CardActivity"/>
+        <activity android:name=".calendar.CalendarActivity" />
+        <activity android:name=".PhotoActivity" />
         <activity
             android:name=".MainActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar">

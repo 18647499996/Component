@@ -62,6 +62,10 @@ android {
         preDexLibraries true
         javaMaxHeapSize "6g"
     }
+
+    buildFeatures{
+        viewBinding = true
+    }
 }
 
 dependencies {

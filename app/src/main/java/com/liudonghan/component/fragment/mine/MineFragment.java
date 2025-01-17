@@ -1,6 +1,7 @@
 package com.liudonghan.component.fragment.mine;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.liudonghan.component.MainActivity;
@@ -32,7 +33,7 @@ public class MineFragment extends ADBaseFragment<MinePresenter, MainActivity> im
 
     @Override
     protected void initData(Bundle savedInstanceState) throws RuntimeException {
-
+        Log.i("Mac_Liu","创建Mine");
     }
 
     @Override

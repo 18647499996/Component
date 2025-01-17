@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <com.liudonghan.view.recycler.ADRecyclerView
+        android:id="@+id/activity_rv_card"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.liudonghan.view.radius.ADTextView
+        android:id="@+id/activity_tv_hint"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:layout_margin="12dp"
+        tools:text="viewBinding组件"
+        app:liu_round_corner="5dp"
+        android:background="@color/color_505257"
+        app:layout_constraintTop_toBottomOf="@id/activity_rv_card" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
