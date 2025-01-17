@@ -8,7 +8,9 @@
     android:orientation="vertical"
     tools:context=".constraintLayout.ADConstraintLayoutActivity">
 
-    <include layout="@layout/ad_title_builder" />
+    <include
+        android:id="@+id/activity_title_inc"
+        layout="@layout/ad_title_builder" />
 
     <com.liudonghan.view.radius.ADConstraintLayout
         android:id="@+id/activity_main_layout"

@@ -1,5 +1,6 @@
 package com.liudonghan.component.constraintLayout;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 
@@ -36,25 +37,14 @@ public class ADConstraintLayoutActivity extends ADBaseActivity<ADConstraintLayou
         return (ADConstraintLayoutPresenter) new ADConstraintLayoutPresenter(this).builder(this);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void initData(Bundle savedInstanceState) throws RuntimeException {
-        findViewById(R.id.activity_main_layout).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                SnackbarManager.show(Snackbar
-//                        .with(MainActivity.this)
-//                        .position(Snackbar.SnackbarPosition.TOP)
-//                        .duration(1000)
-//                        .margin(15, 15)
-//                        .backgroundDrawable(R.drawable.ad_snack_bar_bg)
-//                        .text("咕咕咕咕咕咕"));
-            }
-        });
     }
 
     @Override
     protected void addListener() throws RuntimeException {
-
+        mViewBinding.activityMainLayout.setOnClickListener(view -> mViewBinding.activityTitleInc.actTitleCenterTvTitle.setText("我是动态ViewBinding标题"));
     }
 
     @Override
