@@ -8,6 +8,7 @@ import com.liudonghan.component.R;
 import com.liudonghan.component.databinding.ActivityADConstraintLayoutBinding;
 import com.liudonghan.mvp.ADBaseActivity;
 import com.liudonghan.view.snackbar.ADSnackBarManager;
+import com.liudonghan.view.title.ADTitleBuilder;
 
 /**
  * Description：
@@ -16,6 +17,8 @@ import com.liudonghan.view.snackbar.ADSnackBarManager;
  * Time:
  */
 public class ADConstraintLayoutActivity extends ADBaseActivity<ADConstraintLayoutPresenter, ActivityADConstraintLayoutBinding> implements ADConstraintLayoutContract.View {
+
+    private ADTitleBuilder titleBuilder;
 
     @Override
     protected ActivityADConstraintLayoutBinding getActivityBinding() throws RuntimeException {
@@ -28,8 +31,13 @@ public class ADConstraintLayoutActivity extends ADBaseActivity<ADConstraintLayou
     }
 
     @Override
-    protected Object initBuilderTitle() throws RuntimeException {
-        return null;
+    protected ADTitleBuilder initBuilderTitle() throws RuntimeException {
+        titleBuilder = new ADTitleBuilder(mViewBinding.activityTitleInc)
+                .setMiddleTitleBgRes("ADConstraintLayout")
+                .setLeftBack(R.drawable.ad_back_black)
+                .setRightSub("刷新模式", R.color.white, R.color.color_eb2525)
+                .setLeftRelativeLayoutFinish(this);
+        return titleBuilder;
     }
 
     @Override
@@ -42,9 +50,10 @@ public class ADConstraintLayoutActivity extends ADBaseActivity<ADConstraintLayou
     protected void initData(Bundle savedInstanceState) throws RuntimeException {
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void addListener() throws RuntimeException {
-        mViewBinding.activityMainLayout.setOnClickListener(view -> mViewBinding.activityTitleInc.actTitleCenterTvTitle.setText("我是动态ViewBinding标题"));
+        mViewBinding.activityMainLayout.setOnClickListener(view -> titleBuilder.getTextViewTitleCenter().setText("我是动态ViewBinding标题"));
     }
 
     @Override

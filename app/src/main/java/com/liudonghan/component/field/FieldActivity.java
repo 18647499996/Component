@@ -31,7 +31,10 @@ public class FieldActivity extends ADBaseActivity<FieldPresenter, ActivityFieldB
 
     @Override
     protected Object initBuilderTitle() throws RuntimeException {
-        return new ADTitleBuilder(this).setMiddleTitleBgRes("Field").setLeftImageRes(R.drawable.ad_back_black).setLeftRelativeLayoutListener(this);
+        return new ADTitleBuilder(mViewBinding.getRoot())
+                .setMiddleTitleBgRes("Field")
+                .setLeftBack(R.drawable.ad_back_black)
+                .setLeftRelativeLayoutListener(this);
     }
 
     @Override

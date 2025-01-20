@@ -35,7 +35,7 @@ public class CalendarActivity extends ADBaseActivity<CalendarPresenter, Activity
 
     @Override
     protected Object initBuilderTitle() throws RuntimeException {
-        return new ADTitleBuilder(this).setMiddleTitleBgRes("日历").setLeftImageRes(R.drawable.ad_back_black).setLeftRelativeLayoutListener(this);
+        return new ADTitleBuilder(mViewBinding.getRoot()).setMiddleTitleBgRes("日历").setRightSub("日期模式").setLeftBack(R.drawable.ad_back_black).setLeftRelativeLayoutListener(this);
     }
 
     @Override
