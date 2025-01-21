@@ -4,12 +4,14 @@ import android.content.Context;
 import android.view.View;
 
 import com.liudonghan.component.R;
-import com.liudonghan.component.card.ADBaseListAdapter;
+import com.liudonghan.view.fling.ADBaseListAdapter;
+
+import java.util.List;
 
 public class CardAdapter extends ADBaseListAdapter<String> {
 
-    public CardAdapter(Context context) {
-        super(context);
+    public CardAdapter(Context context, List<String> data) {
+        super(context, data);
     }
 
     @Override

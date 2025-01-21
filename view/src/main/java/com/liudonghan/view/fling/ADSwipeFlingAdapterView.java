@@ -1,40 +1,38 @@
-package com.liudonghan.component.card;
+package com.liudonghan.view.fling;
 
 import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.database.DataSetObserver;
-import android.os.Build;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.FrameLayout;
 
-import com.liudonghan.component.R;
+import com.liudonghan.view.R;
 
 import java.util.ArrayList;
 
 
-
 /**
+ * 高仿探探滑动卡片
  * Created by dionysis_lorentzos on 5/8/14
  * for package com.lorentzos.swipecards
  * and project Swipe cards.
  * Use with caution dinosaurs might appear!
  */
+public class ADSwipeFlingAdapterView extends AdapterView {
 
-public class ADSwipeFlingAdapterView extends BaseFlingAdapterView {
-
-    private ArrayList<View> cacheItems = new ArrayList<>();
+    private final ArrayList<View> cacheItems = new ArrayList<>();
 
     /**
      * view叠加垂直偏移量的步长
      */
-    private int yOffsetStep;
+    private final int yOffsetStep;
     /**
      * view叠加缩放的步长
      */
@@ -54,6 +52,8 @@ public class ADSwipeFlingAdapterView extends BaseFlingAdapterView {
     private View mActiveCard = null;
     private OnItemClickListener mOnItemClickListener;
     private FlingCardListener flingCardListener;
+    private int heightMeasureSpec;
+    private int widthMeasureSpec;
 
     /**
      * 支持左右滑
@@ -90,24 +90,29 @@ public class ADSwipeFlingAdapterView extends BaseFlingAdapterView {
     /**
      * A shortcut method to set both the listeners and the adapter.
      *
-     * @param context The activity context which extends onFlingListener, OnItemClickListener or both
+     * @param context  The activity context which extends onFlingListener, OnItemClickListener or both
      * @param mAdapter The adapter you have to set.
      */
     public void init(final Context context, Adapter mAdapter) {
-        if(context instanceof onFlingListener) {
+        if (context instanceof onFlingListener) {
             mFlingListener = (onFlingListener) context;
-        }else{
+        } else {
             throw new RuntimeException("Activity does not implement SwipeFlingAdapterView.onFlingListener");
         }
-        if(context instanceof OnItemClickListener){
+        if (context instanceof OnItemClickListener) {
             mOnItemClickListener = (OnItemClickListener) context;
         }
         setAdapter(mAdapter);
     }
 
- 	@Override
+    @Override
     public View getSelectedView() {
         return mActiveCard;
+    }
+
+    @Override
+    public void setSelection(int position) {
+        throw new UnsupportedOperationException("Not supported");
     }
 
 
@@ -133,11 +138,11 @@ public class ADSwipeFlingAdapterView extends BaseFlingAdapterView {
             removeAndAddToCache(0);
         } else {
             View topCard = getChildAt(LAST_OBJECT_IN_STACK);
-            if(mActiveCard != null && topCard != null && topCard == mActiveCard) {
+            if (mActiveCard != null && topCard != null && topCard == mActiveCard) {
 //                removeViewsInLayout(0, LAST_OBJECT_IN_STACK);
                 removeAndAddToCache(1);
                 layoutChildren(1, adapterCount);
-            }else{
+            } else {
                 // Reset the UI and set top view listener
 //                removeAllViewsInLayout();
                 removeAndAddToCache(0);
@@ -152,10 +157,10 @@ public class ADSwipeFlingAdapterView extends BaseFlingAdapterView {
             initLeft = mActiveCard.getLeft();
         }
 
-        if(adapterCount < MIN_ADAPTER_STACK) {
-        	if(mFlingListener != null){
-        		mFlingListener.onAdapterAboutToEmpty(adapterCount);
-        	}
+        if (adapterCount < MIN_ADAPTER_STACK) {
+            if (mFlingListener != null) {
+                mFlingListener.onAdapterAboutToEmpty(adapterCount);
+            }
         }
     }
 
@@ -168,10 +173,10 @@ public class ADSwipeFlingAdapterView extends BaseFlingAdapterView {
         }
     }
 
-    private void layoutChildren(int startingIndex, int adapterCount){
-        while (startingIndex < Math.min(adapterCount, MAX_VISIBLE) ) {
+    private void layoutChildren(int startingIndex, int adapterCount) {
+        while (startingIndex < Math.min(adapterCount, MAX_VISIBLE)) {
             View item = null;
-            if (cacheItems.size() > 0) {
+            if (!cacheItems.isEmpty()) {
                 item = cacheItems.get(0);
                 cacheItems.remove(item);
             }
@@ -185,7 +190,6 @@ public class ADSwipeFlingAdapterView extends BaseFlingAdapterView {
     }
 
     @SuppressLint("WrongConstant")
-    @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     private void makeAndAddView(View child, int index) {
         FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) child.getLayoutParams();
         addViewInLayout(child, 0, lp, true);
@@ -208,30 +212,21 @@ public class ADSwipeFlingAdapterView extends BaseFlingAdapterView {
         }
 
         int layoutDirection = 0;
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN) {
-            layoutDirection = getLayoutDirection();
-        }
+        layoutDirection = getLayoutDirection();
         final int absoluteGravity = Gravity.getAbsoluteGravity(gravity, layoutDirection);
         final int verticalGravity = gravity & Gravity.VERTICAL_GRAVITY_MASK;
 
         int childLeft;
         int childTop;
-        switch (absoluteGravity & Gravity.HORIZONTAL_GRAVITY_MASK) {
-            case Gravity.CENTER_HORIZONTAL:
-                childLeft = (getWidth() + getPaddingLeft() - getPaddingRight()  - w) / 2 +
-                        lp.leftMargin - lp.rightMargin;
-                break;
-            case Gravity.END:
-                childLeft = getWidth() + getPaddingRight() - w - lp.rightMargin;
-                break;
-            case Gravity.START:
-            default:
-                childLeft = getPaddingLeft() + lp.leftMargin;
-                break;
+        if ((absoluteGravity & Gravity.HORIZONTAL_GRAVITY_MASK) == Gravity.CENTER_HORIZONTAL) {
+            childLeft = (getWidth() + getPaddingLeft() - getPaddingRight() - w) / 2 +
+                    lp.leftMargin - lp.rightMargin;
+        } else {
+            childLeft = getPaddingLeft() + lp.leftMargin;
         }
         switch (verticalGravity) {
             case Gravity.CENTER_VERTICAL:
-                childTop = (getHeight() + getPaddingTop() - getPaddingBottom()  - h) / 2 +
+                childTop = (getHeight() + getPaddingTop() - getPaddingBottom() - h) / 2 +
                         lp.topMargin - lp.bottomMargin;
                 break;
             case Gravity.BOTTOM:
@@ -249,12 +244,7 @@ public class ADSwipeFlingAdapterView extends BaseFlingAdapterView {
 
     private void adjustChildView(View child, int index) {
         if (index > -1 && index < MAX_VISIBLE) {
-            int multiple;
-            if (index > 2) {
-                multiple = 2;
-            } else {
-                multiple = index;
-            }
+            int multiple = Math.min(index, 2);
             child.offsetTopAndBottom(yOffsetStep * multiple);
             child.setScaleX(1 - SCALE_STEP * multiple);
             child.setScaleY(1 - SCALE_STEP * multiple);
@@ -285,48 +275,48 @@ public class ADSwipeFlingAdapterView extends BaseFlingAdapterView {
     }
 
     /**
-    *  Set the top view and add the fling listener
-    */
+     * Set the top view and add the fling listener
+     */
     private void setTopView() {
-        if(getChildCount()>0){
+        if (getChildCount() > 0) {
 
             mActiveCard = getChildAt(LAST_OBJECT_IN_STACK);
-            if(mActiveCard != null && mFlingListener != null) {
+            if (mActiveCard != null && mFlingListener != null) {
 
                 flingCardListener = new FlingCardListener(mActiveCard, mAdapter.getItem(0),
                         ROTATION_DEGREES, new FlingCardListener.FlingListener() {
 
-                            @Override
-                            public void onCardExited() {
-                                removeViewInLayout(mActiveCard);
-                                mActiveCard = null;
-                            	mFlingListener.removeFirstObjectInAdapter();
-                            }
+                    @Override
+                    public void onCardExited() {
+                        removeViewInLayout(mActiveCard);
+                        mActiveCard = null;
+                        mFlingListener.removeFirstObjectInAdapter();
+                    }
 
-                            @Override
-                            public void leftExit(Object dataObject) {
-                        		mFlingListener.onLeftCardExit(dataObject);
-                            }
+                    @Override
+                    public void leftExit(Object dataObject) {
+                        mFlingListener.onLeftCardExit(dataObject);
+                    }
 
-                            @Override
-                            public void rightExit(Object dataObject) {
-                        		mFlingListener.onRightCardExit(dataObject);
-                            }
+                    @Override
+                    public void rightExit(Object dataObject) {
+                        mFlingListener.onRightCardExit(dataObject);
+                    }
 
-                            @Override
-                            public void onClick(MotionEvent event, View v, Object dataObject) {
-                                if(mOnItemClickListener != null) {
-                                    mOnItemClickListener.onItemClicked(event, v, dataObject);
-                                }
-                            }
+                    @Override
+                    public void onClick(MotionEvent event, View v, Object dataObject) {
+                        if (mOnItemClickListener != null) {
+                            mOnItemClickListener.onItemClicked(event, v, dataObject);
+                        }
+                    }
 
-                            @Override
-                            public void onScroll(float progress, float scrollXProgress) {
+                    @Override
+                    public void onScroll(float progress, float scrollXProgress) {
 //                                Log.e("Log", "onScroll " + progress);
-                                adjustChildrenOfUnderTopView(progress);
-                        		mFlingListener.onScroll(progress, scrollXProgress);
-                            }
-                        });
+                        adjustChildrenOfUnderTopView(progress);
+                        mFlingListener.onScroll(progress, scrollXProgress);
+                    }
+                });
                 // 设置是否支持左右滑
                 flingCardListener.setIsNeedSwipe(isNeedSwipe);
 
@@ -336,13 +326,13 @@ public class ADSwipeFlingAdapterView extends BaseFlingAdapterView {
     }
 
     public FlingCardListener getTopCardListener() throws NullPointerException {
-        if(flingCardListener==null){
+        if (flingCardListener == null) {
             throw new NullPointerException("flingCardListener is null");
         }
         return flingCardListener;
     }
 
-    public void setMaxVisible(int MAX_VISIBLE){
+    public void setMaxVisible(int MAX_VISIBLE) {
         this.MAX_VISIBLE = MAX_VISIBLE;
     }
 
@@ -387,7 +377,7 @@ public class ADSwipeFlingAdapterView extends BaseFlingAdapterView {
 
         mAdapter = adapter;
 
-        if (mAdapter != null  && mDataSetObserver == null) {
+        if (mAdapter != null && mDataSetObserver == null) {
             mDataSetObserver = new AdapterDataSetObserver();
             mAdapter.registerDataSetObserver(mDataSetObserver);
         }
@@ -397,7 +387,7 @@ public class ADSwipeFlingAdapterView extends BaseFlingAdapterView {
         this.mFlingListener = onFlingListener;
     }
 
-    public void setOnItemClickListener(OnItemClickListener onItemClickListener){
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.mOnItemClickListener = onItemClickListener;
     }
 
@@ -428,11 +418,29 @@ public class ADSwipeFlingAdapterView extends BaseFlingAdapterView {
 
     public interface onFlingListener {
         void removeFirstObjectInAdapter();
+
         void onLeftCardExit(Object dataObject);
+
         void onRightCardExit(Object dataObject);
+
         void onAdapterAboutToEmpty(int itemsInAdapter);
+
         void onScroll(float progress, float scrollXProgress);
     }
 
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        this.widthMeasureSpec = widthMeasureSpec;
+        this.heightMeasureSpec = heightMeasureSpec;
+    }
 
+
+    public int getWidthMeasureSpec() {
+        return widthMeasureSpec;
+    }
+
+    public int getHeightMeasureSpec() {
+        return heightMeasureSpec;
+    }
 }

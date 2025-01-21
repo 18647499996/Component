@@ -9,6 +9,8 @@ import com.liudonghan.component.R;
 import com.liudonghan.component.adapter.CardAdapter;
 import com.liudonghan.component.databinding.ActivityCardBinding;
 import com.liudonghan.mvp.ADBaseActivity;
+import com.liudonghan.view.fling.ADBaseListAdapter;
+import com.liudonghan.view.fling.ADSwipeFlingAdapterView;
 import com.liudonghan.view.title.ADTitleBuilder;
 
 import java.io.IOException;
@@ -43,9 +45,8 @@ public class CardActivity extends ADBaseActivity<CardPresenter, ActivityCardBind
 
     @Override
     protected void initData(Bundle savedInstanceState) throws RuntimeException {
-        cardAdapter = new CardAdapter(this);
+        cardAdapter = new CardAdapter(this,getData());
         mViewBinding.activityCardSwipe.setAdapter(cardAdapter);
-        cardAdapter.addAll(getData());
     }
 
     private List<String> getData() {

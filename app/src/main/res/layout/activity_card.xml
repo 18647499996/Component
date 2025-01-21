@@ -9,7 +9,7 @@
         android:id="@+id/activity_card_title"
         layout="@layout/ad_title_builder" />
 
-    <com.liudonghan.component.card.ADSwipeFlingAdapterView
+    <com.liudonghan.view.fling.ADSwipeFlingAdapterView
         android:id="@+id/activity_card_swipe"
         android:layout_width="match_parent"
         android:layout_height="0dp"

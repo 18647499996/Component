@@ -1,4 +1,4 @@
-package com.liudonghan.component.card;
+package com.liudonghan.view.fling;
 
 
 /*************************************************************************

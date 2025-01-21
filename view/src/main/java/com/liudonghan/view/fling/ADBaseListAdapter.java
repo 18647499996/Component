@@ -1,4 +1,4 @@
-package com.liudonghan.component.card;
+package com.liudonghan.view.fling;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -40,7 +40,7 @@ public abstract class ADBaseListAdapter<T> extends BaseAdapter {
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
-    public ADBaseListAdapter(Context context, ArrayList<T> data) {
+    public ADBaseListAdapter(Context context, List<T> data) {
         super();
         this.context = context;
         this.mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
