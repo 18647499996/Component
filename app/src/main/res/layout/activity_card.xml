@@ -2,26 +2,21 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
 
-    <com.liudonghan.view.recycler.ADRecyclerView
-        android:id="@+id/activity_rv_card"
-        android:layout_width="match_parent"
-        android:layout_height="400dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <include
+        android:id="@+id/activity_card_title"
+        layout="@layout/ad_title_builder" />
 
-    <com.liudonghan.view.radius.ADTextView
-        android:id="@+id/activity_tv_hint"
+    <com.liudonghan.component.card.ADSwipeFlingAdapterView
+        android:id="@+id/activity_card_swipe"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:gravity="center"
-        android:layout_margin="12dp"
-        tools:text="viewBinding组件"
-        app:liu_round_corner="5dp"
-        android:background="@color/color_505257"
-        app:layout_constraintTop_toBottomOf="@id/activity_rv_card" />
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/activity_card_title"
+        app:liu_max_visible="4"
+        app:liu_min_adapter_stack="4"
+        app:liu_y_offset_step="28dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

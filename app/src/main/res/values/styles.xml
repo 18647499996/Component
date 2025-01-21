@@ -7,4 +7,12 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <declare-styleable name="ADSwipeFlingAdapterView">
+        <attr name="liu_swipe_fling_style" format="reference" />
+        <attr name="liu_rotation_degrees" format="float" />
+        <attr name="liu_min_adapter_stack" format="integer" />
+        <attr name="liu_max_visible" format="integer" />
+        <attr name="liu_y_offset_step" format="dimension" />
+    </declare-styleable>
+
 </resources>
