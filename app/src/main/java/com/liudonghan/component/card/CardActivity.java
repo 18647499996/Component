@@ -45,7 +45,7 @@ public class CardActivity extends ADBaseActivity<CardPresenter, ActivityCardBind
 
     @Override
     protected void initData(Bundle savedInstanceState) throws RuntimeException {
-        cardAdapter = new CardAdapter(this,getData());
+        cardAdapter = new CardAdapter(this, getData());
         mViewBinding.activityCardSwipe.setAdapter(cardAdapter);
     }
 
@@ -63,12 +63,6 @@ public class CardActivity extends ADBaseActivity<CardPresenter, ActivityCardBind
         mViewBinding.activityCardSwipe.setFlingListener(this);
         cardAdapter.setOnItemChildClickAdapterListener(this);
         cardAdapter.setOnItemClickAdapterListener(this);
-        mViewBinding.activityCardSwipe.setOnItemClickListener(new ADSwipeFlingAdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClicked(MotionEvent event, View v, Object dataObject) {
-
-            }
-        });
     }
 
     @Override
@@ -98,17 +92,22 @@ public class CardActivity extends ADBaseActivity<CardPresenter, ActivityCardBind
 
     @Override
     public void onLeftCardExit(Object dataObject) {
-
+        String data = (String) dataObject;
+        Log.e("Mac_Liu", "向左滑动：" + data);
     }
 
     @Override
     public void onRightCardExit(Object dataObject) {
-
+        String data = (String) dataObject;
+        Log.e("Mac_Liu", "向右滑动：" + data);
     }
 
     @Override
     public void onAdapterAboutToEmpty(int itemsInAdapter) {
-
+        if (itemsInAdapter == 2) {
+            Log.e("Mac_Liu", "onAdapterAboutToEmpty：" + itemsInAdapter + "  加载更多数据");
+            cardAdapter.addAll(getData());
+        }
     }
 
     @Override
